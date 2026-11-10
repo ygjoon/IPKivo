@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ConnectivityTile, homeTargets } from "@/components/connectivity";
+import { SponsorLinks } from "@/components/sponsor-links";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
@@ -140,6 +141,7 @@ export function HomePage() {
   const typeByIp = new Map(ips.map((ip, index) => [ip, typeQueries[index]]));
   return (
     <div className={homePageClass}>
+      <SponsorLinks />
       <div className={homeToolbarClass}>
         <div className="flex min-w-0 items-center gap-2">
           <h1 className="text-[0.875rem] leading-[1.4] font-[650] whitespace-nowrap">
