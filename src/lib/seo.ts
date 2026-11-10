@@ -1,3 +1,4 @@
+import { normalizePublicIp } from "./public-ip";
 import seoConfig from "./seo-config.json" with { type: "json" };
 import { localizedFaq } from "./seo-faq";
 
@@ -22,9 +23,13 @@ export function resolvePageSeo(pathname: string, locale: SeoLocale) {
 
   if (ipMatch) {
     try {
-      ip = decodeURIComponent(ipMatch[1]);
-      canonicalPath = `/ip/${encodeURIComponent(ip)}`;
-      routePath = "/ip/:ip";
+      ip = normalizePublicIp(decodeURIComponent(ipMatch[1]));
+      if (ip) {
+        canonicalPath = `/ip/${encodeURIComponent(ip)}`;
+        routePath = "/ip/:ip";
+      } else {
+        routePath = "";
+      }
     } catch {
       routePath = "";
     }
@@ -73,50 +78,53 @@ export function resolvePageSeo(pathname: string, locale: SeoLocale) {
     alternateZh,
     alternateEn: alternateEn.href,
     image,
-    structuredData: [
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: seoConfig.siteName,
-        url: seoConfig.origin,
-        inLanguage: locale,
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        name: seoConfig.siteName,
-        url: canonical || seoConfig.origin,
-        applicationCategory: "DeveloperApplication",
-        operatingSystem: "Any",
-        description,
-        offers: {
-          "@type": "Offer",
-          price: "0",
-          priceCurrency: "USD",
-        },
-      },
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        itemListElement: breadcrumbs,
-      },
-      ...(faq.length
-        ? [
-            {
-              "@context": "https://schema.org",
-              "@type": "FAQPage",
-              mainEntity: faq.map(({ question, answer }) => ({
-                "@type": "Question",
-                name: question,
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: answer,
-                },
-              })),
+    faq,
+    structuredData: route
+      ? [
+          {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: seoConfig.siteName,
+            url: seoConfig.origin,
+            inLanguage: locale,
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebApplication",
+            name: seoConfig.siteName,
+            url: canonical || seoConfig.origin,
+            applicationCategory: "DeveloperApplication",
+            operatingSystem: "Any",
+            description,
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD",
             },
-          ]
-        : []),
-    ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs,
+          },
+          ...(faq.length
+            ? [
+                {
+                  "@context": "https://schema.org",
+                  "@type": "FAQPage",
+                  mainEntity: faq.map(({ question, answer }) => ({
+                    "@type": "Question",
+                    name: question,
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: answer,
+                    },
+                  })),
+                },
+              ]
+            : []),
+        ]
+      : [],
   };
 }
 
@@ -188,7 +196,7 @@ export function updateDocumentSeo(
   setMeta("seo-og-url", "property", metadata.canonical || window.location.href);
   setMeta("seo-og-site-name", "property", seoConfig.siteName);
   setMeta("seo-og-image", "property", metadata.image);
-  setMeta("seo-twitter-card", "name", "summary");
+  setMeta("seo-twitter-card", "name", "summary_large_image");
   setMeta("seo-twitter-title", "name", metadata.title);
   setMeta("seo-twitter-description", "name", metadata.description);
   setMeta("seo-twitter-image", "name", metadata.image);

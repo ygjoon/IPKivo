@@ -1,3 +1,4 @@
+import { normalizePublicIp } from "../src/lib/public-ip.ts";
 import seoConfig from "../src/lib/seo-config.json" with { type: "json" };
 import { localizedFaq } from "../src/lib/seo-faq.ts";
 
@@ -35,9 +36,12 @@ function resolvePage(pathname, locale) {
   if (!routes[routePath]) {
     const dynamic = matchRoute("/ip/:ip", path);
     if (dynamic) {
-      routePath = "/ip/:ip";
-      params = dynamic;
-      canonicalPath = `/ip/${encodeURIComponent(dynamic.ip)}`;
+      const ip = normalizePublicIp(dynamic.ip);
+      if (ip) {
+        routePath = "/ip/:ip";
+        params = { ip };
+        canonicalPath = `/ip/${encodeURIComponent(ip)}`;
+      }
     }
   }
   const route = routes[routePath];
@@ -83,6 +87,7 @@ function resolvePage(pathname, locale) {
     alternateZh: new URL(canonicalPath, seoConfig.origin).href,
     alternateEn: alternateEn.href,
     image: new URL(seoConfig.image, seoConfig.origin).href,
+    faq,
     structuredData: route
       ? [
           {
@@ -191,6 +196,52 @@ function escapeAttribute(value) {
     .replaceAll(">", "&gt;");
 }
 
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function fallbackBody(metadata) {
+  const links =
+    metadata.locale === "en"
+      ? [
+          ["/ip", "IP lookup"],
+          ["/leak/dns", "DNS leak test"],
+          ["/unlock/sites", "Website connectivity"],
+          ["/speedtest", "Internet speed test"],
+          ["/whois", "WHOIS and RDAP lookup"],
+          ["/ping", "Global ping test"],
+        ]
+      : [
+          ["/ip", "IP 地址查询"],
+          ["/leak/dns", "DNS 泄露检测"],
+          ["/unlock/sites", "网站连通性检测"],
+          ["/speedtest", "网络测速"],
+          ["/whois", "WHOIS 与 RDAP 查询"],
+          ["/ping", "全球 Ping 测试"],
+        ];
+  const language = metadata.locale === "en" ? "?lang=en" : "";
+  const label = metadata.locale === "en" ? "IPKivo tools" : "IPKivo 工具";
+  const faqTitle =
+    metadata.locale === "en" ? "Frequently asked questions" : "常见问题";
+  const faq = (metadata.faq ?? [])
+    .map(
+      ({ question, answer }) =>
+        `<article><h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p></article>`,
+    )
+    .join("");
+  const faqMarkup = faq
+    ? `<section aria-label="${faqTitle}"><h2>${faqTitle}</h2>${faq}</section>`
+    : "";
+  return `<main data-seo-fallback><h1>${escapeHtml(metadata.title)}</h1><p>${escapeHtml(metadata.description)}</p><nav aria-label="${label}"><ul>${links
+    .map(([path, text]) => `<li><a href="${path}${language}">${text}</a></li>`)
+    .join("")}</ul></nav>${faqMarkup}</main>`;
+}
+
 function htmlRewriterResponse(response, metadata, status, currentUrl, noindex) {
   const jsonLd = JSON.stringify(metadata.structuredData).replaceAll(
     "<",
@@ -221,6 +272,11 @@ function htmlRewriterResponse(response, metadata, status, currentUrl, noindex) {
         element.setInnerContent(metadata.title);
       },
     })
+    .on("#root", {
+      element(element) {
+        element.setInnerContent(fallbackBody(metadata), { html: true });
+      },
+    })
     .on("#seo-description", setMeta(metadata.description))
     .on("#seo-robots", setMeta(noindex ? "noindex, nofollow" : "index, follow"))
     .on("#seo-og-type", setMeta("website"))
@@ -229,7 +285,7 @@ function htmlRewriterResponse(response, metadata, status, currentUrl, noindex) {
     .on("#seo-og-url", setMeta(metadata.canonical || currentUrl))
     .on("#seo-og-site-name", setMeta(seoConfig.siteName))
     .on("#seo-og-image", setMeta(metadata.image))
-    .on("#seo-twitter-card", setMeta("summary"))
+    .on("#seo-twitter-card", setMeta("summary_large_image"))
     .on("#seo-twitter-title", setMeta(metadata.title))
     .on("#seo-twitter-description", setMeta(metadata.description))
     .on("#seo-twitter-image", setMeta(metadata.image))
@@ -295,7 +351,11 @@ function fallbackHtmlResponse(response, metadata, status, currentUrl, noindex) {
     });
     html = html.replace(
       /<title>[\s\S]*?<\/title>/i,
-      `<title>${attr(metadata.title)}</title>`,
+      () => `<title>${attr(metadata.title)}</title>`,
+    );
+    html = html.replace(
+      /(<div\b(?=[^>]*\bid="root")[^>]*>)[\s\S]*?(<\/div>)/i,
+      (_match, open, close) => `${open}${fallbackBody(metadata)}${close}`,
     );
     const replaceMeta = (id, key, name, value) => {
       const pattern = new RegExp(`<meta\\b(?=[^>]*\\bid="${id}")[^>]*>`, "i");
@@ -362,7 +422,7 @@ function fallbackHtmlResponse(response, metadata, status, currentUrl, noindex) {
       "seo-twitter-card",
       "name",
       "twitter:card",
-      "summary",
+      "summary_large_image",
     )(html);
     html = replaceMeta(
       "seo-twitter-title",
@@ -403,7 +463,8 @@ function fallbackHtmlResponse(response, metadata, status, currentUrl, noindex) {
     )(html);
     html = html.replace(
       /<script\b(?=[^>]*\bid="seo-jsonld")[^>]*>[\s\S]*?<\/script>/i,
-      `<script id="seo-jsonld" type="application/ld+json">${jsonLd}</script>`,
+      () =>
+        `<script id="seo-jsonld" type="application/ld+json">${jsonLd}</script>`,
     );
 
     const headers = new Headers(response.headers);

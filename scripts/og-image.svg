@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#090d14" />
+      <stop offset="0.58" stop-color="#101927" />
+      <stop offset="1" stop-color="#0c1420" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.75" cy="0.48" r="0.55">
+      <stop offset="0" stop-color="#1976d2" stop-opacity="0.28" />
+      <stop offset="1" stop-color="#1976d2" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#192635" stop-opacity="0.94" />
+      <stop offset="1" stop-color="#111a27" stop-opacity="0.82" />
+    </linearGradient>
+    <linearGradient id="route" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#1976d2" stop-opacity="0.15" />
+      <stop offset="0.55" stop-color="#58a8f5" stop-opacity="0.9" />
+      <stop offset="1" stop-color="#86c1ff" stop-opacity="0.12" />
+    </linearGradient>
+    <pattern id="grid" width="36" height="36" patternUnits="userSpaceOnUse">
+      <path d="M36 0H0V36" fill="none" stroke="#9bb6d5" stroke-opacity="0.045" stroke-width="1" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)" />
+  <rect width="1200" height="630" fill="url(#glow)" />
+  <rect width="1200" height="630" fill="url(#grid)" />
+
+  <g fill="none" stroke="#6a9acb" stroke-opacity="0.12">
+    <circle cx="922" cy="326" r="208" stroke-width="1.5" />
+    <circle cx="922" cy="326" r="161" stroke-width="1" />
+    <ellipse cx="922" cy="326" rx="82" ry="208" stroke-width="1" />
+    <ellipse cx="922" cy="326" rx="159" ry="76" stroke-width="1" />
+    <path d="M716 326h412M754 232h336M754 420h336" stroke-width="1" />
+  </g>
+  <g fill="none" stroke="url(#route)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M741 378 823 322l76 26 75-105 91 43" stroke-width="3" />
+    <path d="m775 246 72 40 88-66 64 28 87-82" stroke-opacity="0.44" stroke-width="2" />
+    <path d="m763 443 95-37 70 42 88-55 80 20" stroke-opacity="0.45" stroke-width="2" />
+  </g>
+  <g fill="#a6d3ff" stroke="#10243a" stroke-width="5">
+    <circle cx="741" cy="378" r="8" />
+    <circle cx="823" cy="322" r="8" />
+    <circle cx="899" cy="348" r="8" />
+    <circle cx="974" cy="243" r="9" />
+    <circle cx="1065" cy="286" r="8" />
+    <circle cx="935" cy="220" r="7" />
+    <circle cx="859" cy="406" r="7" />
+    <circle cx="1006" cy="393" r="7" />
+  </g>
+
+  <g transform="translate(88 76) scale(.105) translate(-220 -258)" fill="#49a2f2">
+    <circle cx="437" cy="398" r="70" />
+    <path d="M369 570 C369 480 503 480 503 570 V773 C425 786 369 756 369 706 Z" />
+    <path d="M577 747 V669 C577 563 663 475 769 475 C877 475 964 561 964 667 C964 774 877 853 779 853 C742 853 710 842 683 824 V953 C683 1024 577 1024 577 953 V837 C477 877 343 863 301 781 C280 739 309 716 328 747 C380 854 589 809 691 695 C704 733 733 755 769 755 C816 755 853 717 853 668 C853 619 816 581 769 581 C726 581 698 607 678 650 C657 691 617 722 577 747 Z" />
+  </g>
+  <text x="180" y="132" fill="#eef5fc" font-family="Helvetica Neue, Arial, sans-serif" font-size="38" font-weight="700" letter-spacing="0.4">IPKivo</text>
+  <text x="88" y="274" fill="#f5f8fc" font-family="Arial, 'PingFang SC', sans-serif" font-size="48" font-weight="700">网络检测工具箱</text>
+  <text x="90" y="332" fill="#b8c6d6" font-family="Helvetica Neue, Arial, sans-serif" font-size="27" font-weight="500">Know Your IP. Test Your Network.</text>
+  <text x="90" y="389" fill="#8597aa" font-family="Arial, 'PingFang SC', sans-serif" font-size="20">IP 查询 · DNS 泄露检测 · 网络连通性诊断</text>
+
+  <g font-family="Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="600" letter-spacing="0.7">
+    <rect x="90" y="438" width="136" height="38" rx="19" fill="#152a40" stroke="#327fc2" stroke-opacity="0.55" />
+    <text x="158" y="463" fill="#9dcefa" text-anchor="middle">IP LOOKUP</text>
+    <rect x="239" y="438" width="161" height="38" rx="19" fill="#152a40" stroke="#327fc2" stroke-opacity="0.55" />
+    <text x="319" y="463" fill="#9dcefa" text-anchor="middle">DNS LEAK TEST</text>
+    <rect x="413" y="438" width="210" height="38" rx="19" fill="#152a40" stroke="#327fc2" stroke-opacity="0.55" />
+    <text x="518" y="463" fill="#9dcefa" text-anchor="middle">NETWORK DIAGNOSTICS</text>
+  </g>
+
+  <g fill="#7890a8" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" letter-spacing="1.4">
+    <text x="90" y="560">IPKIVO.COM</text>
+    <text x="1097" y="560" text-anchor="end">IPv4 · IPv6 · DNS · WEBRTC</text>
+  </g>
+  <path d="M90 582h1020" stroke="#718ba8" stroke-opacity="0.2" />
+</svg>

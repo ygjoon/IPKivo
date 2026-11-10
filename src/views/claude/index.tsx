@@ -1,3 +1,4 @@
+import { SeoFaq } from "@/components/seo-faq";
 import AiDiagnostics from "@/views/components/ai-diagnostics";
 import { EnvironmentScore } from "./environment-score";
 
@@ -6,6 +7,7 @@ export default function ClaudePage() {
     <div className="flex flex-col gap-4">
       <AiDiagnostics kind="claude" />
       <EnvironmentScore />
+      <SeoFaq route="/unlock/claude" />
     </div>
   );
 }

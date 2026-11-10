@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, useState, useId } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { LookupForm } from "@/components/lookup-form";
+import { SeoFaq } from "@/components/seo-faq";
 import { IpText, ErrorNotice, Pending } from "@/components/toolkit";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -179,6 +180,7 @@ export default function IpPage() {
           {recent}
         </div>
       )}
+      <SeoFaq route="/ip" />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/tooltip";
 import { UnderlineHover } from "@/components/underline-hover";
 import { t, locale } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import { localizeCatalogItem } from "@/lib/localize-catalog";
 import { aiPlatforms } from "@/views/ai/platforms";
 import { probeAiDomain } from "@/views/ai/probe";
@@ -184,7 +185,10 @@ export function PlatformSummary() {
         <div className="flex items-center justify-between gap-3">
           <CardTitle>{t("navigation.serviceStatus")}</CardTitle>
           <UnderlineHover asChild>
-            <Link to="/status" className="text-[0.78rem] text-muted-foreground">
+            <Link
+              to={localePath("/status", locale)}
+              className="text-[0.78rem] text-muted-foreground"
+            >
               {t("home.allServicesLabel")}
             </Link>
           </UnderlineHover>
@@ -212,7 +216,7 @@ export function PlatformSummary() {
                 >
                   <UnderlineHover asChild>
                     <Link
-                      to={`/status?service=${service.id}`}
+                      to={localePath(`/status?service=${service.id}`, locale)}
                       className="flex min-w-0 items-center gap-2 text-foreground"
                       style={{ display: "flex" }}
                     >

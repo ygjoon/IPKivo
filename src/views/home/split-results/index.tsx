@@ -7,9 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveDialog } from "@/components/ui/responsive-dialog";
 import { UnderlineHover } from "@/components/underline-hover";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
 import { countryName } from "@/lib/country";
 import { sameIp } from "@/lib/ip-address";
+import { localePath } from "@/lib/locale-path";
 import { useQueries } from "@tanstack/react-query";
 import { type Row, SiteEgressTable } from "./site-egress-table";
 import { sites } from "./sites";
@@ -210,7 +211,7 @@ export function SplitResults({ summary = false }: { summary?: boolean }) {
             <UnderlineHover asChild>
               <Link
                 className="text-[0.78rem] text-muted-foreground"
-                to="/unlock/sites"
+                to={localePath("/unlock/sites", locale)}
               >
                 {t("home.viewAll")}
               </Link>

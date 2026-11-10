@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { CompactText } from "@/components/compact-text";
 import { DataTable } from "@/components/data-table";
+import { SeoFaq } from "@/components/seo-faq";
 import {
   Facts,
   ToolCard,
@@ -367,6 +368,7 @@ export default function BrowserPage({ page }: { page: string }) {
           <Checks page="automation" />
         </div>
       )}
+      {page === "fingerprint" && <SeoFaq route="/browser/fingerprint" />}
     </div>
   );
 }

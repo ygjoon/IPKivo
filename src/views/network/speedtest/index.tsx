@@ -1,3 +1,4 @@
+import { SeoFaq } from "@/components/seo-faq";
 import { t } from "@/i18n";
 import { CloudflareTest } from "./components/cloudflare-test";
 
@@ -11,6 +12,7 @@ export default function SpeedtestPage() {
         </p>
       </div>
       <CloudflareTest />
+      <SeoFaq route="/speedtest" />
     </div>
   );
 }

@@ -9,7 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { SweepShine } from "@/components/ui/sweep-shine";
 import { Switch } from "@/components/ui/switch";
 import { UnderlineHover } from "@/components/underline-hover";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import { maskedIp } from "@/lib/network";
 import { cn } from "@/lib/utils";
 import { hideIpAtom } from "@/store/privacy";
@@ -94,7 +95,7 @@ export function IpText({
         {link && !hidden ? (
           <UnderlineHover asChild>
             <Link
-              to={`/ip/${encodeURIComponent(ip)}`}
+              to={localePath(`/ip/${encodeURIComponent(ip)}`, locale)}
               {...(newTab && { target: "_blank", rel: "noopener" })}
             >
               {content}

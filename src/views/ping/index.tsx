@@ -4,6 +4,7 @@ import { CompactText } from "@/components/compact-text";
 import { CountryFlag } from "@/components/country-flag";
 import { LookupForm } from "@/components/lookup-form";
 import { NumberTicker } from "@/components/number-ticker";
+import { SeoFaq } from "@/components/seo-faq";
 import { ErrorNotice, Pending } from "@/components/toolkit";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -423,6 +424,7 @@ export default function PingPage() {
           <PingResults data={data} pending={query.isPending} />
         </>
       )}
+      <SeoFaq route="/ping" />
     </div>
   );
 }

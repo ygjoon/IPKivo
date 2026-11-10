@@ -10,6 +10,7 @@ import { UnderlineHover } from "@/components/underline-hover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useTheme } from "@/hooks/use-theme";
 import { locale, t } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import { updateDocumentSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { HomeShortcuts } from "@/views/home/components/home-shortcuts";
@@ -72,7 +73,7 @@ export function AppLayout() {
       >
         <header className="mb-2 hidden items-center justify-between max-md:flex">
           <Link
-            to="/"
+            to={localePath("/", locale)}
             className="flex items-center gap-2 text-sm font-semibold"
             aria-label={t("navigation.siteTitle")}
           >
@@ -92,7 +93,7 @@ export function AppLayout() {
           aria-label={t("navigation.main")}
         >
           <Link
-            to="/"
+            to={localePath("/", locale)}
             aria-label={t("navigation.siteTitle")}
             className="flex h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-ring"
           >
@@ -152,11 +153,13 @@ export function AppLayout() {
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>
-            <Link to="/privacy">{t("policy.privacy")}</Link>
+            <Link to={localePath("/privacy", locale)}>
+              {t("policy.privacy")}
+            </Link>
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>
-            <Link to="/terms">{t("policy.terms")}</Link>
+            <Link to={localePath("/terms", locale)}>{t("policy.terms")}</Link>
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>

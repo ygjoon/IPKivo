@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { SiteLogo } from "@/components/site-logo";
 import { Card, CardContent } from "@/components/ui/card";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import {
   Activity,
   FileSearch,
@@ -115,7 +116,7 @@ export function HomeShortcuts() {
           {tools.map((tool, index) => (
             <Link
               key={tool.path}
-              to={tool.path}
+              to={localePath(tool.path, locale)}
               title={tool.description}
               className={tileClass}
             >

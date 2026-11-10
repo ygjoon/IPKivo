@@ -5,9 +5,10 @@ import { NumberTicker } from "@/components/number-ticker";
 import { IpText, Pending } from "@/components/toolkit";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
 import { companyTypeColors } from "@/lib/ip-badge-colors";
 import { ipScoreColor } from "@/lib/ip-score";
+import { localePath } from "@/lib/locale-path";
 import type { Geo } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import type { lookupIp } from "@/views/ip/api";
@@ -109,7 +110,7 @@ export function IpOverviewCard({
       <IpCardMap geo={mapGeo} />
       {data && (
         <Link
-          to={`/ip/${encodeURIComponent(data.ip)}`}
+          to={localePath(`/ip/${encodeURIComponent(data.ip)}`, locale)}
           aria-label={`${label} · ${t("home.ipAddressLookupAndNetworkDiagnostics")}`}
           className="absolute inset-0 z-10 rounded-[inherit] transition-colors hover:bg-primary/[0.025] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
         />

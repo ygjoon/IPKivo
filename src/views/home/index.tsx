@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ConnectivityTile, homeTargets } from "@/components/connectivity";
+import { SeoFaq } from "@/components/seo-faq";
 import { SponsorLinks } from "@/components/sponsor-links";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
@@ -8,7 +9,8 @@ import { Switch } from "@/components/ui/switch";
 import { UnderlineHover } from "@/components/underline-hover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useSortAnimation } from "@/hooks/use-sort-animation";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import { lookupIp } from "@/views/ip/api";
 import { testConnectivity } from "@/views/link/api";
 import { useQueries, useQueryClient } from "@tanstack/react-query";
@@ -197,7 +199,7 @@ export function HomePage() {
                 <UnderlineHover asChild>
                   <Link
                     className="text-[0.78rem] whitespace-nowrap text-muted-foreground"
-                    to="/unlock/sites"
+                    to={localePath("/unlock/sites", locale)}
                   >
                     {t("home.viewMore")}
                   </Link>
@@ -219,6 +221,7 @@ export function HomePage() {
       <SplitResults summary />
       <PlatformSummary />
       <PagePortrait />
+      <SeoFaq route="/" />
     </div>
   );
 }

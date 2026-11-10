@@ -8,10 +8,11 @@ import {
   useParams,
 } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
 import { AppLayout } from "@/layout";
 import { browserChecks, legacyRoutes } from "@/layout/routes";
 import { ToolLayout } from "@/layout/tool-layout";
+import { localePath } from "@/lib/locale-path";
 
 const HomePage = lazy(() => import("@/views/home"));
 const ClaudePage = lazy(() => import("@/views/claude"));
@@ -97,7 +98,9 @@ export function App() {
             <section className="py-5 text-center text-[0.88rem] leading-[1.8] text-muted-foreground">
               <h1>{t("navigation.pageNotFound")}</h1>
               <Button variant="outline" asChild>
-                <Link to="/">{t("navigation.backToOverview")}</Link>
+                <Link to={localePath("/", locale)}>
+                  {t("navigation.backToOverview")}
+                </Link>
               </Button>
             </section>
           }
