@@ -138,11 +138,11 @@ export function AppLayout() {
           © {currentYear} IP ·{" "}
           <UnderlineHover asChild>
             <a
-              href="https://huzhihui.com/blog/one-ip-guide"
+              href="https://github.com/ygjoon/IPKivo"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t("navigation.documentation")}
+              GitHub
             </a>
           </UnderlineHover>{" "}
           ·{" "}

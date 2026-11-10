@@ -1,8 +1,6 @@
 {
   "policy.terms": "使用条款",
   "policy.privacy": "隐私政策",
-  "policy.contactAuthor": "联系作者",
-  "policy.tsx.questionsAboutSiteUsagePrivacyContactAuthorEmail": "如对本站使用或隐私有疑问，请通过邮箱或微信联系作者。",
   "policy.tsx.serviceScope": "服务范围",
   "policy.tsx.siteProvidesIpLookupsNetworkDiagnosticsBrowserChecks": "本站提供 IP 查询、网络诊断、浏览器检测及服务状态查询。",
   "policy.tsx.acceptableUse": "合理使用",
@@ -30,5 +28,5 @@
   "policy.tsx.optionalCaptcha": "可选验证码",
   "policy.tsx.whenConfiguredUsedCaptchaFeaturesLoadCloudflareTurnstile": "配置并使用验证码功能时，浏览器会加载 Cloudflare Turnstile 或 Google reCAPTCHA。验证凭证经本站发送至对应服务校验；这些服务还会按自身规则处理设备和网络信号。",
   "policy.tsx.retentionAndDeletion": "保存与清除",
-  "policy.tsx.lookupHistoryKeepsLatest10SuccessfulQueriesResults": "查询历史在当前浏览器按类别保留最近 10 条成功查询及结果，清除本站数据即可删除。服务端使用请求 IP 做限流；托管配置启用了采样日志，实际记录与保留时间取决于部署设置。清除浏览器数据不会删除第三方或托管服务的记录。如需咨询相关数据，请联系作者并说明请求时间和功能。"
+  "policy.tsx.lookupHistoryKeepsLatest10SuccessfulQueriesResults": "查询历史在当前浏览器按类别保留最近 10 条成功查询及结果，清除本站数据即可删除。服务端使用请求 IP 做限流；托管配置启用了采样日志，实际记录与保留时间取决于部署设置。清除浏览器数据不会删除第三方或托管服务的记录。"
 }

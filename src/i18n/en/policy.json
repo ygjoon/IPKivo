@@ -1,8 +1,6 @@
 {
   "policy.terms": "Terms of use",
   "policy.privacy": "Privacy policy",
-  "policy.contactAuthor": "Contact the author",
-  "policy.tsx.questionsAboutSiteUsagePrivacyContactAuthorEmail": "For questions about site usage or privacy, contact the author by email or WeChat.",
   "policy.tsx.serviceScope": "Service scope",
   "policy.tsx.siteProvidesIpLookupsNetworkDiagnosticsBrowserChecks": "This site provides IP lookups, network diagnostics, browser checks and service status queries.",
   "policy.tsx.acceptableUse": "Acceptable use",
@@ -30,5 +28,5 @@
   "policy.tsx.optionalCaptcha": "Optional CAPTCHA",
   "policy.tsx.whenConfiguredUsedCaptchaFeaturesLoadCloudflareTurnstile": "When configured and used, CAPTCHA features load Cloudflare Turnstile or Google reCAPTCHA. This site forwards verification tokens to the provider for validation. Those services also process device and network signals under their own policies.",
   "policy.tsx.retentionAndDeletion": "Retention and deletion",
-  "policy.tsx.lookupHistoryKeepsLatest10SuccessfulQueriesResults": "Lookup history keeps the latest 10 successful queries and results per category in the current browser; clear site data to remove it. The server uses request IPs for rate limiting. Hosting configuration enables sampled logs; actual records and retention depend on deployment settings. Clearing browser data does not remove third-party or hosting records. Contact the author with the request time and feature for data questions."
+  "policy.tsx.lookupHistoryKeepsLatest10SuccessfulQueriesResults": "Lookup history keeps the latest 10 successful queries and results per category in the current browser; clear site data to remove it. The server uses request IPs for rate limiting. Hosting configuration enables sampled logs; actual records and retention depend on deployment settings. Clearing browser data does not remove third-party or hosting records."
 }
