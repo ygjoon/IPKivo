@@ -1,6 +1,6 @@
 import { Button } from "./ui/button";
 
-export const repositoryUrl = "https://github.com/zhihui-hu/one-ip";
+export const repositoryUrl = "https://github.com/ygjoon/IPKivo";
 
 /** Header icon linking to the GitHub repository. */
 export function GithubLink() {

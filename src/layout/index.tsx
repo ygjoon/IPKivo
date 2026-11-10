@@ -74,6 +74,7 @@ export function AppLayout() {
             aria-label={t("navigation.siteTitle")}
           >
             <img src="/icon.svg" width="24" height="24" alt="" />
+            <span>IPKivo</span>
           </Link>
           <div className={headerActionsClass}>
             {mobile && <IpSearch />}
@@ -91,7 +92,7 @@ export function AppLayout() {
           <Link
             to="/"
             aria-label={t("navigation.siteTitle")}
-            className="flex h-11 shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-ring"
+            className="flex h-11 shrink-0 items-center gap-2 rounded-lg focus-visible:outline-2 focus-visible:outline-ring"
           >
             <img
               src="/icon.svg"
@@ -100,6 +101,12 @@ export function AppLayout() {
               height="32"
               className="size-6"
             />
+            <span className="flex flex-col leading-tight">
+              <span className="text-sm font-semibold">IPKivo 网络检测工具箱</span>
+              <span className="text-[10px] font-normal text-muted-foreground">
+                Know Your IP. Test Your Network.
+              </span>
+            </span>
           </Link>
           <div className={cn(headerActionsClass, "md:gap-1.5")}>
             {!mobile && <IpSearch />}

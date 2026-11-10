@@ -1,4 +1,4 @@
-# <img src="public/icon.svg" alt="One IP Logo" width="32" height="32" /> One IP
+# <img src="public/icon.svg" alt="IPKivo Logo" width="32" height="32" /> IPKivo
 
 <p align="left">
   <img src="https://img.shields.io/badge/React-19-282C34?logo=react&amp;logoColor=61DAFB" alt="React 19" />
@@ -7,11 +7,17 @@
   <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflareworkers&amp;logoColor=white" alt="Cloudflare Workers" />
 </p>
 
-A toolbox for IP lookups, network diagnostics, browser checks and AI service status.
+**Know Your IP. Test Your Network.**
+
+A toolkit for IP lookups, DNS leak checks and network testing.
+
+## Source project
+
+This project is based on [zhihui-hu/one-ip](https://github.com/zhihui-hu/one-ip).
 
 [中文](README.md) · **English**
 
-[Live demo](https://ip.huzhihui.com/) · [GitHub](https://github.com/zhihui-hu/one-ip)
+[Live demo](https://ip.huzhihui.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
 
 ![Desktop overview, redacted](docs/screenshots/desktop-home-redacted.png)
 
@@ -38,7 +44,7 @@ Results rely on third-party services and may be affected by rate limits or CORS.
 
 One-click deploy to Cloudflare:
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fzhihui-hu%2Fone-ip)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fygjoon%2FIPKivo)
 
 Or fork the repo and import it under Cloudflare **Workers & Pages** with build command `pnpm build` and deploy command `pnpm deploy`. Core features need no API keys.
 
@@ -77,9 +83,9 @@ A closed-source commercial edition is available: commercial licenses, private de
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=zhihui-hu%2Fone-ip&amp;type=date">
+<a href="https://www.star-history.com/?repos=ygjoon%2FIPKivo&amp;type=date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=zhihui-hu/one-ip&amp;type=Date&amp;theme=dark" />
-    <img src="https://api.star-history.com/svg?repos=zhihui-hu/one-ip&amp;type=Date" alt="One IP GitHub star history" width="640" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ygjoon/IPKivo&amp;type=Date&amp;theme=dark" />
+    <img src="https://api.star-history.com/svg?repos=ygjoon/IPKivo&amp;type=Date" alt="IPKivo GitHub star history" width="640" />
   </picture>
 </a>

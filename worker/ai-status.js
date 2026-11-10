@@ -141,7 +141,7 @@ export async function getAiStatus(service) {
     return parseReplicate(
       await upstream(service.url, {
         headers: {
-          "User-Agent": "One-IP/1.0 (+https://github.com/zhihui-hu/one-ip)",
+          "User-Agent": "IPKivo/1.0 (+https://github.com/ygjoon/IPKivo)",
         },
       }),
     );

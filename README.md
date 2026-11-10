@@ -1,4 +1,4 @@
-# <img src="public/icon.svg" alt="One IP Logo" width="32" height="32" /> One IP
+# <img src="public/icon.svg" alt="IPKivo 标志" width="32" height="32" /> IPKivo 网络检测工具箱
 
 <p align="left">
   <img src="https://img.shields.io/badge/React-19-282C34?logo=react&amp;logoColor=61DAFB" alt="React 19" />
@@ -7,11 +7,15 @@
   <img src="https://img.shields.io/badge/Cloudflare_Workers-F38020?logo=cloudflareworkers&amp;logoColor=white" alt="Cloudflare Workers" />
 </p>
 
-IP 查询、网络诊断、浏览器检测与 AI 服务状态工具箱。
+IPKivo 网络检测工具箱：IP 查询、DNS 泄露与网络检测。
+
+## 源项目
+
+本项目基于 [zhihui-hu/one-ip](https://github.com/zhihui-hu/one-ip) 继续开发。
 
 **中文** · [English](README.en.md)
 
-[在线体验](https://ip.huzhihui.com/) · [GitHub](https://github.com/zhihui-hu/one-ip)
+[在线体验](https://ip.huzhihui.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
 
 ![桌面首页（已打码）](docs/screenshots/desktop-home-redacted.png)
 
@@ -38,7 +42,7 @@ IP 查询、网络诊断、浏览器检测与 AI 服务状态工具箱。
 
 一键部署到 Cloudflare：
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fzhihui-hu%2Fone-ip)
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https%3A%2F%2Fgithub.com%2Fygjoon%2FIPKivo)
 
 或 Fork 后在 Cloudflare **Workers & Pages** 导入仓库，构建命令 `pnpm build`，部署命令 `pnpm deploy`。基础功能无需任何 API Key。
 
@@ -79,9 +83,9 @@ Net.Coffee、ip-api、Globalping、IANA / RDAP、各平台官方状态源；浏�
 
 ## Star History
 
-<a href="https://www.star-history.com/?repos=zhihui-hu%2Fone-ip&amp;type=date">
+<a href="https://www.star-history.com/?repos=ygjoon%2FIPKivo&amp;type=date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=zhihui-hu/one-ip&amp;type=Date&amp;theme=dark" />
-    <img src="https://api.star-history.com/svg?repos=zhihui-hu/one-ip&amp;type=Date" alt="One IP 的 GitHub Star 历史曲线" width="640" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=ygjoon/IPKivo&amp;type=Date&amp;theme=dark" />
+    <img src="https://api.star-history.com/svg?repos=ygjoon/IPKivo&amp;type=Date" alt="IPKivo 的 GitHub Star 历史曲线" width="640" />
   </picture>
 </a>

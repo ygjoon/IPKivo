@@ -4,9 +4,9 @@
 
 ## Deploy to Cloudflare
 
-1. [Fork this project](https://github.com/zhihui-hu/one-ip/fork) into your GitHub account.
+1. [Fork this project](https://github.com/ygjoon/IPKivo/fork) into your GitHub account.
 2. Open the [Cloudflare dashboard](https://dash.cloudflare.com/), go to **Workers & Pages**, create a Worker and choose to import a Git repository.
-3. Connect GitHub, select your `one-ip` fork and set the production branch to `main`.
+3. Connect GitHub, select your `IPKivo` fork and set the production branch to `main`.
 4. Set the build command to `pnpm build` and the deploy command to `pnpm deploy`. Use Node.js 24 and pnpm 10.32.1. Keep the default root directory.
 5. Deploy and open the assigned `workers.dev` address. Use the Worker settings to connect a custom domain.
 
