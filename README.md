@@ -15,7 +15,7 @@ IPKivo 网络检测工具箱：IP 查询、DNS 泄露与网络检测。
 
 **中文** · [English](README.en.md)
 
-[在线体验](https://ip.huzhihui.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
+[在线体验](https://www.ipkivo.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
 
 ![桌面首页（已打码）](docs/screenshots/desktop-home-redacted.png)
 

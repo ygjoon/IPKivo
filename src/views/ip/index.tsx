@@ -1,12 +1,13 @@
 import { useLayoutEffect, useRef, useState, useId } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { LookupForm } from "@/components/lookup-form";
 import { SeoFaq } from "@/components/seo-faq";
 import { IpText, ErrorNotice, Pending } from "@/components/toolkit";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { useLookupHistory } from "@/hooks/use-lookup-history";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
+import { localePath } from "@/lib/locale-path";
 import { useQuery } from "@tanstack/react-query";
 import { gsap } from "gsap";
 import { Search, X } from "lucide-react";
@@ -117,25 +118,34 @@ export default function IpPage() {
         </span>
         {(history.entries.length
           ? history.entries.map((entry) => entry.query)
-          : ["1.1.1.1", "8.8.8.8", "223.5.5.5"]
+          : [
+              "1.1.1.1",
+              "1.0.0.1",
+              "8.8.8.8",
+              "8.8.4.4",
+              "223.5.5.5",
+              "223.6.6.6",
+              "119.29.29.29",
+              "114.114.114.114",
+              "9.9.9.9",
+              "208.67.222.222",
+            ]
         )
-          .slice(0, 6)
+          .slice(0, history.entries.length ? 6 : 10)
           .map((value) => (
-            <button
+            <Link
               key={value}
-              type="button"
+              to={localePath(`/ip/${encodeURIComponent(value)}`, locale)}
               className="cursor-pointer border-0 px-1 py-0.5 text-foreground max-md:min-h-8 max-md:px-1.5 max-md:py-1"
-              onClick={() =>
-                value === ip
-                  ? void query.refetch()
-                  : navigate({
-                      pathname: `/ip/${encodeURIComponent(value)}`,
-                      search: location.search,
-                    })
-              }
+              onClick={(event) => {
+                if (value === ip) {
+                  event.preventDefault();
+                  void query.refetch();
+                }
+              }}
             >
               <IpText ip={value} link={false} />
-            </button>
+            </Link>
           ))}
       </div>
       {searchToggle}

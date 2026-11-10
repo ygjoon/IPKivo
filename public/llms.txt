@@ -1,0 +1,35 @@
+# IPKivo 网络检测工具箱 / Network Diagnostics Toolkit
+
+> IPKivo 提供公网 IP 查询、网络泄露检测、网站连通性诊断与浏览器环境检查。IPKivo provides public IP lookup, network leak checks, connectivity diagnostics, and browser environment checks.
+
+简体中文为默认语言。英文页面使用对应链接并添加 `?lang=en`，例如 `https://www.ipkivo.com/ip?lang=en`。Simplified Chinese is the default; add `?lang=en` to any route for English.
+
+## 网络工具 / Network tools
+
+- [网络概览 / Network overview](https://www.ipkivo.com/): 查看当前浏览器连接可获取的网络与公网 IP 信息。View network and public IP information available to the current browser connection.
+- [IP 地址查询 / IP address lookup](https://www.ipkivo.com/ip): 查询公网 IPv4 和 IPv6 地址。Look up public IPv4 and IPv6 addresses.
+- [DNS 泄露检测 / DNS leak test](https://www.ipkivo.com/leak/dns): 查看检测过程中观察到的 DNS 解析服务器。Inspect DNS resolver addresses observed during the test.
+- [WebRTC 泄露检测 / WebRTC leak test](https://www.ipkivo.com/leak/webrtc): 对比 WebRTC 网络候选地址与浏览器网络结果。Compare WebRTC network candidates with browser network results.
+- [网站连通性 / Website connectivity](https://www.ipkivo.com/unlock/sites): 检测所选网站的连通情况与响应时间。Check connectivity and response timing for selected websites.
+- [ChatGPT 连通性 / ChatGPT connectivity](https://www.ipkivo.com/unlock/gpt): 诊断与 ChatGPT 相关服务的网络连通性。Diagnose network connectivity to related ChatGPT services.
+- [Claude 连通性 / Claude connectivity](https://www.ipkivo.com/unlock/claude): 检查 Claude 相关网络连通性与浏览器环境信号。Check Claude connectivity and review browser environment signals.
+- [网络测速 / Internet speed test](https://www.ipkivo.com/speedtest): 在浏览器中测量下载、上传、延迟与抖动。Measure download, upload, latency, and jitter in the browser.
+- [WHOIS 与 RDAP 查询 / WHOIS and RDAP lookup](https://www.ipkivo.com/whois): 查询支持的域名、IP 地址和 ASN 注册信息。Query registration data for supported domains, IP addresses, and ASNs.
+- [全球 Ping 测试 / Global ping test](https://www.ipkivo.com/ping): 对比可用远程探测节点的测量结果。Compare measurements from available remote probes.
+- [服务状态 / Service status](https://www.ipkivo.com/status): 查看来自公开服务源的平台状态数据。View platform status data collected from public provider sources.
+
+## 浏览器工具 / Browser tools
+
+- [浏览器环境 / Browser environment](https://www.ipkivo.com/browser/environment): 检查浏览器公开提供的环境与能力信号。Inspect browser-reported environment and capability signals.
+- [浏览器指纹 / Browser fingerprint](https://www.ipkivo.com/browser/fingerprint): 查看当前浏览器公开的指纹信号。Review fingerprint signals exposed by this browser.
+- [浏览器一致性检测 / Browser consistency checks](https://www.ipkivo.com/browser/checks): 对比不同浏览器上下文中的部分信号。Compare selected signals across browser contexts.
+- [浏览器隐私检测 / Browser privacy checks](https://www.ipkivo.com/browser/privacy): 查看浏览器权限状态与部分隐私能力。Review browser permissions and selected privacy capabilities.
+
+## 智能体访问 / Agent access
+
+当兼容浏览器提供 WebMCP 接口时，IPKivo 会注册浏览器工具，包括页面导航和受支持的网络诊断。IPKivo registers browser tools through WebMCP when a compatible browser provides the interface, including page navigation and supported network diagnostics.
+
+## 使用政策 / Policies
+
+- [隐私政策 / Privacy policy](https://www.ipkivo.com/privacy)
+- [使用条款 / Terms of service](https://www.ipkivo.com/terms)

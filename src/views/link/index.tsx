@@ -8,6 +8,7 @@ import {
   pingDotClass,
   pingToneBgClass,
 } from "@/components/ping-dot";
+import { SeoFaq } from "@/components/seo-faq";
 import {
   SiteLogo,
   siteCellClass,
@@ -291,6 +292,7 @@ export default function LinkPage() {
       <p className="mt-6 rounded-[8px] border border-border bg-muted px-5 py-4 text-[0.84rem] leading-[1.8] text-muted-foreground">
         {t("link.browserHttpRequestTimingMedianSuccessfulRequestsAcross")}
       </p>
+      <SeoFaq route="/unlock/sites" />
     </>
   );
 }

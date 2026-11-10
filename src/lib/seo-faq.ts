@@ -320,15 +320,203 @@ const supplementalFaqs: Record<
       },
     ],
   },
+  "/unlock/sites": {
+    "zh-CN": [
+      {
+        question: "网站连通性检测会检查什么？",
+        answer:
+          "检测会从当前浏览器尝试访问列表中的网站，并汇总可读取的响应时间与连通情况。跨域限制可能使部分响应细节不可见。",
+      },
+      {
+        question: "检测成功是否代表网站的全部功能都能使用？",
+        answer:
+          "不代表。连通性结果只反映检测时的网络请求，不验证账号登录、页面内容、播放功能或地区资格。",
+      },
+      {
+        question: "为什么网站检测结果会因地区或网络而不同？",
+        answer:
+          "DNS 解析、代理分流、运营商路由、目标站点策略和网络波动都可能造成差异。请结合实际访问与多次检测判断。",
+      },
+    ],
+    en: [
+      {
+        question: "What does the website connectivity check measure?",
+        answer:
+          "It tries to reach listed websites from your browser and reports available response timing and connectivity details. Cross-origin restrictions can hide some response information.",
+      },
+      {
+        question:
+          "Does a successful check mean every website feature will work?",
+        answer:
+          "No. It reflects network requests at the time of the check and does not verify sign-in, page content, playback, or regional eligibility.",
+      },
+      {
+        question: "Why can results differ by region or network?",
+        answer:
+          "DNS answers, proxy routing, ISP paths, site policies, and network changes can all affect results. Compare repeated checks with actual access.",
+      },
+    ],
+  },
+  "/status": {
+    "zh-CN": [
+      {
+        question: "服务状态页面的数据来自哪里？",
+        answer:
+          "页面汇总所列平台的公开状态接口或公开信息源。不同平台提供的数据范围、更新频率和可用性可能不同。",
+      },
+      {
+        question: "为什么状态显示未知或查询失败？",
+        answer:
+          "服务可能没有可接入的公开接口，或其状态源暂时不可用、格式发生变化。此时请查看对应平台的官方状态页。",
+      },
+      {
+        question: "这里的状态能代表我所在地区的服务情况吗？",
+        answer:
+          "不一定。平台的公开状态通常是汇总信息，可能不会覆盖特定账号、地区、产品组件或本地网络路径。",
+      },
+    ],
+    en: [
+      {
+        question: "Where does the service status data come from?",
+        answer:
+          "The page aggregates public status APIs or public feeds from listed providers. Their coverage, update frequency, and availability vary.",
+      },
+      {
+        question: "Why does a service show as unknown or unavailable?",
+        answer:
+          "A provider may not expose a supported public API, or its status source may be unavailable or change format. Check the provider's official status page for details.",
+      },
+      {
+        question: "Does this status represent service health in my region?",
+        answer:
+          "Not necessarily. Public status is usually an aggregate and may not cover a specific account, region, product component, or local network path.",
+      },
+    ],
+  },
+  "/browser/environment": {
+    "zh-CN": [
+      {
+        question: "浏览器环境检测会读取哪些信息？",
+        answer:
+          "页面会展示浏览器公开提供的环境信号，例如 User-Agent、语言、时区、屏幕和部分硬件能力。不同浏览器可提供的信息不同。",
+      },
+      {
+        question: "浏览器环境信息能准确定位我的位置吗？",
+        answer:
+          "不能。语言、时区等只能提供环境线索，不是 GPS 定位；只有你主动使用位置权限检测时，浏览器才会请求定位授权。",
+      },
+      {
+        question: "为什么浏览器环境检测显示的信息不完整？",
+        answer:
+          "隐私设置、浏览器版本、权限策略和设备能力都可能限制可读取的字段。缺少字段不表示设备故障。",
+      },
+    ],
+    en: [
+      {
+        question: "What information does the browser environment check show?",
+        answer:
+          "It displays environment signals exposed by the browser, such as User-Agent, language, timezone, screen, and some hardware capabilities. Available fields vary by browser.",
+      },
+      {
+        question: "Can browser environment data locate me precisely?",
+        answer:
+          "No. Language and timezone are only environment clues, not GPS location. The browser requests location permission only when you start the location check.",
+      },
+      {
+        question: "Why is some browser environment information missing?",
+        answer:
+          "Privacy settings, browser versions, permission policies, and device capabilities can limit available fields. A missing field does not mean the device is faulty.",
+      },
+    ],
+  },
+  "/browser/checks": {
+    "zh-CN": [
+      {
+        question: "浏览器一致性检测会比较什么？",
+        answer:
+          "检测会比较页面可读取的主线程、Worker 或其他浏览器上下文信号，并检查部分自动化标记；可比较的项目取决于浏览器支持。",
+      },
+      {
+        question: "检测到环境差异就表示浏览器有问题吗？",
+        answer:
+          "不一定。隐私保护、浏览器隔离策略、扩展和兼容性都可能造成差异。结果用于排查线索，不是安全或身份结论。",
+      },
+      {
+        question: "没有检测到自动化标记能证明我是普通用户吗？",
+        answer:
+          "不能。检测只覆盖有限的公开信号，不能证明浏览器或访问行为一定不是自动化程序。",
+      },
+    ],
+    en: [
+      {
+        question: "What does the browser consistency check compare?",
+        answer:
+          "It compares signals exposed across the page, Worker, or other browser contexts and checks some automation indicators. Coverage depends on browser support.",
+      },
+      {
+        question: "Does a detected difference mean something is wrong?",
+        answer:
+          "Not necessarily. Privacy protections, browser isolation, extensions, and compatibility can cause differences. Results are troubleshooting clues, not security or identity conclusions.",
+      },
+      {
+        question:
+          "Does finding no automation signal prove I am a regular user?",
+        answer:
+          "No. The check covers only a limited set of exposed signals and cannot prove that a browser or visit is not automated.",
+      },
+    ],
+  },
+  "/browser/privacy": {
+    "zh-CN": [
+      {
+        question: "浏览器隐私检测会请求摄像头或位置权限吗？",
+        answer:
+          "页面会读取浏览器可查询的权限状态。摄像头、麦克风或位置等主动检测仅在你点击对应按钮后发起。",
+      },
+      {
+        question: "为什么有些权限或浏览器能力显示不支持？",
+        answer:
+          "浏览器版本、安全上下文、设备和权限策略都会影响接口是否可用。页面会将无法查询的项目标记为不支持或不可用。",
+      },
+      {
+        question: "浏览器隐私检测能保证我的隐私安全吗？",
+        answer:
+          "不能。页面只展示有限的浏览器能力和权限信息，不能全面评估网站、扩展、设备或网络的隐私与安全。",
+      },
+    ],
+    en: [
+      {
+        question:
+          "Does the browser privacy check request camera or location access?",
+        answer:
+          "The page reads permission states exposed by the browser. Active camera, microphone, or location checks run only after you click the matching button.",
+      },
+      {
+        question:
+          "Why are some permissions or browser capabilities unsupported?",
+        answer:
+          "Browser version, secure context, device support, and permission policies affect API availability. The page marks fields it cannot query as unsupported or unavailable.",
+      },
+      {
+        question: "Can this browser privacy check guarantee my privacy?",
+        answer:
+          "No. It shows a limited set of browser capabilities and permissions and cannot fully assess the privacy or security of sites, extensions, devices, or networks.",
+      },
+    ],
+  },
 };
 
 export function localizedFaq(route: string, locale: SeoLocale) {
+  const resolvedRoute = route === "/ip/:ip" ? "/ip" : route;
   const dictionary = dictionaries[locale] as Record<string, string>;
-  const translatedFaq = (faqKeysByRoute[route] ?? []).map(
+  const translatedFaq = (faqKeysByRoute[resolvedRoute] ?? []).map(
     ([questionKey, answerKey]) => ({
       question: dictionary[questionKey],
       answer: dictionary[answerKey],
     }),
   );
-  return [...translatedFaq, ...(supplementalFaqs[route]?.[locale] ?? [])];
+  return [
+    ...translatedFaq,
+    ...(supplementalFaqs[resolvedRoute]?.[locale] ?? []),
+  ];
 }

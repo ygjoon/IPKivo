@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import { DataTable } from "@/components/data-table";
 import { NumberTicker } from "@/components/number-ticker";
+import { SeoFaq } from "@/components/seo-faq";
 import { PageHeading, Pending, ToolCard } from "@/components/toolkit";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -189,6 +190,7 @@ export default function StatusPage() {
         open={detailId !== null}
         onClose={() => setDetailId(null)}
       />
+      <SeoFaq route="/status" />
     </div>
   );
 }

@@ -209,20 +209,42 @@ function fallbackBody(metadata) {
   const links =
     metadata.locale === "en"
       ? [
+          ["/", "IPKivo overview"],
           ["/ip", "IP lookup"],
           ["/leak/dns", "DNS leak test"],
+          ["/leak/webrtc", "WebRTC leak test"],
           ["/unlock/sites", "Website connectivity"],
+          ["/unlock/gpt", "ChatGPT connectivity"],
+          ["/unlock/claude", "Claude connectivity"],
           ["/speedtest", "Internet speed test"],
           ["/whois", "WHOIS and RDAP lookup"],
           ["/ping", "Global ping test"],
+          ["/browser/environment", "Browser environment"],
+          ["/browser/fingerprint", "Browser fingerprint"],
+          ["/browser/checks", "Browser consistency checks"],
+          ["/browser/privacy", "Browser privacy checks"],
+          ["/status", "Service status"],
+          ["/privacy", "Privacy policy"],
+          ["/terms", "Terms of service"],
         ]
       : [
+          ["/", "IPKivo 网络概览"],
           ["/ip", "IP 地址查询"],
           ["/leak/dns", "DNS 泄露检测"],
+          ["/leak/webrtc", "WebRTC 泄露检测"],
           ["/unlock/sites", "网站连通性检测"],
+          ["/unlock/gpt", "ChatGPT 连通性诊断"],
+          ["/unlock/claude", "Claude 连通性诊断"],
           ["/speedtest", "网络测速"],
           ["/whois", "WHOIS 与 RDAP 查询"],
           ["/ping", "全球 Ping 测试"],
+          ["/browser/environment", "浏览器环境信息"],
+          ["/browser/fingerprint", "浏览器指纹检测"],
+          ["/browser/checks", "浏览器一致性检测"],
+          ["/browser/privacy", "浏览器隐私检测"],
+          ["/status", "服务状态"],
+          ["/privacy", "隐私政策"],
+          ["/terms", "使用条款"],
         ];
   const language = metadata.locale === "en" ? "?lang=en" : "";
   const label = metadata.locale === "en" ? "IPKivo tools" : "IPKivo 工具";

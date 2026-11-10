@@ -17,7 +17,7 @@ This project is based on [zhihui-hu/one-ip](https://github.com/zhihui-hu/one-ip)
 
 [中文](README.md) · **English**
 
-[Live demo](https://ip.huzhihui.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
+[Live demo](https://www.ipkivo.com/) · [GitHub](https://github.com/ygjoon/IPKivo)
 
 ![Desktop overview, redacted](docs/screenshots/desktop-home-redacted.png)
 

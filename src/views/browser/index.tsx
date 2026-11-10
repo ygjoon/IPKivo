@@ -368,7 +368,7 @@ export default function BrowserPage({ page }: { page: string }) {
           <Checks page="automation" />
         </div>
       )}
-      {page === "fingerprint" && <SeoFaq route="/browser/fingerprint" />}
+      <SeoFaq route={`/browser/${page}`} />
     </div>
   );
 }
