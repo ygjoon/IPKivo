@@ -58,6 +58,8 @@
   "appUpdate.updating": "Updating…",
   "appUpdate.updateFailedPleaseRetry": "Update failed. Please retry.",
   "navigation.siteTitle": "IPKivo - IP Lookup, DNS Leak & Network Testing Toolkit",
+  "navigation.productName": "IPKivo Network Testing Toolkit",
+  "navigation.tagline": "Know Your IP. Test Your Network.",
   "navigation.diagnostics": "Network diagnostics",
   "navigation.main": "Main navigation",
   "navigation.loadingPage": "Loading page…",

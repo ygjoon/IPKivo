@@ -37,10 +37,14 @@ export function SponsorLinks({
                 <img
                   src={sponsor.image}
                   alt={sponsor.name}
-                  className="size-full flex-none object-contain"
-                  width="320"
-                  height="44"
+                  className="h-full w-[52%] flex-none object-contain object-left"
+                  width="960"
+                  height="274"
                 />
+                <span className="min-w-0 flex-1 truncate text-center">
+                  {sponsor.name}
+                </span>
+                <span aria-hidden="true">↗</span>
               ) : (
                 <>
                   <span>{sponsor.name}</span>

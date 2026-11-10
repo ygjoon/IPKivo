@@ -16,7 +16,7 @@ For map access from mainland China, configure `TIANDITU_TOKEN` under Worker → 
 
 The default map requires no account or API key. OpenStreetMap's public tiles are subject to its [usage policy](https://operations.osmfoundation.org/policies/tiles/): keep attribution visible, load tiles on demand, respect browser caching, and do not offer offline downloads or bulk prefetching. Availability is not guaranteed. Tile requests send only this site's origin as the Referer, excluding page paths containing queried IPs. Failed maps can be retried independently while location text and coordinates remain available.
 
-Workers Builds builds and deploys when `main` receives a commit. The button above points to the original repository. To preserve the fork relationship and update workflow, follow the steps to import your fork.
+After connecting Cloudflare Workers Builds, commits pushed to the production branch `main` are built and deployed automatically.
 
 ## Cloudflare Pages deployment
 
@@ -96,40 +96,9 @@ node scripts/sync-worker-secrets.mjs production
 
 The script uploads non-empty values, preserves existing secrets and skips missing optional files. Add `--pages` for Pages; use `.env.docker` for Docker. Sensitive files are in the Git ignore list. Store secrets in server settings, not `VITE_*` variables. Check the `configured` fields at `/api/browser/challenges` to inspect the setup.
 
-## GitHub Actions deployment (optional)
-
-Choose Workers Builds or GitHub Actions to avoid duplicate deployments. Actions runs builds and tests by default. To enable deployment, add these settings to your repository's Actions configuration:
-
-| Kind     | Name                    | Purpose                                             |
-| -------- | ----------------------- | --------------------------------------------------- |
-| Variable | `ENABLE_CF_DEPLOY=true` | Enable deployment                                   |
-| Variable | `CF_DEPLOY_TARGET`      | `workers` (default) or `pages`                      |
-| Variable | `CF_DEPLOY_BRANCH`      | Branch to deploy; defaults to the default branch    |
-| Secret   | `CLOUDFLARE_API_TOKEN`  | Workers/Pages deployment credentials for the target |
-| Secret   | `CLOUDFLARE_ACCOUNT_ID` | Target Cloudflare account ID                        |
-
-Push to the deploy branch (`main` by default) or run `Build and deploy one-ip` on it. Deployment starts after the build, tests and Docker smoke test pass; other branches only build and test. Documentation-only changes do not trigger a run. Deployment uses the `production` environment, so secrets can live in the repository or that environment. External PRs run tests without deployment credentials. These credentials are used by CI.
-
-For `pages`, first create the Pages project named in `deploy/pages/wrangler.toml`. When using Pages Git integration, leave Actions deployment disabled.
-
 ## Update your fork
 
 Click **Sync fork → Update branch** on your GitHub repository page. Review differences if you have code changes, and resolve merge conflicts.
-
-For scheduled updates, enable `Sync upstream`:
-
-1. Enable workflows in your fork's Actions tab.
-2. Under Settings → Secrets and variables → Actions → **Variables**, add `AUTO_SYNC_UPSTREAM=true`.
-3. The workflow checks for updates at 04:23 UTC each day. You can run it from the Actions page.
-
-The workflow supports forks created from `zhihui-hu/one-ip` and requires no personal access token. It uses GitHub's `merge-upstream` API, stops on conflicts and preserves your commits. Use GitHub's Sync fork if you want to review updates.
-
-- **Workers Builds:** connect your fork's production branch and check deployment records for synchronized commits in Cloudflare's build history.
-- **GitHub Actions deployment:** the sync workflow triggers deployment when it merges updates. Pushes made with `GITHUB_TOKEN` do not trigger ordinary `push` workflows.
-- If branch protection blocks a merge, use a PR.
-- Enable scheduled workflows in your fork. GitHub may disable schedules after 60 days of inactivity in a public repository; use the Actions page to enable them.
-
-References: [Syncing a fork](https://docs.github.com/en/pull-requests/how-tos/work-with-forks/syncing-a-fork), [GITHUB_TOKEN triggering behavior](https://docs.github.com/en/actions/concepts/security/github_token), [Workflow disabling rules](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/disable-and-enable-workflows).
 
 ## WebMCP
 

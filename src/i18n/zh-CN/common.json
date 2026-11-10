@@ -58,6 +58,8 @@
   "appUpdate.updating": "正在更新…",
   "appUpdate.updateFailedPleaseRetry": "更新失败，请重试。",
   "navigation.siteTitle": "IPKivo - IP 查询、DNS 泄露与网络检测工具箱",
+  "navigation.productName": "IPKivo 网络检测工具箱",
+  "navigation.tagline": "了解你的 IP，检测你的网络。",
   "navigation.diagnostics": "网络诊断工具",
   "navigation.main": "主导航",
   "navigation.loadingPage": "正在加载页面…",

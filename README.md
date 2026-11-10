@@ -53,7 +53,7 @@ cp .env.docker.example .env.docker   # 可选配置
 docker compose up -d --build         # 打开 http://服务器地址:8080
 ```
 
-Cloudflare Pages、反向代理、天地图、人机验证、GitHub Actions 与 Fork 同步等配置见 [部署与配置](docs/deploy.md)。
+Cloudflare Pages、反向代理、天地图和人机验证等配置见 [部署与配置](docs/deploy.md)。
 
 ## 本地开发
 

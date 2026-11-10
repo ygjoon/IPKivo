@@ -55,7 +55,7 @@ cp .env.docker.example .env.docker   # optional settings
 docker compose up -d --build         # open http://your-server:8080
 ```
 
-See [Deployment and configuration](docs/deploy.en.md) for Cloudflare Pages, reverse proxies, Tianditu maps, human verification, GitHub Actions and fork syncing.
+See [Deployment and configuration](docs/deploy.en.md) for Cloudflare Pages, reverse proxies, Tianditu maps and human verification.
 
 ## Local development
 

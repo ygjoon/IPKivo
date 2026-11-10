@@ -83,22 +83,24 @@ export default function PolicyPage({ page }: { page: "terms" | "privacy" }) {
           <p className="text-sm leading-6 text-muted-foreground">{body}</p>
         </ToolCard>
       ))}
-      <ToolCard title={t("policy.contactAuthor")}>
-        <p className="mb-2 text-sm text-muted-foreground">
-          {t("policy.tsx.questionsAboutSiteUsagePrivacyContactAuthorEmail")}
-        </p>
-        <div className="flex flex-wrap items-center gap-4">
-          <a
-            className="text-sm text-primary hover:underline"
-            href="mailto:ip@huzhihui.com"
-          >
-            ip@huzhihui.com
-          </a>
-          <AuthorContact className="text-sm text-primary hover:underline">
-            {t("sites.wechat")}
-          </AuthorContact>
-        </div>
-      </ToolCard>
+      {page === "privacy" && (
+        <ToolCard title={t("policy.contactAuthor")}>
+          <p className="mb-2 text-sm text-muted-foreground">
+            {t("policy.tsx.questionsAboutSiteUsagePrivacyContactAuthorEmail")}
+          </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              className="text-sm text-primary hover:underline"
+              href="mailto:ip@huzhihui.com"
+            >
+              ip@huzhihui.com
+            </a>
+            <AuthorContact className="text-sm text-primary hover:underline">
+              {t("sites.wechat")}
+            </AuthorContact>
+          </div>
+        </ToolCard>
+      )}
     </div>
   );
 }

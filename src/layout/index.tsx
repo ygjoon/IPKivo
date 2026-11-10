@@ -1,7 +1,5 @@
 import { lazy, Suspense, useEffect, useRef } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import { AuthorContact } from "@/components/author-contact";
-import { GithubLink, repositoryUrl } from "@/components/github-link";
 import { HomePageSkeleton } from "@/components/home-page-skeleton";
 import { IpSearch } from "@/components/ip-search";
 import { LanguageSelect } from "@/components/language-select";
@@ -81,7 +79,6 @@ export function AppLayout() {
             <PrivacyToggle iconOnly />
             <LanguageSelect />
             <ThemeToggleButton className="size-8 rounded-full text-muted-foreground" />
-            <GithubLink />
           </div>
         </header>
         <nav
@@ -102,9 +99,11 @@ export function AppLayout() {
               className="size-6"
             />
             <span className="flex flex-col leading-tight">
-              <span className="text-sm font-semibold">IPKivo 网络检测工具箱</span>
+              <span className="text-sm font-semibold">
+                {t("navigation.productName")}
+              </span>
               <span className="text-[10px] font-normal text-muted-foreground">
-                Know Your IP. Test Your Network.
+                {t("navigation.tagline")}
               </span>
             </span>
           </Link>
@@ -113,7 +112,6 @@ export function AppLayout() {
             <PrivacyToggle iconOnly />
             <LanguageSelect />
             <ThemeToggleButton className="size-9 shrink-0 rounded-lg text-muted-foreground" />
-            <GithubLink />
           </div>
         </nav>
         <main className="outline-none">
@@ -149,26 +147,7 @@ export function AppLayout() {
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>
-            <Link to="/terms">{t("policy.terms")}</Link>
-          </UnderlineHover>{" "}
-          ·{" "}
-          <UnderlineHover asChild>
             <Link to="/privacy">{t("policy.privacy")}</Link>
-          </UnderlineHover>{" "}
-          ·{" "}
-          <UnderlineHover asChild>
-            <a
-              href={repositoryUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="align-middle"
-            >
-              GitHub
-            </a>
-          </UnderlineHover>{" "}
-          ·{" "}
-          <UnderlineHover asChild>
-            <AuthorContact />
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>
