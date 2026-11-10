@@ -1,0 +1,244 @@
+{
+  "origin": "https://www.ipkivo.com",
+  "siteName": "IPKivo",
+  "image": "/icon.svg",
+  "routes": {
+    "/": {
+      "zh-CN": {
+        "title": "IPKivo - IP 查询、DNS 泄露检测、分流出口与网络诊断工具箱",
+        "description": "免费在线 IP 与网络检测工具箱：查询 IPv4/IPv6 归属地、ASN、运营商与 IP 信誉分，检测国内外网站分流出口、DNS/WebRTC 泄露，并诊断 ChatGPT、Claude 网络连通性。"
+      },
+      "en": {
+        "title": "IPKivo - IP Lookup, DNS Leak Tests and Network Diagnostics",
+        "description": "Free online IP and network tools. Check IPv4/IPv6 location, ASN, ISP and reputation; test DNS/WebRTC leaks, routing exits, global ping and access to ChatGPT or Claude."
+      }
+    },
+    "/ip": {
+      "zh-CN": {
+        "title": "IP 地址查询 - IPv4/IPv6 归属地、ASN、信誉分与路由检测 | IPKivo",
+        "description": "查询 IPv4 或 IPv6 地址的地理位置、运营商、ASN、IP 信誉分、机房或住宅属性，以及 BGP 路由和网络延迟信息。"
+      },
+      "en": {
+        "title": "IP Lookup - IPv4/IPv6 Location, ASN and Reputation | IPKivo",
+        "description": "Look up an IPv4 or IPv6 address to see its location, ISP, ASN, reputation, hosting or residential classification, BGP route and network latency."
+      }
+    },
+    "/ip/:ip": {
+      "zh-CN": {
+        "title": "{ip} IP 归属地、ASN、信誉分与网络风险查询 - IPKivo",
+        "description": "查看 IP 地址 {ip} 的归属地、运营商、ASN 编号、信誉分、住宅或机房类型、滥用风险标记及网络路由信息。"
+      },
+      "en": {
+        "title": "{ip} IP Location, ASN, Reputation and Network Risk - IPKivo",
+        "description": "Review location, ISP, ASN, reputation, hosting or residential classification, abuse signals and network route details for IP address {ip}."
+      }
+    },
+    "/leak/dns": {
+      "zh-CN": {
+        "title": "DNS 泄露检测 - 在线测试代理与 VPN DNS 解析出口 | IPKivo",
+        "description": "通过随机子域名解析检测实际 DNS 服务器的 IP、运营商和地区，判断代理或 VPN 使用期间 DNS 请求是否发生泄露。"
+      },
+      "en": {
+        "title": "DNS Leak Test - Check Proxy and VPN DNS Requests | IPKivo",
+        "description": "Run randomized DNS lookups to identify resolver IPs, providers and locations, and check whether DNS requests bypass your proxy or VPN."
+      }
+    },
+    "/leak/webrtc": {
+      "zh-CN": {
+        "title": "WebRTC 泄露检测 - 检查浏览器是否暴露真实 IP | IPKivo",
+        "description": "收集浏览器 WebRTC STUN/ICE 候选地址并与网页出口 IP 对比，检查代理或 VPN 是否暴露公网或局域网地址。"
+      },
+      "en": {
+        "title": "WebRTC Leak Test - Check for Exposed IP Addresses | IPKivo",
+        "description": "Compare browser WebRTC STUN/ICE candidates with your web egress address to check whether a proxy or VPN exposes public or local IPs."
+      }
+    },
+    "/unlock/sites": {
+      "zh-CN": {
+        "title": "网站连通性与分流出口检测 - AI、流媒体和网站访问测试 | IPKivo",
+        "description": "检测 ChatGPT、Claude、Netflix、YouTube、GitHub 等网站的连通性、HTTP 响应时间和实际网络出口 IP。"
+      },
+      "en": {
+        "title": "Website Connectivity and Egress Test for AI and Streaming | IPKivo",
+        "description": "Check connectivity, HTTP response time and network egress for ChatGPT, Claude, Netflix, YouTube, GitHub and other popular sites."
+      }
+    },
+    "/unlock/gpt": {
+      "zh-CN": {
+        "title": "ChatGPT 网络连通性与访问出口诊断工具 | IPKivo",
+        "description": "检查当前网络访问 OpenAI 和 ChatGPT 服务的连通性、出口 IP 地区及错误信息，帮助排查代理分流和访问限制。"
+      },
+      "en": {
+        "title": "ChatGPT Connectivity and Egress Diagnostics | IPKivo",
+        "description": "Check connectivity, egress IP location and errors when accessing OpenAI and ChatGPT to troubleshoot routing and regional access issues."
+      }
+    },
+    "/unlock/claude": {
+      "zh-CN": {
+        "title": "Claude 访问环境与网络出口诊断工具 | IPKivo",
+        "description": "检测访问 Claude 的网络出口与连通性，并查看浏览器语言、时区和设备环境信号，辅助排查访问受限问题。"
+      },
+      "en": {
+        "title": "Claude Access Environment and Network Diagnostics | IPKivo",
+        "description": "Check network egress and connectivity to Claude, and review browser language, timezone and device signals when troubleshooting access."
+      }
+    },
+    "/speedtest": {
+      "zh-CN": {
+        "title": "在线网络测速 - 下载、上传、延迟与抖动测试 | IPKivo",
+        "description": "使用 Cloudflare 全球边缘网络测试当前连接的下载速度、上传带宽、Ping 延迟和抖动。"
+      },
+      "en": {
+        "title": "Internet Speed Test - Download, Upload, Latency and Jitter | IPKivo",
+        "description": "Measure download and upload speed, ping latency and jitter through Cloudflare's global edge network."
+      }
+    },
+    "/whois": {
+      "zh-CN": {
+        "title": "WHOIS 与 RDAP 查询 - 域名、IP 地址及 ASN 注册信息 | IPKivo",
+        "description": "查询域名、IPv4/IPv6 地址或 ASN 的 RDAP/WHOIS 注册信息，包括注册机构、日期、状态、所属组织和名称服务器。"
+      },
+      "en": {
+        "title": "WHOIS and RDAP Lookup - Domain, IP and ASN Registration | IPKivo",
+        "description": "Look up RDAP/WHOIS registration records for domains, IPv4/IPv6 addresses and ASNs, including organizations, dates, status and name servers."
+      }
+    },
+    "/ping": {
+      "zh-CN": {
+        "title": "全球 Ping 测试 - 多节点网络延迟与丢包检测 | IPKivo",
+        "description": "从多个国家和地区的探测节点测试目标 IP 或域名，对比网络延迟、往返时间和丢包情况。"
+      },
+      "en": {
+        "title": "Global Ping Test - Network Latency and Packet Loss | IPKivo",
+        "description": "Test an IP address or domain from probes in multiple regions and compare network latency, round-trip time and packet loss."
+      }
+    },
+    "/browser/environment": {
+      "zh-CN": {
+        "title": "浏览器环境信息检测 - 系统、语言、时区与硬件信息 | IPKivo",
+        "description": "查看浏览器公开的 User-Agent、语言、时区、屏幕分辨率、CPU 核心数、WebGL 显卡和网络接口等环境信息。"
+      },
+      "en": {
+        "title": "Browser Environment Check - System, Language and Hardware | IPKivo",
+        "description": "Inspect browser-exposed user agent, language, timezone, screen resolution, CPU cores, WebGL graphics and network interface details."
+      }
+    },
+    "/browser/fingerprint": {
+      "zh-CN": {
+        "title": "浏览器指纹检测 - Canvas、WebGL、Audio 与唯一性测试 | IPKivo",
+        "description": "检查浏览器指纹及 Canvas、WebGL、Audio 等组成特征，并重复检测对比当前会话中的变化。"
+      },
+      "en": {
+        "title": "Browser Fingerprint Test - Canvas, WebGL and Audio | IPKivo",
+        "description": "Inspect browser fingerprint signals such as Canvas, WebGL and Audio, then repeat the check to compare changes in this session."
+      }
+    },
+    "/browser/checks": {
+      "zh-CN": {
+        "title": "浏览器环境一致性与自动化特征检测 | IPKivo",
+        "description": "对照浏览器在不同上下文中的系统信息，检查语言、时区、WebDriver 和自动化特征是否存在差异。"
+      },
+      "en": {
+        "title": "Browser Environment Consistency and Automation Check | IPKivo",
+        "description": "Compare browser environment signals across contexts and inspect differences in language, timezone, WebDriver and automation indicators."
+      }
+    },
+    "/browser/privacy": {
+      "zh-CN": {
+        "title": "浏览器权限、隐私能力与 TLS 指纹检测 | IPKivo",
+        "description": "检查浏览器权限、存储隔离、传感器能力、TLS 指纹和 WebRTC 出口，了解浏览器可能公开的隐私信号。"
+      },
+      "en": {
+        "title": "Browser Privacy, Permissions and TLS Fingerprint Check | IPKivo",
+        "description": "Review browser permissions, storage isolation, sensor capabilities, TLS fingerprints and WebRTC egress signals."
+      }
+    },
+    "/status": {
+      "zh-CN": {
+        "title": "AI 与云服务状态监控 - ChatGPT、Claude、Cloudflare、AWS | IPKivo",
+        "description": "查看 OpenAI、Claude、GitHub、Cloudflare、AWS、阿里云和腾讯云等服务的官方运行状态与故障事件。"
+      },
+      "en": {
+        "title": "AI and Cloud Service Status - OpenAI, Claude, Cloudflare, AWS | IPKivo",
+        "description": "View official service health and incident updates for OpenAI, Claude, GitHub, Cloudflare, AWS, Alibaba Cloud and Tencent Cloud."
+      }
+    },
+    "/privacy": {
+      "zh-CN": {
+        "title": "隐私政策 - IPKivo 网络检测工具箱",
+        "description": "了解 IPKivo 如何处理 IP 地址、网络诊断请求和浏览器本地存储数据。"
+      },
+      "en": {
+        "title": "Privacy Policy - IPKivo Network Toolkit",
+        "description": "Learn how IPKivo handles IP addresses, network diagnostic requests and data stored in your browser."
+      }
+    },
+    "/terms": {
+      "zh-CN": {
+        "title": "服务条款 - IPKivo 网络检测工具箱",
+        "description": "了解 IPKivo 网络检测工具箱的使用条款、免责声明和合规使用规范。"
+      },
+      "en": {
+        "title": "Terms of Use - IPKivo Network Toolkit",
+        "description": "Review the terms, disclaimers and acceptable-use rules for the IPKivo network toolkit."
+      }
+    }
+  },
+  "notFound": {
+    "zh-CN": {
+      "title": "页面不存在 - IPKivo",
+      "description": "该页面不存在，请返回 IPKivo 网络检测工具箱首页。"
+    },
+    "en": {
+      "title": "Page Not Found - IPKivo",
+      "description": "This page could not be found. Return to the IPKivo network toolkit home page."
+    }
+  },
+  "entryRedirects": {
+    "/leak": "/leak/dns",
+    "/unlock": "/unlock/sites",
+    "/browser": "/browser/environment"
+  },
+  "legacyRoutes": {
+    "/lookup": "/ip",
+    "/lookup/ip": "/ip",
+    "/lookup/ip/:ip": "/ip",
+    "/lookup/whois": "/whois",
+    "/query": "/ip",
+    "/query/ip": "/ip",
+    "/query/ip/:ip": "/ip",
+    "/query/whois": "/whois",
+    "/network": "/unlock/sites",
+    "/network/ip": "/ip",
+    "/network/ip/:ip": "/ip",
+    "/network/whois": "/whois",
+    "/network/connectivity": "/unlock/sites",
+    "/network/link": "/unlock/sites",
+    "/network/exits": "/unlock/sites",
+    "/network/dns": "/leak/dns",
+    "/network/speedtest": "/speedtest",
+    "/connectivity": "/unlock/sites",
+    "/link": "/unlock/sites",
+    "/dns": "/leak/dns",
+    "/network/ping": "/ping",
+    "/webrtc": "/leak/webrtc",
+    "/network/webrtc": "/leak/webrtc",
+    "/browser/webrtc": "/leak/webrtc",
+    "/browser/consistency": "/browser/checks",
+    "/browser/automation": "/browser/checks",
+    "/ai": "/unlock/gpt",
+    "/ai/gpt": "/unlock/gpt",
+    "/ai/claude": "/unlock/claude",
+    "/gpt": "/unlock/gpt",
+    "/claude": "/unlock/claude",
+    "/ai/status": "/status",
+    "/ai/status/openai": "/status?service=9",
+    "/ai/status/claude": "/status?service=4",
+    "/ai/gpt/status": "/status?service=9",
+    "/ai/claude/status": "/status?service=4",
+    "/status/openai": "/status?service=9",
+    "/status/claude": "/status?service=4",
+    "/gpt/status.html": "/status?service=9",
+    "/claude/status.html": "/status?service=4"
+  }
+}

@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { AnimatedValue } from "@/components/animated-value";
 import { CompactText } from "@/components/compact-text";
@@ -23,12 +23,9 @@ export function PageHeading({
   title: string;
   privacy?: boolean;
 }) {
-  useEffect(() => {
-    document.title = `${title}`;
-  }, [title]);
   return (
     <>
-      <h1 className="sr-only">{title}</h1>
+      <h1 className="mb-2 text-lg font-semibold leading-tight">{title}</h1>
       {privacy && (
         <div className="mb-2 flex items-center justify-end">
           <PrivacyToggle />

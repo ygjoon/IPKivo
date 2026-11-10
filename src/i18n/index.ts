@@ -7,10 +7,10 @@ const storageKey = "ip-tools:locale";
 
 export function resolveLocale(
   saved: string | null,
-  languages: readonly string[],
+  _languages: readonly string[] = [],
 ): Locale {
   if (saved === "zh-CN" || saved === "en") return saved;
-  return languages[0]?.toLowerCase().startsWith("zh") ? "zh-CN" : "en";
+  return "zh-CN";
 }
 
 function initialLocale(): Locale {
@@ -25,7 +25,6 @@ function initialLocale(): Locale {
   }
   return resolveLocale(
     override === "en" || override === "zh-CN" ? override : saved,
-    navigator.languages,
   );
 }
 
@@ -57,8 +56,4 @@ export function setLocale(next: Locale) {
 
 export function initializeLocale() {
   document.documentElement.lang = locale;
-  document.title = t("navigation.siteTitle");
-  const description = document.querySelector('meta[name="description"]');
-  if (description)
-    description.setAttribute("content", t("navigation.siteDescription"));
 }

@@ -9,7 +9,8 @@ import { Pending, PrivacyToggle } from "@/components/toolkit";
 import { UnderlineHover } from "@/components/underline-hover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useTheme } from "@/hooks/use-theme";
-import { t } from "@/i18n";
+import { locale, t } from "@/i18n";
+import { updateDocumentSeo } from "@/lib/seo";
 import { cn } from "@/lib/utils";
 import { HomeShortcuts } from "@/views/home/components/home-shortcuts";
 import { Toaster } from "sonner";
@@ -40,7 +41,7 @@ const headerActionsClass =
 export function AppLayout() {
   const { resolvedTheme } = useTheme();
   const mobile = useIsMobile();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -56,6 +57,10 @@ export function AppLayout() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [pathname]);
+
+  useEffect(() => {
+    updateDocumentSeo(pathname, search, locale);
+  }, [pathname, search]);
 
   return (
     <>
@@ -135,7 +140,7 @@ export function AppLayout() {
           <HomeShortcuts />
         </div>
         <footer className="max-w-full overflow-x-auto pt-[30px] pb-5 text-center text-[0.82rem] whitespace-nowrap text-subtle max-sm:pt-5 max-sm:pb-4 max-sm:text-left max-sm:text-[0.75rem] max-sm:[-webkit-overflow-scrolling:touch]">
-          © {currentYear} IP ·{" "}
+          © {currentYear} IPKivo ·{" "}
           <UnderlineHover asChild>
             <a
               href="https://github.com/ygjoon/IPKivo"
@@ -148,6 +153,10 @@ export function AppLayout() {
           ·{" "}
           <UnderlineHover asChild>
             <Link to="/privacy">{t("policy.privacy")}</Link>
+          </UnderlineHover>{" "}
+          ·{" "}
+          <UnderlineHover asChild>
+            <Link to="/terms">{t("policy.terms")}</Link>
           </UnderlineHover>{" "}
           ·{" "}
           <UnderlineHover asChild>

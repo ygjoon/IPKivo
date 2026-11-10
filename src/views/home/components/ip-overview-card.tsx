@@ -110,9 +110,7 @@ export function IpOverviewCard({
       {data && (
         <Link
           to={`/ip/${encodeURIComponent(data.ip)}`}
-          target="_blank"
-          rel="noopener"
-          aria-label={`${label} · ${t("home.ipDetectionNewTab")}`}
+          aria-label={`${label} · ${t("home.ipAddressLookupAndNetworkDiagnostics")}`}
           className="absolute inset-0 z-10 rounded-[inherit] transition-colors hover:bg-primary/[0.025] focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-ring"
         />
       )}

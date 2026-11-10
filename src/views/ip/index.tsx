@@ -142,7 +142,9 @@ export default function IpPage() {
   );
   return (
     <div className="max-md:min-w-0 max-md:max-w-full [&_[data-slot=input-group]]:![border:0] [&_[data-slot=input-group]]:!bg-muted [&_[data-slot=input-group]]:![box-shadow:none]">
-      <h1 className="sr-only">{t("common.ipLookup")}</h1>
+      <h1 className="mb-2 text-lg font-semibold leading-tight">
+        {t("common.ipLookup")}
+      </h1>
       <ErrorNotice error={query.error} />
       {query.data?.fallback && !query.isFetching && (
         <Alert className="my-4">

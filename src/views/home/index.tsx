@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ConnectivityTile, homeTargets } from "@/components/connectivity";
 import { SponsorLinks } from "@/components/sponsor-links";
@@ -84,9 +84,6 @@ export function HomePage() {
   const connectivityRef = useSortAnimation(
     `${mobile}-${orderedTargets.map(({ target }) => target.name).join("|")}`,
   );
-  useEffect(() => {
-    document.title = t("home.overviewIpTools");
-  }, []);
   const probes = useQueries({
     queries: [
       {

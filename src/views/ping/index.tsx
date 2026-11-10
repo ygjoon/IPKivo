@@ -53,7 +53,6 @@ export default function PingPage() {
   const [stopped, setStopped] = useState(false);
   const controller = useRef<AbortController | null>(null);
   useEffect(() => {
-    document.title = t("ping.globalPingIpTools");
     return () => controller.current?.abort();
   }, []);
   const catalog = useQuery({
@@ -95,6 +94,9 @@ export default function PingPage() {
     ).length ?? 0;
   return (
     <div>
+      <h1 className="mb-3 text-lg font-semibold leading-tight">
+        {t("home.globalPing")}
+      </h1>
       <div className="rounded-xl bg-card p-3">
         <LookupForm
           grouped

@@ -1,4 +1,5 @@
 import { t } from "@/i18n";
+import seoConfig from "@/lib/seo-config.json" with { type: "json" };
 
 /**
  * Feature groups that own several pages. They are no longer rendered as
@@ -56,48 +57,7 @@ export const secondaryRoutes = [
 ] as const;
 
 /** Old paths that still resolve; `:ip` is carried over when present. */
-export const legacyRoutes: Record<string, string> = {
-  "/lookup": "/ip",
-  "/lookup/ip": "/ip",
-  "/lookup/ip/:ip": "/ip",
-  "/lookup/whois": "/whois",
-  "/query": "/ip",
-  "/query/ip": "/ip",
-  "/query/ip/:ip": "/ip",
-  "/query/whois": "/whois",
-  "/network": "/unlock/sites",
-  "/network/ip": "/ip",
-  "/network/ip/:ip": "/ip",
-  "/network/whois": "/whois",
-  "/network/connectivity": "/unlock/sites",
-  "/network/link": "/unlock/sites",
-  "/network/exits": "/unlock/sites",
-  "/network/dns": "/leak/dns",
-  "/network/speedtest": "/speedtest",
-  "/connectivity": "/unlock/sites",
-  "/link": "/unlock/sites",
-  "/dns": "/leak/dns",
-  "/network/ping": "/ping",
-  "/webrtc": "/leak/webrtc",
-  "/network/webrtc": "/leak/webrtc",
-  "/browser/webrtc": "/leak/webrtc",
-  "/browser/consistency": "/browser/checks",
-  "/browser/automation": "/browser/checks",
-  "/ai": "/unlock/gpt",
-  "/ai/gpt": "/unlock/gpt",
-  "/ai/claude": "/unlock/claude",
-  "/gpt": "/unlock/gpt",
-  "/claude": "/unlock/claude",
-  "/ai/status": "/status",
-  "/ai/status/openai": "/status?service=9",
-  "/ai/status/claude": "/status?service=4",
-  "/ai/gpt/status": "/status?service=9",
-  "/ai/claude/status": "/status?service=4",
-  "/status/openai": "/status?service=9",
-  "/status/claude": "/status?service=4",
-  "/gpt/status.html": "/status?service=9",
-  "/claude/status.html": "/status?service=4",
-};
+export const legacyRoutes: Record<string, string> = seoConfig.legacyRoutes;
 
 /**
  * The header link that owns a path, "" for a known page outside the header,

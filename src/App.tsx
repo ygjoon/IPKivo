@@ -31,12 +31,16 @@ function Redirect({ to }: { to: string }) {
   const { search, hash } = useLocation();
   const { ip } = useParams();
   const [pathname, query] = to.split("?");
+  const destinationSearch = new URLSearchParams(query ?? search);
+  const language = new URLSearchParams(search).get("lang");
+  if (query && language && !destinationSearch.has("lang"))
+    destinationSearch.set("lang", language);
   return (
     <Navigate
       replace
       to={{
         pathname: ip ? `${pathname}/${encodeURIComponent(ip)}` : pathname,
-        search: query ? `?${query}` : search,
+        search: destinationSearch.size ? `?${destinationSearch}` : "",
         hash,
       }}
     />

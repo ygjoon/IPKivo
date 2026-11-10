@@ -269,12 +269,11 @@ function ConnectivityGroup({
 }
 
 export default function LinkPage() {
-  useEffect(() => {
-    document.title = t("link.connectivityEgressIpTools");
-  }, []);
   return (
     <>
-      <h1 className="sr-only">{t("link.connectivityAndRoutedEgress")}</h1>
+      <h1 className="mb-3 text-lg font-semibold leading-tight">
+        {t("link.connectivityAndRoutedEgress")}
+      </h1>
       <SplitResults />
       <div className="mt-5 -mb-2">
         <h2 className="mb-2 text-[1.4rem] font-bold">

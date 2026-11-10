@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api
+Disallow: /worker
+
+Sitemap: https://www.ipkivo.com/sitemap.xml

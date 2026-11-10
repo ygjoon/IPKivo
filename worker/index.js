@@ -10,6 +10,7 @@ import { ipType } from "./ip-type.js";
 import { mapConfig } from "./map.js";
 import { startPing, pingResult, pingNodes } from "./ping.js";
 import { rateLimit } from "./rate-limit.js";
+import { handlePageRequest, redirectTarget } from "./seo.js";
 import { normalizeStatus } from "./service-status.js";
 import services from "./services.json";
 import { tlsFingerprint } from "./tls-fingerprint.js";
@@ -19,6 +20,17 @@ import { lookupRegistration, registrationTarget } from "./whois.js";
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (env.LOCAL_DEV !== "true") {
+      const redirect = redirectTarget(url);
+      if (redirect)
+        return new Response(null, {
+          status: 301,
+          headers: {
+            Location: redirect.href,
+            "Cache-Control": "public, max-age=86400",
+          },
+        });
+    }
     if (url.pathname === "/worker" || url.pathname.startsWith("/worker/"))
       return new Response("Not found", { status: 404 });
     if (url.pathname !== "/api" && !url.pathname.startsWith("/api/")) {
@@ -28,7 +40,7 @@ export default {
         url.protocol = "http:";
         return fetch(new Request(url, request));
       }
-      return env.ASSETS.fetch(request);
+      return handlePageRequest(request, env);
     }
     try {
       const origin = request.headers.get("Origin");

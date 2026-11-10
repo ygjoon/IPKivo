@@ -28,13 +28,13 @@ export function iconTone(position: number) {
   return "bg-[color-mix(in_srgb,#b59dc9_12%,var(--card))] text-[#9781ad]";
 }
 
-/** Flat directory of every tool; each opens in a new tab. */
+/** Flat directory of every tool. */
 export function HomeShortcuts() {
   const tools = [
     {
       path: "/ip",
       label: t("common.ipLookup"),
-      description: t("home.ipDetectionNewTab"),
+      description: t("home.ipAddressLookupAndNetworkDiagnostics"),
       icon: Search,
     },
     {
@@ -117,8 +117,6 @@ export function HomeShortcuts() {
               key={tool.path}
               to={tool.path}
               title={tool.description}
-              target="_blank"
-              rel="noopener"
               className={tileClass}
             >
               <span
