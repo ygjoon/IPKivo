@@ -1,3 +1,4 @@
+import { SeoFaq } from "@/components/seo-faq";
 import { PageHeading, ToolCard } from "@/components/toolkit";
 import { t } from "@/i18n";
 
@@ -82,6 +83,7 @@ export default function PolicyPage({ page }: { page: "terms" | "privacy" }) {
           <p className="text-sm leading-6 text-muted-foreground">{body}</p>
         </ToolCard>
       ))}
+      <SeoFaq route={`/${page}`} />
     </div>
   );
 }

@@ -504,6 +504,100 @@ const supplementalFaqs: Record<
       },
     ],
   },
+  "/privacy": {
+    "zh-CN": [
+      {
+        question: "IPKivo 会处理哪些网络请求信息？",
+        answer:
+          "托管服务会处理请求 IP 和必要的请求信息。IP、域名查询及网络检测会把相关目标发送给对应数据源或检测服务；浏览器直接连接的第三方站点也能看到该连接的出口 IP。",
+      },
+      {
+        question: "IPKivo 会在浏览器中保存哪些数据？",
+        answer:
+          "本站会在当前浏览器保存主题、语言、提示偏好和查询历史。查询历史包含最近成功查询的地址与结果。",
+      },
+      {
+        question: "如何删除查询历史和其他本地数据？",
+        answer:
+          "可以通过浏览器的网站数据设置清除本站本地数据。此操作不会删除托管服务或第三方服务可能保留的请求记录。",
+      },
+      {
+        question: "浏览器检测会未经同意打开摄像头或定位吗？",
+        answer:
+          "摄像头、麦克风和定位检测需要你主动点击触发，并受浏览器权限控制。媒体测试会立即关闭获取到的媒体流，不录制音视频。",
+      },
+    ],
+    en: [
+      {
+        question: "What network request information does IPKivo process?",
+        answer:
+          "The hosting service processes request IPs and necessary request information. IP, domain, and network checks send their targets to the relevant data or diagnostic services. Third-party sites contacted directly by your browser can also see that connection's egress IP.",
+      },
+      {
+        question: "What data does IPKivo store in my browser?",
+        answer:
+          "The site stores theme, language, notice preferences, and lookup history in the current browser. Lookup history includes recent successful queries and their results.",
+      },
+      {
+        question: "How can I delete lookup history and other local data?",
+        answer:
+          "Clear this site's data in your browser settings to remove local data. This does not delete request records that hosting or third-party services may retain.",
+      },
+      {
+        question:
+          "Can browser checks open my camera or access my location without consent?",
+        answer:
+          "Camera, microphone, and location checks start only after you click them and are controlled by browser permissions. Media tests close the stream immediately and do not record audio or video.",
+      },
+    ],
+  },
+  "/terms": {
+    "zh-CN": [
+      {
+        question: "IPKivo 提供哪些服务？",
+        answer:
+          "本站提供 IP 查询、网络诊断、浏览器检测和服务状态查询。具体功能和数据源可能调整，请以页面当前说明为准。",
+      },
+      {
+        question: "可以检测任何 IP、域名或网站吗？",
+        answer:
+          "请仅检测你有权测试的目标。不得利用本站从事违法活动、干扰第三方服务、绕过访问限制或滥用 API。",
+      },
+      {
+        question: "检测结果能保证服务可用或账号可访问吗？",
+        answer:
+          "不能。结果会受网络、浏览器限制和第三方数据影响，仅供参考，不保证安全性、账号可用性或服务持续可用。重要结果请通过相关官方渠道核实。",
+      },
+      {
+        question: "API 是否需要密钥，是否有请求限制？",
+        answer:
+          "API 无需密钥，但会按请求 IP 限流。收到 429 响应时请降低请求频率后重试，不要通过轮换 IP 绕过限制。",
+      },
+    ],
+    en: [
+      {
+        question: "What services does IPKivo provide?",
+        answer:
+          "The site provides IP lookup, network diagnostics, browser checks, and service status queries. Features and data sources may change; follow the current page instructions.",
+      },
+      {
+        question: "May I test any IP address, domain, or website?",
+        answer:
+          "Use the tools only for targets you are authorized to test. Do not use the site for unlawful activity, disrupting third-party services, bypassing access restrictions, or abusing the API.",
+      },
+      {
+        question:
+          "Do test results guarantee service availability or account access?",
+        answer:
+          "No. Results depend on the network, browser restrictions, and third-party data. They are for reference and do not guarantee security, account access, or continued availability. Verify important results through the relevant official service.",
+      },
+      {
+        question: "Does the API require a key, and are requests rate-limited?",
+        answer:
+          "The API requires no key but is rate-limited by request IP. If you receive a 429 response, reduce your request frequency and retry; do not rotate IPs to bypass limits.",
+      },
+    ],
+  },
 };
 
 export function localizedFaq(route: string, locale: SeoLocale) {
