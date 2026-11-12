@@ -21,6 +21,15 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
     if (env.LOCAL_DEV !== "true") {
+      const yandexVerificationFile = url.pathname.match(
+        /^\/(yandex_[a-f0-9]+)\.html$/,
+      );
+      if (yandexVerificationFile) {
+        // Fetch the canonical asset before HTML redirects and SEO fallback handling.
+        const assetUrl = new URL(request.url);
+        assetUrl.pathname = `/${yandexVerificationFile[1]}`;
+        return env.ASSETS.fetch(new Request(assetUrl, request));
+      }
       const redirect = redirectTarget(url);
       if (redirect)
         return new Response(null, {
