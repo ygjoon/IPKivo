@@ -8,3 +8,6 @@
   Referrer-Policy: no-referrer
   Permissions-Policy: camera=(self), microphone=(self), geolocation=(self), clipboard-read=(self), clipboard-write=(self), browsing-topics=()
   Strict-Transport-Security: max-age=31536000
+
+/app-version.json
+  Cache-Control: no-store

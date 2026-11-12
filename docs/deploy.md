@@ -115,3 +115,7 @@ Claude 页面比较 `claude.ai` 与 `claude.com` 出口，并检查 DNS、WebRTC
 以上结果仅用于环境排查，不代表 Claude 官方判定、账号风险或封禁概率；页面不读取本机 Claude Code 配置，也不展示 Cloudflare 企业版 Bot Management 分数。
 
 社区友链：[LINUX DO](https://linux.do/) · 真诚、友善、团结、专业。
+
+## IndexNow 站点更新通知
+
+IndexNow 由 `.github/workflows/indexnow.yml` 在 `main` 分支的站点文件更新后触发。工作流会等待线上 `app-version.json` 的提交号与当前提交一致，再校验 `public/<key>.txt` 已部署，最后把 sitemap 中的页面 URL 发送到 IndexNow 公共端点。根目录 key 文件是协议要求，不能删除。通知表示搜索引擎已收到 URL，不保证一定收录。

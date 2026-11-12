@@ -11,6 +11,10 @@ const headers = {
 export default defineConfig(() => {
   // Evaluated by Vite at build time, not when a visitor opens the page.
   const buildTime = new Date().toISOString();
+  const deploymentCommit =
+    process.env.CF_PAGES_COMMIT_SHA ??
+    process.env.WORKERS_CI_COMMIT_SHA ??
+    process.env.GITHUB_SHA;
 
   return {
     plugins: [
@@ -22,7 +26,10 @@ export default defineConfig(() => {
           this.emitFile({
             type: "asset",
             fileName: "app-version.json",
-            source: JSON.stringify({ build: buildTime }),
+            source: JSON.stringify({
+              build: buildTime,
+              ...(deploymentCommit ? { commit: deploymentCommit } : {}),
+            }),
           });
         },
       },
