@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
 import { moduleUrl } from "./compile.mjs";
+
 const i18n = moduleUrl("export const t = (text) => text;");
 const network = moduleUrl(
   readFileSync("src/lib/network.ts", "utf8").replace(
@@ -88,6 +89,44 @@ test("site inspection reuses a successful egress response as reachability", asyn
     assert.equal(result.reachable, true);
     assert.equal(result.geo?.ip, "1.1.1.1");
     assert.deepEqual(calls, ["https://www.example.com/cdn-cgi/trace"]);
+  } finally {
+    globalThis.fetch = original;
+  }
+});
+
+test("site inspection bounds concurrent browser requests to avoid connection pool starvation", async () => {
+  const original = globalThis.fetch;
+  let inFlight = 0;
+  let maxInFlight = 0;
+  const resolvers = [];
+  globalThis.fetch = () => {
+    inFlight += 1;
+    maxInFlight = Math.max(maxInFlight, inFlight);
+    return new Promise((resolve) => {
+      resolvers.push(() => {
+        inFlight -= 1;
+        resolve(new Response("ip=1.1.1.1\nloc=SG\n", { status: 200 }));
+      });
+    });
+  };
+  try {
+    const tasks = Array.from({ length: 16 }, (_, index) =>
+      api.inspectSite({
+        domain: `s${index}.example.com`,
+        icon: "",
+        name: `Site ${index}`,
+        method: "cftrace",
+      }),
+    );
+    await new Promise((resolve) => setTimeout(resolve, 10));
+    assert.equal(maxInFlight, 8);
+    while (resolvers.length > 0) {
+      resolvers.shift()();
+      await new Promise((resolve) => setTimeout(resolve, 5));
+    }
+    const results = await Promise.all(tasks);
+    assert.equal(results.length, 16);
+    assert.equal(maxInFlight, 8);
   } finally {
     globalThis.fetch = original;
   }

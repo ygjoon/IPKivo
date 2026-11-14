@@ -2,17 +2,20 @@ import { t } from "@/i18n";
 import { sameIp } from "@/lib/ip-address";
 import { endpoint, request } from "@/lib/network";
 import type { Geo, Lookup } from "@/lib/types";
-import { adaptCoffee, coffeeIpSchema, type CoffeeLookup } from "./coffee.ts";
+import type { CoffeeLookup } from "./coffee.ts";
 import type { IpNetwork } from "./route-graph/types.ts";
 
 /** Budget for the direct Net.Coffee call before falling back to the same-origin API. */
 const COFFEE_TIMEOUT_MS = 5000;
 
 export async function lookupIp(ip: string, signal?: AbortSignal) {
-  const data = await request<unknown>(
-    `https://ip.net.coffee/api/ip/lookup/${encodeURIComponent(ip)}`,
-    { signal, mode: "cors", credentials: "omit", cache: "no-store" },
-  );
+  const [data, { adaptCoffee, coffeeIpSchema }] = await Promise.all([
+    request<unknown>(
+      `https://ip.net.coffee/api/ip/lookup/${encodeURIComponent(ip)}`,
+      { signal, mode: "cors", credentials: "omit", cache: "no-store" },
+    ),
+    import("./coffee.ts"),
+  ]);
   const result = coffeeIpSchema.safeParse(data);
   if (!result.success)
     throw new Error(t("api.theIpLocationSourceReturnedNoValidResult"));
@@ -26,10 +29,12 @@ export async function lookupIpViaServer(
   ip: string,
   signal?: AbortSignal,
 ): Promise<CoffeeLookup> {
-  const data = await endpoint<Partial<Lookup>>(
-    `/ip/lookup/${encodeURIComponent(ip)}`,
-    { signal },
-  );
+  const [data, { coffeeIpSchema }] = await Promise.all([
+    endpoint<Partial<Lookup>>(`/ip/lookup/${encodeURIComponent(ip)}`, {
+      signal,
+    }),
+    import("./coffee.ts"),
+  ]);
   const geo: Geo = { ...data.geo, ip };
   const sources = (data.sources ?? []).filter((source) =>
     sameIp(source.ip, ip),

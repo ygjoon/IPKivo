@@ -175,18 +175,54 @@ export interface SiteInspection {
   reachable: boolean;
 }
 
+const MAX_CONCURRENT_SITE_INSPECTIONS = 8;
+let activeSiteInspections = 0;
+const siteInspectionQueue: Array<() => void> = [];
+
+async function withSiteInspectionSlot<T>(
+  signal: AbortSignal | undefined,
+  run: () => Promise<T>,
+): Promise<T> {
+  signal?.throwIfAborted();
+  if (activeSiteInspections >= MAX_CONCURRENT_SITE_INSPECTIONS) {
+    await new Promise<void>((resolve, reject) => {
+      const wake = () => {
+        signal?.removeEventListener("abort", onAbort);
+        resolve();
+      };
+      const onAbort = () => {
+        const index = siteInspectionQueue.indexOf(wake);
+        if (index !== -1) siteInspectionQueue.splice(index, 1);
+        reject(signal?.reason);
+      };
+      signal?.addEventListener("abort", onAbort, { once: true });
+      siteInspectionQueue.push(wake);
+    });
+  }
+  signal?.throwIfAborted();
+  activeSiteInspections += 1;
+  try {
+    return await run();
+  } finally {
+    activeSiteInspections -= 1;
+    siteInspectionQueue.shift()?.();
+  }
+}
+
 export async function inspectSite(
   site: Site,
   signal?: AbortSignal,
 ): Promise<SiteInspection> {
-  if (site.method === "unsupported")
-    return { reachable: await probeSite(site, signal) };
-  try {
-    return { geo: await detectSite(site, signal), reachable: true };
-  } catch (error) {
-    if (signal?.aborted) throw error;
-    return { reachable: await probeSite(site, signal) };
-  }
+  return withSiteInspectionSlot(signal, async () => {
+    if (site.method === "unsupported")
+      return { reachable: await probeSite(site, signal) };
+    try {
+      return { geo: await detectSite(site, signal), reachable: true };
+    } catch (error) {
+      if (signal?.aborted) throw error;
+      return { reachable: await probeSite(site, signal) };
+    }
+  });
 }
 
 async function detectSite(site: Site, signal?: AbortSignal): Promise<Geo> {

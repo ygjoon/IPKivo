@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@/components/ui/command";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +11,13 @@ import {
 } from "@/components/ui/dialog";
 import { t } from "@/i18n";
 import { normalizeIp } from "@/lib/ip-address";
-import { ArrowRight, Search } from "lucide-react";
+import { Search } from "lucide-react";
+
+const IpSearchCommand = lazy(() =>
+  import("@/components/ui/command").then((m) => ({
+    default: m.IpSearchCommand,
+  })),
+);
 
 export function IpSearch() {
   const navigate = useNavigate();
@@ -82,48 +80,34 @@ export function IpSearch() {
           </kbd>
         </Button>
       </DialogTrigger>
-      <DialogContent
-        className="top-[20%] -translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-lg"
-        showCloseButton={false}
-      >
-        <DialogHeader className="sr-only">
-          <DialogTitle>{t("home.searchIp")}</DialogTitle>
-          <DialogDescription>{t("home.searchIpDescription")}</DialogDescription>
-        </DialogHeader>
-        <Command shouldFilter={false} loop label={t("home.searchIp")}>
-          <CommandInput
-            autoFocus
-            aria-label={t("home.enterIp")}
-            placeholder={t("home.enterIp")}
-            autoCapitalize="none"
-            autoCorrect="off"
-            spellCheck={false}
-            value={ip}
-            onValueChange={setIp}
-          />
-          <CommandList>
-            <CommandEmpty>{t("home.enterValidIp")}</CommandEmpty>
-            <CommandGroup
-              heading={!ip.trim() ? t("common.suggestedLookups") : undefined}
-            >
-              {options.map((value) => (
-                <CommandItem
-                  key={value}
-                  value={value}
-                  onSelect={() => lookup(value)}
-                >
-                  <Search aria-hidden="true" />
-                  <span className="min-w-0 flex-1 break-all">{value}</span>
-                  <ArrowRight aria-hidden="true" />
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </CommandList>
-        </Command>
-        <p className="border-t px-3 py-2 text-xs text-muted-foreground">
-          {t("home.searchIpDescription")}
-        </p>
-      </DialogContent>
+      {open && (
+        <DialogContent
+          className="top-[20%] -translate-y-0 gap-0 overflow-hidden p-0 sm:max-w-lg"
+          showCloseButton={false}
+        >
+          <DialogHeader className="sr-only">
+            <DialogTitle>{t("home.searchIp")}</DialogTitle>
+            <DialogDescription>
+              {t("home.searchIpDescription")}
+            </DialogDescription>
+          </DialogHeader>
+          <Suspense fallback={<div className="h-36" />}>
+            <IpSearchCommand
+              ip={ip}
+              onIpChange={setIp}
+              options={options}
+              onSelect={lookup}
+              enterIpLabel={t("home.enterIp")}
+              enterValidIpLabel={t("home.enterValidIp")}
+              suggestedLookupsLabel={t("common.suggestedLookups")}
+              searchIpLabel={t("home.searchIp")}
+            />
+          </Suspense>
+          <p className="border-t px-3 py-2 text-xs text-muted-foreground">
+            {t("home.searchIpDescription")}
+          </p>
+        </DialogContent>
+      )}
     </Dialog>
   );
 }

@@ -41,11 +41,16 @@ export default defineConfig(() => {
       rollupOptions: {
         output: {
           manualChunks(id) {
-            if (!id.includes("node_modules")) return;
+            if (!id.includes("node_modules") || id.endsWith(".css")) return;
             if (id.includes("echarts") || id.includes("zrender"))
               return "vendor-echarts";
             if (id.includes("leaflet")) return "vendor-leaflet";
             if (id.includes("gsap")) return "vendor-gsap";
+            if (
+              id.includes("@tanstack/react-table") ||
+              id.includes("@tanstack/table-core")
+            )
+              return "vendor-table";
             if (id.includes("@tanstack")) return "vendor-tanstack";
             if (id.includes("radix-ui") || id.includes("@radix-ui"))
               return "vendor-radix";

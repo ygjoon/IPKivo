@@ -10,7 +10,6 @@ import { useInView } from "@/hooks/use-in-view";
 import { locale, t, type MessageKey } from "@/i18n";
 import { countryName } from "@/lib/country";
 import { sameIp } from "@/lib/ip-address";
-import { fingerprint } from "@/views/browser/collect";
 import type { BrowserNavigator } from "@/views/browser/environment";
 import { lookupIp } from "@/views/ip/api";
 import { useQuery } from "@tanstack/react-query";
@@ -150,15 +149,19 @@ function powerComment(cores: number): MessageKey {
 
 // "中国电信" reads better than "Chinanet" in a Chinese letter.
 function ispName(isp: string) {
-  if (locale === "en") return isp;
-  if (/china ?telecom|chinanet/i.test(isp)) return "中国电信";
-  if (/china ?unicom|cnc ?group/i.test(isp)) return "中国联通";
-  if (/china ?mobile|cmnet/i.test(isp)) return "中国移动";
+  if (locale !== "zh-CN" && locale !== "zh-TW") return isp;
+  const traditional = locale === "zh-TW";
+  if (/china ?telecom|chinanet/i.test(isp))
+    return traditional ? "中國電信" : "中国电信";
+  if (/china ?unicom|cnc ?group/i.test(isp))
+    return traditional ? "中國聯通" : "中国联通";
+  if (/china ?mobile|cmnet/i.test(isp))
+    return traditional ? "中國移動" : "中国移动";
   return isp;
 }
 
 // The letter as last written this session, so a return visit skips the typing.
-const cacheKey = "ip-tools:portrait-letter";
+const cacheKey = `ip-tools:portrait-letter:${locale}`;
 
 function readCachedLetter(): Part[] | undefined {
   try {
@@ -226,7 +229,8 @@ function PortraitLetter() {
   });
   const visitor = useQuery({
     queryKey: ["home-browser-fingerprint"],
-    queryFn: () => fingerprint(),
+    queryFn: async () =>
+      (await import("@/views/browser/collect")).fingerprint(),
     enabled: seen,
     staleTime: Infinity,
     retry: false,

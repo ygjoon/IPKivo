@@ -117,6 +117,36 @@ function DrawerDescription({
   );
 }
 
+export function ResponsiveMobileDrawer({
+  open,
+  onOpenChange,
+  title,
+  description,
+  children,
+}: {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  children: React.ReactNode;
+}) {
+  return (
+    <Drawer open={open} onOpenChange={onOpenChange}>
+      <DrawerContent className="[&>div:first-child]:mt-2 [&>div:first-child]:w-10">
+        <DrawerHeader className="shrink-0 gap-1 px-4 py-2 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-left group-data-[vaul-drawer-direction=top]/drawer-content:text-left">
+          <DrawerTitle className="text-sm leading-5">{title}</DrawerTitle>
+          <DrawerDescription className="text-xs leading-4 empty:hidden">
+            {description}
+          </DrawerDescription>
+        </DrawerHeader>
+        <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+          {children}
+        </div>
+      </DrawerContent>
+    </Drawer>
+  );
+}
+
 export {
   Drawer,
   DrawerPortal,

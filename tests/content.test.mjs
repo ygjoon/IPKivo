@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { test } from "node:test";
 import {
@@ -34,7 +35,14 @@ test("header navigation maps IP details and tabbed pages to their owner", () => 
   assert.equal(activeNavigationRoute("/leak/webrtc"), "/leak");
   assert.equal(activeNavigationRoute("/unlock/claude/"), "/unlock");
   // Reachable pages outside the header highlight no link.
-  for (const path of ["/", "/ip", "/whois", "/ping", "/status", "/browser/checks"])
+  for (const path of [
+    "/",
+    "/ip",
+    "/whois",
+    "/ping",
+    "/status",
+    "/browser/checks",
+  ])
     assert.equal(activeNavigationRoute(path), "", path);
   for (const path of [
     "/dns/",
@@ -80,6 +88,40 @@ test("production assets exclude deleted content and backend source", () => {
     readdirSync("dist/assets").every(
       (name) => !/^\d{8}[a-z]?\.html-|^news-/.test(name),
     ),
+  );
+  const builtIndex = readFileSync("dist/index.html", "utf8");
+  const preloads = [
+    ...builtIndex.matchAll(
+      /<link\b[^>]*rel="modulepreload"[^>]*href="([^"]+)"/g,
+    ),
+  ].map((match) => match[1]);
+  for (const deferred of [
+    "vendor-leaflet",
+    "vendor-table",
+    "schemas",
+    "drawer",
+  ])
+    assert.ok(
+      preloads.every((href) => !href.includes(deferred)),
+      `dist/index.html should not modulepreload ${deferred}`,
+    );
+});
+
+test("inline bootstrap script SHA-256 matches Content-Security-Policy in public/_headers", () => {
+  const html = readFileSync("index.html", "utf8");
+  const headers = readFileSync("public/_headers", "utf8");
+  const scripts = [
+    ...html.matchAll(
+      /<script(?![^>]*\b(?:src|type)=)[^>]*>([\s\S]*?)<\/script>/g,
+    ),
+  ];
+  assert.equal(scripts.length, 1);
+  const hash = createHash("sha256")
+    .update(scripts[0][1], "utf8")
+    .digest("base64");
+  assert.ok(
+    headers.includes(`'sha256-${hash}'`),
+    `public/_headers is missing 'sha256-${hash}' for index.html inline bootstrap script`,
   );
 });
 

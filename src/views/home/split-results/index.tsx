@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { CountryFlag } from "@/components/country-flag";
 import { SiteLogo } from "@/components/site-logo";
@@ -13,11 +13,18 @@ import { countryName } from "@/lib/country";
 import { sameIp } from "@/lib/ip-address";
 import { localePath } from "@/lib/locale-path";
 import { useQueries } from "@tanstack/react-query";
-import { type Row, SiteEgressTable } from "./site-egress-table";
+import type { Row } from "./site-egress-table";
 import { sites } from "./sites";
 import { getDomesticIp, getGeo, inspectSite } from "../api";
 import { matchesSiteCategory } from "../category-status";
-import { ExitGroups, type SiteFilter } from "../exit-groups";
+import type { SiteFilter } from "../exit-groups";
+
+const ExitGroups = lazy(() =>
+  import("../exit-groups").then((m) => ({ default: m.ExitGroups })),
+);
+const SiteEgressTable = lazy(() =>
+  import("./site-egress-table").then((m) => ({ default: m.SiteEgressTable })),
+);
 
 const routeClass: Record<"direct" | "proxy" | "unknown", string> = {
   direct: "bg-ok/12 text-ok",
@@ -337,22 +344,30 @@ export function SplitResults({ summary = false }: { summary?: boolean }) {
                 {pending ? t("common.checkingDots") : t("common.runAgain")}
               </ActionButton>
             </div>
-            <ExitGroups
-              rows={groupedRows}
-              category={category}
-              onCategoryChange={(value) => {
-                setCategory(value);
-                setFilter(null);
-              }}
-              onSelect={setDetailName}
-              onFilter={setFilter}
-              activeFilter={filter}
-            />
-            <SiteEgressTable
-              rows={filteredRows}
-              filter={filter}
-              onClearFilter={() => setFilter(null)}
-            />
+            <Suspense
+              fallback={
+                <p className="py-5 text-center text-[0.88rem] leading-[1.8] text-muted-foreground">
+                  <Pending>{t("navigation.loadingPage")}</Pending>
+                </p>
+              }
+            >
+              <ExitGroups
+                rows={groupedRows}
+                category={category}
+                onCategoryChange={(value) => {
+                  setCategory(value);
+                  setFilter(null);
+                }}
+                onSelect={setDetailName}
+                onFilter={setFilter}
+                activeFilter={filter}
+              />
+              <SiteEgressTable
+                rows={filteredRows}
+                filter={filter}
+                onClearFilter={() => setFilter(null)}
+              />
+            </Suspense>
           </>
         )}
       </Content>

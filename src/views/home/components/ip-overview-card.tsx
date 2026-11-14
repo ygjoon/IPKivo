@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { CopyButton } from "@/components/copy-button";
 import { CountryFlag } from "@/components/country-flag";
@@ -12,12 +13,17 @@ import { localePath } from "@/lib/locale-path";
 import type { Geo } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import type { lookupIp } from "@/views/ip/api";
-import { PerfectScoreEffects } from "@/views/ip/perfect-score-effects";
 import type { UseQueryResult } from "@tanstack/react-query";
 import { Crown } from "lucide-react";
 import { IpCardMap } from "./ip-card-map";
 import "../home.css";
 import { homePrimaryBlockClass, homePrimaryCardClass } from "../styles";
+
+const PerfectScoreEffects = lazy(() =>
+  import("@/views/ip/perfect-score-effects").then((m) => ({
+    default: m.PerfectScoreEffects,
+  })),
+);
 
 export function IpOverviewCard({
   label,
@@ -106,7 +112,11 @@ export function IpOverviewCard({
           "home-ip-card-perfect text-foreground [--border:#514837] [--card-foreground:#f3ecdf] [--card:#191d24] [--foreground:#f3ecdf] [--muted-foreground:#bbb3a4] [--muted:#242830] [--primary:#e3c68e] [--ring:#e3c68e] [--subtle:var(--muted-foreground)]",
       )}
     >
-      {perfect && <PerfectScoreEffects />}
+      {perfect && (
+        <Suspense fallback={null}>
+          <PerfectScoreEffects />
+        </Suspense>
+      )}
       <IpCardMap geo={mapGeo} />
       {data && (
         <Link

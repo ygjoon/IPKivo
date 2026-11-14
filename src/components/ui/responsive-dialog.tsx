@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { lazy, Suspense, useState, type ReactNode } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import {
@@ -8,13 +8,10 @@ import {
   DialogTitle,
   DialogDescription,
 } from "./dialog";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerDescription,
-} from "./drawer";
+
+const ResponsiveMobileDrawer = lazy(() =>
+  import("./drawer").then((m) => ({ default: m.ResponsiveMobileDrawer })),
+);
 
 export function ResponsiveDialog({
   open,
@@ -32,21 +29,23 @@ export function ResponsiveDialog({
   dialogClassName?: string;
 }) {
   const mobile = useIsMobile();
+  const [hasOpened, setHasOpened] = useState(open);
+  if (open && !hasOpened) setHasOpened(true);
+
+  if (!open && !hasOpened) return null;
+
   if (mobile)
     return (
-      <Drawer open={open} onOpenChange={onOpenChange}>
-        <DrawerContent className="[&>div:first-child]:mt-2 [&>div:first-child]:w-10">
-          <DrawerHeader className="shrink-0 gap-1 px-4 py-2 group-data-[vaul-drawer-direction=bottom]/drawer-content:text-left group-data-[vaul-drawer-direction=top]/drawer-content:text-left">
-            <DrawerTitle className="text-sm leading-5">{title}</DrawerTitle>
-            <DrawerDescription className="text-xs leading-4 empty:hidden">
-              {description}
-            </DrawerDescription>
-          </DrawerHeader>
-          <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain px-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-            {children}
-          </div>
-        </DrawerContent>
-      </Drawer>
+      <Suspense fallback={null}>
+        <ResponsiveMobileDrawer
+          open={open}
+          onOpenChange={onOpenChange}
+          title={title}
+          description={description}
+        >
+          {children}
+        </ResponsiveMobileDrawer>
+      </Suspense>
     );
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

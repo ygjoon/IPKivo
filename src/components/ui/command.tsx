@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
-import { Search } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 
 function Command({
   className,
@@ -97,6 +97,57 @@ function CommandItem({
       )}
       {...props}
     />
+  );
+}
+
+export function IpSearchCommand({
+  ip,
+  onIpChange,
+  options,
+  onSelect,
+  enterIpLabel,
+  enterValidIpLabel,
+  suggestedLookupsLabel,
+  searchIpLabel,
+}: {
+  ip: string;
+  onIpChange: (value: string) => void;
+  options: string[];
+  onSelect: (value: string) => void;
+  enterIpLabel: string;
+  enterValidIpLabel: string;
+  suggestedLookupsLabel: string;
+  searchIpLabel: string;
+}) {
+  return (
+    <Command shouldFilter={false} loop label={searchIpLabel}>
+      <CommandInput
+        autoFocus
+        aria-label={enterIpLabel}
+        placeholder={enterIpLabel}
+        autoCapitalize="none"
+        autoCorrect="off"
+        spellCheck={false}
+        value={ip}
+        onValueChange={onIpChange}
+      />
+      <CommandList>
+        <CommandEmpty>{enterValidIpLabel}</CommandEmpty>
+        <CommandGroup heading={!ip.trim() ? suggestedLookupsLabel : undefined}>
+          {options.map((value) => (
+            <CommandItem
+              key={value}
+              value={value}
+              onSelect={() => onSelect(value)}
+            >
+              <Search aria-hidden="true" />
+              <span className="min-w-0 flex-1 break-all">{value}</span>
+              <ArrowRight aria-hidden="true" />
+            </CommandItem>
+          ))}
+        </CommandGroup>
+      </CommandList>
+    </Command>
   );
 }
 
