@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState } from "react";
 import { CompactText } from "@/components/compact-text";
 import { CountryFlag } from "@/components/country-flag";
+import { LazyMount } from "@/components/lazy-mount";
 import { SiteLogo } from "@/components/site-logo";
 import { IpText, Pending } from "@/components/toolkit";
 import { Badge } from "@/components/ui/badge";
@@ -117,22 +118,31 @@ export function ExitGroups({
       <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
         <Card className="min-w-0 gap-0 self-start rounded-lg py-0 shadow-none">
           <CardContent className="p-3">
-            <Suspense
+            <LazyMount
+              rootMargin="200px 0px"
               fallback={
                 <div className="h-[402px]">
                   <Pending>{t("home.loadingMap")}</Pending>
                 </div>
               }
             >
-              <ExitMap
-                rows={filtered}
-                onSelect={(name) => {
-                  onSelect(name);
-                  onFilter({ kind: "site", value: name });
-                }}
-                mapOnly
-              />
-            </Suspense>
+              <Suspense
+                fallback={
+                  <div className="h-[402px]">
+                    <Pending>{t("home.loadingMap")}</Pending>
+                  </div>
+                }
+              >
+                <ExitMap
+                  rows={filtered}
+                  onSelect={(name) => {
+                    onSelect(name);
+                    onFilter({ kind: "site", value: name });
+                  }}
+                  mapOnly
+                />
+              </Suspense>
+            </LazyMount>
           </CardContent>
         </Card>
         <div className="h-[426px] min-w-0 overflow-auto pr-1">

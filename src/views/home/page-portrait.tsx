@@ -227,6 +227,7 @@ function PortraitLetter() {
   const visitor = useQuery({
     queryKey: ["home-browser-fingerprint"],
     queryFn: () => fingerprint(),
+    enabled: seen,
     staleTime: Infinity,
     retry: false,
     refetchOnWindowFocus: false,
