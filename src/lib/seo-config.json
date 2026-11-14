@@ -5,32 +5,32 @@
   "routes": {
     "/": {
       "zh-CN": {
-        "title": "IPKivo - IP 查询、DNS 泄露检测、分流出口与网络诊断工具箱",
-        "description": "免费在线 IP 与网络检测工具箱：查询 IPv4/IPv6 归属地、ASN、运营商与 IP 信誉分，检测国内外网站分流出口、DNS/WebRTC 泄露，并诊断 ChatGPT、Claude 网络连通性。"
+        "title": "IPKivo - IP 纯净度检测、原生住宅 IP 查询与 AI 解锁诊断工具箱",
+        "description": "免费在线 IP 纯净度与网络检测工具箱：查询 IPv4/IPv6 归属地、ASN、原生/住宅家宽属性与 IP 信誉分，检测 DNS/WebRTC 泄露、流媒体及 ChatGPT、Claude AI 解锁与分流出口。"
       },
       "en": {
-        "title": "IPKivo - IP Lookup, DNS Leak Tests and Network Diagnostics",
-        "description": "Free online IP and network tools. Check IPv4/IPv6 location, ASN, ISP and reputation; test DNS/WebRTC leaks, routing exits, global ping and access to ChatGPT or Claude."
+        "title": "IPKivo - IP Fraud Score, Residential IP Check & Leak Test Toolkit",
+        "description": "Free online IP and proxy checker: inspect IPv4/IPv6 location, ASN, residential or hosting IP, fraud score, DNS/WebRTC leaks, and AI or streaming unlock routes for ChatGPT and Claude."
       }
     },
     "/ip": {
       "zh-CN": {
-        "title": "IP 地址查询 - IPv4/IPv6 归属地、ASN、信誉分与路由检测 | IPKivo",
-        "description": "查询 IPv4 或 IPv6 地址的地理位置、运营商、ASN、IP 信誉分、机房或住宅属性，以及 BGP 路由和网络延迟信息。"
+        "title": "IP 纯净度与原生住宅 IP 查询 - IPv4/IPv6 信誉分、ASN 与风险检测 | IPKivo",
+        "description": "在线检测 IP 纯净度、原生或双 ISP 住宅家宽属性、IP 信誉分、机房标记、ASN 运营商归属地以及 BGP 路由与网络延迟。"
       },
       "en": {
-        "title": "IP Lookup - IPv4/IPv6 Location, ASN and Reputation | IPKivo",
-        "description": "Look up an IPv4 or IPv6 address to see its location, ISP, ASN, reputation, hosting or residential classification, BGP route and network latency."
+        "title": "IP Fraud Score & Residential IP Checker - ASN & Risk Lookup | IPKivo",
+        "description": "Check any IPv4 or IPv6 address for IP fraud score, residential vs. hosting type, proxy risk signals, geolocation, ISP, ASN, BGP route and latency."
       }
     },
     "/ip/:ip": {
       "zh-CN": {
-        "title": "{ip} IP 归属地、ASN、信誉分与网络风险查询 - IPKivo",
-        "description": "查看 IP 地址 {ip} 的归属地、运营商、ASN 编号、信誉分、住宅或机房类型、滥用风险标记及网络路由信息。"
+        "title": "{ip} IP 纯净度、原生住宅属性与信誉分查询 - IPKivo",
+        "description": "查看 {ip} 的 IP 纯净度评分、住宅/机房属性、滥用风险标记、ASN 运营商、地理位置及 BGP 网络路由信息。"
       },
       "en": {
-        "title": "{ip} IP Location, ASN, Reputation and Network Risk - IPKivo",
-        "description": "Review location, ISP, ASN, reputation, hosting or residential classification, abuse signals and network route details for IP address {ip}."
+        "title": "{ip} IP Fraud Score, Residential Check & ASN Lookup - IPKivo",
+        "description": "Check {ip} for IP fraud score, residential or hosting classification, abuse risk signals, geolocation, ISP, ASN and network route details."
       }
     },
     "/leak/dns": {
@@ -39,48 +39,48 @@
         "description": "通过随机子域名解析检测实际 DNS 服务器的 IP、运营商和地区，判断代理或 VPN 使用期间 DNS 请求是否发生泄露。"
       },
       "en": {
-        "title": "DNS Leak Test - Check Proxy and VPN DNS Requests | IPKivo",
-        "description": "Run randomized DNS lookups to identify resolver IPs, providers and locations, and check whether DNS requests bypass your proxy or VPN."
+        "title": "DNS Leak Test - Check Proxy and VPN DNS Leaks Online | IPKivo",
+        "description": "Run randomized DNS lookups to identify resolver IPs, providers and locations, and verify whether DNS requests leak outside your proxy or VPN."
       }
     },
     "/leak/webrtc": {
       "zh-CN": {
-        "title": "WebRTC 泄露检测 - 检查浏览器是否暴露真实 IP | IPKivo",
-        "description": "收集浏览器 WebRTC STUN/ICE 候选地址并与网页出口 IP 对比，检查代理或 VPN 是否暴露公网或局域网地址。"
+        "title": "WebRTC 泄露检测 - 检查代理与 VPN 是否暴露真实 IP | IPKivo",
+        "description": "收集浏览器 WebRTC STUN/ICE 候选地址并与网页出口 IP 对比，检查代理或 VPN 是否泄露真实公网或局域网 IP。"
       },
       "en": {
-        "title": "WebRTC Leak Test - Check for Exposed IP Addresses | IPKivo",
-        "description": "Compare browser WebRTC STUN/ICE candidates with your web egress address to check whether a proxy or VPN exposes public or local IPs."
+        "title": "WebRTC Leak Test - Check If Your Proxy or VPN Exposes Real IP | IPKivo",
+        "description": "Compare browser WebRTC STUN/ICE candidates with your web egress IP to check whether a proxy or VPN leaks your real public or local IP."
       }
     },
     "/unlock/sites": {
       "zh-CN": {
-        "title": "网站连通性与分流出口检测 - AI、流媒体和网站访问测试 | IPKivo",
-        "description": "检测 ChatGPT、Claude、Netflix、YouTube、GitHub 等网站的连通性、HTTP 响应时间和实际网络出口 IP。"
+        "title": "AI 与流媒体解锁检测 - 网站连通性与分流出口测试 | IPKivo",
+        "description": "一键检测 ChatGPT、Claude、Netflix、YouTube、GitHub 等网站的解锁连通性、HTTP 响应时间与实际分流出口 IP。"
       },
       "en": {
-        "title": "Website Connectivity and Egress Test for AI and Streaming | IPKivo",
-        "description": "Check connectivity, HTTP response time and network egress for ChatGPT, Claude, Netflix, YouTube, GitHub and other popular sites."
+        "title": "AI & Streaming Unlock Test - Website Connectivity & Proxy Check | IPKivo",
+        "description": "Test access, HTTP latency and real exit IP for ChatGPT, Claude, Netflix, YouTube, GitHub and other popular AI or streaming platforms."
       }
     },
     "/unlock/gpt": {
       "zh-CN": {
-        "title": "ChatGPT 网络连通性与访问出口诊断工具 | IPKivo",
-        "description": "检查当前网络访问 OpenAI 和 ChatGPT 服务的连通性、出口 IP 地区及错误信息，帮助排查代理分流和访问限制。"
+        "title": "ChatGPT 解锁检测与 OpenAI 网络连通性诊断 | IPKivo",
+        "description": "检测当前网络与代理节点访问 ChatGPT / OpenAI 的解锁状态、出口 IP 地区与异常报错，快速排查分流和地区限制。"
       },
       "en": {
-        "title": "ChatGPT Connectivity and Egress Diagnostics | IPKivo",
-        "description": "Check connectivity, egress IP location and errors when accessing OpenAI and ChatGPT to troubleshoot routing and regional access issues."
+        "title": "ChatGPT Unlock & OpenAI Connectivity Diagnostics | IPKivo",
+        "description": "Check ChatGPT and OpenAI access, exit IP region and connection errors to troubleshoot proxy routing and regional blocks."
       }
     },
     "/unlock/claude": {
       "zh-CN": {
-        "title": "Claude 访问环境与网络出口诊断工具 | IPKivo",
-        "description": "检测访问 Claude 的网络出口与连通性，并查看浏览器语言、时区和设备环境信号，辅助排查访问受限问题。"
+        "title": "Claude 解锁检测与账号环境一致性诊断工具 | IPKivo",
+        "description": "检测访问 Claude 的网络出口与连通性，同时排查浏览器语言、时区、WebRTC 与设备指纹一致性，降低访问受限或风控风险。"
       },
       "en": {
-        "title": "Claude Access Environment and Network Diagnostics | IPKivo",
-        "description": "Check network egress and connectivity to Claude, and review browser language, timezone and device signals when troubleshooting access."
+        "title": "Claude Unlock & Browser Environment Risk Diagnostics | IPKivo",
+        "description": "Check Claude network access and exit IP alongside browser language, timezone and device signals to troubleshoot access blocks."
       }
     },
     "/speedtest": {

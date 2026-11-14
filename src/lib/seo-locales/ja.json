@@ -1,36 +1,36 @@
 {
   "routes": {
     "/": {
-      "title": "IPKivo - IP 検索、DNS リークテスト、ルーティングエグレス＆ネットワーク診断ツールキット",
-      "description": "無料のオンライン IP・ネットワーク診断ツールキット：IPv4/IPv6 の所在地、ASN、ISP、IP 評価スコアの確認、Web サイトのルーティングエグレス、DNS/WebRTC リークのテスト、ChatGPT や Claude への接続性を診断します。"
+      "title": "IPKivo - IP スコア・住宅 IP 判定＆プロキシ/VPN リーク診断ツール",
+      "description": "無料のオンライン IP・プロキシ診断ツールキット：IPv4/IPv6 の所在地、ASN、レジデンシャル/ホスティング IP 判定、IP 評価スコア、DNS/WebRTC リーク、ChatGPT や Claude のアクセス経路を一括確認。"
     },
     "/ip": {
-      "title": "IP アドレス検索 - IPv4/IPv6 所在地、ASN、評価スコア＆ルーティング確認 | IPKivo",
-      "description": "IPv4 または IPv6 アドレスの地理的位置、ISP、ASN、IP 評価スコア、ホスティング・レジデンシャル分類、BGP ルーティング、ネットワーク遅延情報を検索します。"
+      "title": "IP スコア・住宅 IP 判定＆リスク検索 - IPv4/IPv6・ASN 確認 | IPKivo",
+      "description": "IPv4/IPv6 アドレスの IP 評価スコア、レジデンシャルまたはホスティング（データセンター）種別、プロキシリスク、所在地、ISP、ASN、BGP ルーティングを即座に確認できます。"
     },
     "/ip/:ip": {
-      "title": "{ip} IP 所在地、ASN、評価スコア＆ネットワークリスク情報 - IPKivo",
-      "description": "IP アドレス {ip} の所在地、ISP、ASN 番号、評価スコア、ホスティングまたはレジデンシャル種別、不正利用シグナル、ネットワークルーティング詳細を確認します。"
+      "title": "{ip} IP スコア・住宅 IP 判定＆ASN リスク検索 - IPKivo",
+      "description": "{ip} の IP 評価スコア、レジデンシャル・ホスティング判定、不正利用シグナル、所在地、ISP、ASN 番号およびルーティング詳細を確認します。"
     },
     "/leak/dns": {
-      "title": "DNS リークテスト - プロキシ＆VPN の DNS クエリ漏洩チェック | IPKivo",
-      "description": "ランダムな DNS ルックアップによりリゾルバ IP、プロバイダ、所在地を特定し、DNS リクエストがプロキシや VPN を迂回していないか確認します。"
+      "title": "DNS リークテスト - プロキシ＆VPN の DNS 漏洩チェック | IPKivo",
+      "description": "ランダムな DNS ルックアップで実際のリゾルバ IP、プロバイダ、所在地を特定し、プロキシや VPN 経由で DNS リクエストが漏洩していないか確認します。"
     },
     "/leak/webrtc": {
-      "title": "WebRTC リークテスト - 露出した IP アドレスの検出 | IPKivo",
-      "description": "ブラウザの WebRTC STUN/ICE 候補アドレスを Web エグレスアドレスと比較し、プロキシや VPN がパブリック IP やローカル IP を露出させていないか確認します。"
+      "title": "WebRTC リークテスト - プロキシ/VPN の実 IP 漏洩チェック | IPKivo",
+      "description": "ブラウザの WebRTC STUN/ICE 候補と Web エグレス IP を比較し、プロキシや VPN 使用時にパブリック IP やローカル IP が露出していないか検出します。"
     },
     "/unlock/sites": {
-      "title": "Web サイト接続性＆エグレス診断 - AI・動画配信・主要サイトのアクセス確認 | IPKivo",
-      "description": "ChatGPT、Claude、Netflix、YouTube、GitHub などの主要サイトへの接続性、HTTP 応答時間、ネットワークエグレスを確認します。"
+      "title": "AI・動画配信サイト接続性＆プロキシ出口チェック | IPKivo",
+      "description": "ChatGPT、Claude、Netflix、YouTube、GitHub など主要 AI・動画配信サービスへのアクセス可否、HTTP 応答時間、実際の出口 IP を一括テストします。"
     },
     "/unlock/gpt": {
-      "title": "ChatGPT 接続性＆エグレス診断ツール | IPKivo",
-      "description": "OpenAI および ChatGPT への接続性、エグレス IP の所在地、エラーを確認し、ルーティングや地域制限のトラブルシューティングを支援します。"
+      "title": "ChatGPT 接続性・プロキシ出口 IP 診断ツール | IPKivo",
+      "description": "OpenAI および ChatGPT への接続状況、出口 IP の地域、エラー内容を診断し、プロキシのルーティングや地域制限のトラブルを特定します。"
     },
     "/unlock/claude": {
-      "title": "Claude アクセス環境＆ネットワーク診断ツール | IPKivo",
-      "description": "Claude への接続性とネットワークエグレスを確認し、ブラウザ言語、タイムゾーン、デバイスシグナルをチェックしてアクセス制限の原因を調査します。"
+      "title": "Claude 接続性＆ブラウザ環境リスク診断ツール | IPKivo",
+      "description": "Claude へのアクセス可否と出口 IP に加え、ブラウザ言語・タイムゾーン・デバイス環境シグナルの整合性を確認し、アクセス制限の原因を調査します。"
     },
     "/speedtest": {
       "title": "スピードテスト - ダウンロード、アップロード、遅延＆ジッター測定 | IPKivo",

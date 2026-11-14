@@ -1,36 +1,36 @@
 {
   "routes": {
     "/": {
-      "title": "IPKivo - IP 查詢、DNS 洩漏檢測、分流出口與網路診斷工具箱",
-      "description": "免費線上 IP 與網路檢測工具箱：查詢 IPv4/IPv6 歸屬地、ASN、電信業者與 IP 信譽分，檢測國內外網站分流出口、DNS/WebRTC 洩漏，並診斷 ChatGPT、Claude 網路連線性。"
+      "title": "IPKivo - IP 純淨度檢測、原生住宅 IP 查詢與 AI 解鎖診斷工具箱",
+      "description": "免費線上 IP 純淨度與網路檢測工具箱：查詢 IPv4/IPv6 歸屬地、ASN、原生/住宅家寬屬性與 IP 信譽分，檢測 DNS/WebRTC 洩漏、串流影音及 ChatGPT、Claude AI 解鎖與分流出口。"
     },
     "/ip": {
-      "title": "IP 位址查詢 - IPv4/IPv6 歸屬地、ASN、信譽分與路由檢測 | IPKivo",
-      "description": "查詢 IPv4 或 IPv6 位址的地理位置、電信業者、ASN、IP 信譽分、機房或住宅屬性，以及 BGP 路由和網路延遲資訊。"
+      "title": "IP 純淨度與原生住宅 IP 查詢 - IPv4/IPv6 信譽分、ASN 與風險檢測 | IPKivo",
+      "description": "線上檢測 IP 純淨度、原生或雙 ISP 住宅家寬屬性、IP 信譽分、機房標記、ASN 電信業者歸屬地以及 BGP 路由與網路延遲。"
     },
     "/ip/:ip": {
-      "title": "{ip} IP 歸屬地、ASN、信譽分與網路風險查詢 - IPKivo",
-      "description": "查看 IP 位址 {ip} 的歸屬地、電信業者、ASN 編號、信譽分、住宅或機房類型、濫用風險標記及網路路由資訊。"
+      "title": "{ip} IP 純淨度、原生住宅屬性與信譽分查詢 - IPKivo",
+      "description": "查看 {ip} 的 IP 純淨度評分、住宅/機房屬性、濫用風險標記、ASN 電信業者、地理位置及 BGP 網路路由資訊。"
     },
     "/leak/dns": {
       "title": "DNS 洩漏檢測 - 線上測試代理與 VPN DNS 解析出口 | IPKivo",
       "description": "透過隨機子網域解析檢測實際 DNS 伺服器的 IP、電信業者和地區，判斷代理或 VPN 使用期間 DNS 請求是否發生洩漏。"
     },
     "/leak/webrtc": {
-      "title": "WebRTC 洩漏檢測 - 檢查瀏覽器是否暴露真實 IP | IPKivo",
-      "description": "收集瀏覽器 WebRTC STUN/ICE 候選位址並與網頁出口 IP 比對，檢查代理或 VPN 是否暴露公網或內部網路位址。"
+      "title": "WebRTC 洩漏檢測 - 檢查代理與 VPN 是否暴露真實 IP | IPKivo",
+      "description": "收集瀏覽器 WebRTC STUN/ICE 候選位址並與網頁出口 IP 比對，檢查代理或 VPN 是否洩漏真實公網或內部網路 IP。"
     },
     "/unlock/sites": {
-      "title": "網站連線性與分流出口檢測 - AI、串流影音和網站存取測試 | IPKivo",
-      "description": "檢測 ChatGPT、Claude、Netflix、YouTube、GitHub 等網站的連線性、HTTP 回應時間和實際網路出口 IP。"
+      "title": "AI 與串流影音解鎖檢測 - 網站連線性與分流出口測試 | IPKivo",
+      "description": "一鍵檢測 ChatGPT、Claude、Netflix、YouTube、GitHub 等網站的解鎖連線性、HTTP 回應時間與實際分流出口 IP。"
     },
     "/unlock/gpt": {
-      "title": "ChatGPT 網路連線性與存取出口診斷工具 | IPKivo",
-      "description": "檢查目前網路存取 OpenAI 和 ChatGPT 服務的連線性、出口 IP 地區及錯誤資訊，協助排查代理分流和存取限制。"
+      "title": "ChatGPT 解鎖檢測與 OpenAI 網路連線性診斷 | IPKivo",
+      "description": "檢測目前網路與代理節點存取 ChatGPT / OpenAI 的解鎖狀態、出口 IP 地區與異常錯誤，快速排查分流和地區限制。"
     },
     "/unlock/claude": {
-      "title": "Claude 存取環境與網路出口診斷工具 | IPKivo",
-      "description": "檢測存取 Claude 的網路出口與連線性，並查看瀏覽器語言、時區和裝置環境訊號，輔助排查存取受限問題。"
+      "title": "Claude 解鎖檢測與帳號環境一致性診斷工具 | IPKivo",
+      "description": "檢測存取 Claude 的網路出口與連線性，同時排查瀏覽器語言、時區、WebRTC 與裝置指紋一致性，降低存取受限或風控風險。"
     },
     "/speedtest": {
       "title": "線上網路測速 - 下載、上傳、延遲與抖動測試 | IPKivo",
