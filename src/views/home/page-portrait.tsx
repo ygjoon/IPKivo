@@ -335,7 +335,7 @@ function PortraitLetter() {
   parts.push(t("home.portrait.farewell"));
 
   return (
-    <Card ref={cardRef} aria-label={t("home.portrait.title")}>
+    <Card ref={cardRef} role="region" aria-label={t("home.portrait.title")}>
       <CardContent>
         {/* Data loads ahead of time; the typing waits until it can be watched.
             Seen before this session: show the last letter at once, then the
@@ -378,7 +378,7 @@ export function PagePortrait() {
       className="mb-3"
       rootMargin="300px 0px"
       fallback={
-        <Card aria-label={t("home.portrait.title")}>
+        <Card role="region" aria-label={t("home.portrait.title")}>
           <CardContent>
             <PortraitSkeleton />
           </CardContent>

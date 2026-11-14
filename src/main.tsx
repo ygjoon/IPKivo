@@ -13,6 +13,31 @@ import ReactDOM from "react-dom/client";
 
 initializeLocale();
 
+function scheduleAdSense() {
+  if (typeof window === "undefined") return;
+  const loadScript = () => {
+    if (document.getElementById("adsense-js")) return;
+    const script = document.createElement("script");
+    script.id = "adsense-js";
+    script.async = true;
+    script.crossOrigin = "anonymous";
+    script.src =
+      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9698370041410113";
+    document.head.append(script);
+  };
+  const scheduleIdle = () => {
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(loadScript, { timeout: 3000 });
+    } else {
+      globalThis.setTimeout(loadScript, 1500);
+    }
+  };
+  if (document.readyState === "complete") scheduleIdle();
+  else window.addEventListener("load", scheduleIdle, { once: true });
+}
+
+scheduleAdSense();
+
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Provider>

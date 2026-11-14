@@ -16,12 +16,14 @@ export function LookupFaq({
     <section className="mt-4" aria-label={t("lookup.frequentlyAskedQuestions")}>
       <Card className="gap-1.5">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            {t("lookup.frequentlyAskedQuestions")}{" "}
-            <span className="text-xs font-normal text-muted-foreground">
-              FAQ
-            </span>
-          </CardTitle>
+          <h2 className="m-0">
+            <CardTitle className="flex items-center gap-2">
+              {t("lookup.frequentlyAskedQuestions")}{" "}
+              <span className="text-xs font-normal text-muted-foreground">
+                FAQ
+              </span>
+            </CardTitle>
+          </h2>
         </CardHeader>
         <CardContent>
           <Accordion type="single" collapsible>

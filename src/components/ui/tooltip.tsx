@@ -58,8 +58,10 @@ function TooltipTrigger({
       <Trigger
         {...triggerProps}
         data-slot="tooltip-trigger"
-        aria-haspopup="dialog"
-        aria-expanded={mobile.open}
+        {...(!asChild && {
+          "aria-haspopup": "dialog",
+          "aria-expanded": mobile.open,
+        })}
         onClickCapture={(event) => {
           if (triggerProps.disabled) return;
           event.preventDefault();
