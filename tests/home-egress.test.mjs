@@ -24,7 +24,8 @@ function render(primary, split, client = {}, capture = () => {}) {
       return { toolGroups: { network: [], ai: [] } };
     if (name === "@/hooks/use-sort-animation")
       return { useSortAnimation: () => null };
-    if (name === "@/components/connectivity") return { homeTargets: [] };
+    if (name === "@/components/connectivity-targets")
+      return { homeTargets: [] };
     if (name === "./sites.json") return [{ name: "Example" }];
     if (name === "@tanstack/react-query")
       return {

@@ -18,13 +18,14 @@ import { EvidenceDetails } from "./evidence-details";
 import { metricLabels, stateLabels, stateTone } from "./labels";
 import { ScenarioStars } from "./scenario-stars";
 import { tableClass, tableHeadClass } from "./styles";
-import { ScenarioSummaryRow, platformCount } from "./summary-row";
+import { ScenarioSummaryRow } from "./summary-row";
 import {
   accessRating,
   averageAccessRating,
   evidenceState,
   qualityRating,
 } from "../scenario-evidence";
+import { platformCount } from "../scenario-targets";
 import { scenarioGroups, type ScenarioTarget } from "../scenario-targets";
 import type { useIpLatency } from "../use-ip-latency";
 import { useScenarioAccess } from "../use-scenario-access";

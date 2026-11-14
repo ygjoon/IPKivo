@@ -1,9 +1,8 @@
-import { useEffect, useRef } from "react";
 import { ResponsiveDialog } from "@/components/ui/responsive-dialog";
 import { t } from "@/i18n";
-import { loadWidget, type WidgetApi } from "@/lib/challenge-widget";
 import { endpoint } from "@/lib/network";
 import { createRoot } from "react-dom/client";
+import { VerificationWidget } from "./verification-widget";
 
 export type PingVerification = {
   provider: "turnstile" | "turnstile-noninteractive";
@@ -17,77 +16,6 @@ type ChallengeProvider = {
   sitekey?: string;
 };
 type TurnstileProvider = ChallengeProvider & { sitekey: string };
-
-function VerificationWidget({
-  provider,
-  onToken,
-  onError,
-}: {
-  provider: TurnstileProvider;
-  onToken: (token: string) => void;
-  onError: (error: Error) => void;
-}) {
-  const container = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const host = container.current;
-    if (!host) return;
-    let active = true;
-    let api: WidgetApi | undefined;
-    let widget: string | number | undefined;
-    void loadWidget()
-      .then((loaded) => {
-        if (!active) return;
-        api = loaded;
-        widget = api.render(host, {
-          sitekey: provider.sitekey,
-          action: "ping_start",
-          size: "flexible",
-          callback: (token: string) => {
-            if (active) onToken(token);
-          },
-          retry: "never",
-          "refresh-expired": "manual",
-          "refresh-timeout": "manual",
-          "error-callback": () => {
-            if (active)
-              onError(
-                new Error(
-                  t("api.verificationServiceUnavailablePleaseRetryLater"),
-                ),
-              );
-          },
-          "expired-callback": () => {
-            if (active)
-              onError(
-                new Error(
-                  t("api.verificationFailedTokenExpiredPleaseVerifyAgain"),
-                ),
-              );
-          },
-          "timeout-callback": () => {
-            if (active)
-              onError(new Error(t("challenges.verificationTimedOut")));
-          },
-        });
-      })
-      .catch((error) => {
-        if (active) onError(error);
-      });
-    return () => {
-      active = false;
-      if (api && widget !== undefined) {
-        try {
-          if (api.remove) api.remove(widget);
-          else api.reset(widget);
-        } catch {
-          /* Widget may have already removed itself. */
-        }
-      }
-      host.replaceChildren();
-    };
-  }, [provider, onToken, onError]);
-  return <div ref={container} className="min-h-20 w-full overflow-x-auto" />;
-}
 
 export async function getPingVerification(
   signal: AbortSignal,
@@ -143,7 +71,7 @@ export async function getPingVerification(
             {t("challenges.awaitingVerification")}
           </p>
           <VerificationWidget
-            provider={provider}
+            sitekey={provider.sitekey}
             onToken={(token) => finish(token)}
             onError={(error) => finish(undefined, error)}
           />

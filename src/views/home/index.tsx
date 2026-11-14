@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ConnectivityTile, homeTargets } from "@/components/connectivity";
+import { ConnectivityTile } from "@/components/connectivity";
+import { homeTargets } from "@/components/connectivity-targets";
 import { SeoFaq } from "@/components/seo-faq";
 import { SponsorLinks } from "@/components/sponsor-links";
 import { Button } from "@/components/ui/button";

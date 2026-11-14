@@ -227,3 +227,7 @@ export const accessTargets: ScenarioTarget[] = Array.from(
       group.targets[index] ? [group.targets[index]] : [],
     ),
 ).flat();
+
+export const platformCount = new Set(
+  scenarioGroups.flatMap((group) => group.targets.map((target) => target.url)),
+).size;

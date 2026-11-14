@@ -28,7 +28,7 @@ import {
   platformNameLabelClass,
   tableCellClass,
 } from "./styles";
-import { scenarioGroups, type ScenarioGroup } from "../scenario-targets";
+import { type ScenarioGroup } from "../scenario-targets";
 
 const scenarioIcons = {
   ai: BrainCircuit,
@@ -44,10 +44,6 @@ const scenarioIcons = {
   domestic: House,
   communication: Mail,
 };
-
-export const platformCount = new Set(
-  scenarioGroups.flatMap((group) => group.targets.map((target) => target.url)),
-).size;
 
 // Only visible rating/coverage changes rerender a row; raw sample updates stay in the dialog.
 export const ScenarioSummaryRow = memo(function ScenarioSummaryRow({

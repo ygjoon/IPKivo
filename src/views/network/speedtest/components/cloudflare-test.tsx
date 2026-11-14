@@ -8,13 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { t } from "@/i18n";
 import { Globe, Play, Square } from "lucide-react";
-import { TransferCard, decimal, formatBytes } from "./transfer-card";
+import { TransferCard } from "./transfer-card";
 import {
   DOWNLOAD_LIMIT,
   TRANSFER_SECONDS,
   UPLOAD_LIMIT,
   type Phase,
 } from "../api";
+import { decimal, formatBytes } from "../format";
 import { useSpeedtest } from "../use-speedtest";
 
 const phases: Record<Phase, string> = {
