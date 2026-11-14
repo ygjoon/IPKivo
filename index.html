@@ -1,128 +1,289 @@
 <!doctype html>
 <html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="referrer" content="no-referrer" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="color-scheme" content="light dark" />
-  <meta name="theme-color" content="#1976d2" />
-  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-title" content="IPKivo" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <title>IPKivo - IP 查询、DNS 泄露与网络检测工具箱</title>
-  <meta id="seo-description" name="description" content="IPKivo 网络检测工具箱，提供 IP 查询、DNS 泄露与网络检测。" />
-  <meta id="seo-robots" name="robots" content="index, follow" />
-  <link id="seo-canonical" rel="canonical" href="https://www.ipkivo.com/" />
-  <link id="seo-hreflang-zh" rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/" />
-  <link id="seo-hreflang-zh-tw" rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/?lang=zh-TW" />
-  <link id="seo-hreflang-en" rel="alternate" hreflang="en" href="https://www.ipkivo.com/?lang=en" />
-  <link id="seo-hreflang-ja" rel="alternate" hreflang="ja" href="https://www.ipkivo.com/?lang=ja" />
-  <link id="seo-hreflang-ru" rel="alternate" hreflang="ru" href="https://www.ipkivo.com/?lang=ru" />
-  <link id="seo-hreflang-default" rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/" />
-  <meta id="seo-og-type" property="og:type" content="website" />
-  <meta id="seo-og-title" property="og:title" content="IPKivo - IP 查询、DNS 泄露检测与网络诊断工具箱" />
-  <meta id="seo-og-description" property="og:description" content="查询 IP 地址与网络出口，检测 DNS/WebRTC 泄露，并诊断网络连通性。" />
-  <meta id="seo-og-url" property="og:url" content="https://www.ipkivo.com/" />
-  <meta id="seo-og-site-name" property="og:site_name" content="IPKivo" />
-  <meta id="seo-og-locale" property="og:locale" content="zh_CN" />
-  <meta property="og:locale:alternate" content="zh_TW" />
-  <meta property="og:locale:alternate" content="en_US" />
-  <meta property="og:locale:alternate" content="ja_JP" />
-  <meta property="og:locale:alternate" content="ru_RU" />
-  <meta id="seo-og-image" property="og:image" content="https://www.ipkivo.com/og-image.jpg" />
-  <meta property="og:image:alt" content="IPKivo 网络检测工具箱：IP 查询、DNS 泄露检测与网络诊断" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta id="seo-twitter-card" name="twitter:card" content="summary_large_image" />
-  <meta id="seo-twitter-title" name="twitter:title" content="IPKivo - IP 查询、DNS 泄露检测与网络诊断工具箱" />
-  <meta id="seo-twitter-description" name="twitter:description" content="查询 IP 地址与网络出口，检测 DNS/WebRTC 泄露，并诊断网络连通性。" />
-  <meta id="seo-twitter-image" name="twitter:image" content="https://www.ipkivo.com/og-image.jpg" />
-  <meta name="twitter:image:alt" content="IPKivo Network Diagnostics Toolkit" />
-  <script id="seo-jsonld" type="application/ld+json">[]</script>
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="dns-prefetch" href="https://sdk.51.la" />
-  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-  <script>
-    // Classic ES5 script: IE cannot execute the application's module bundle.
-    (function () {
-      var root = document.documentElement;
-      // Fallback only: production must also send frame-ancestors / X-Frame-Options.
-      if (window.self !== window.top) {
-        root.className = "embedded-browser";
-        return;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#1976d2" />
+    <meta
+      name="format-detection"
+      content="telephone=no, date=no, address=no, email=no"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="IPKivo" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>IPKivo - IP 查询、DNS 泄露与网络检测工具箱</title>
+    <meta
+      id="seo-description"
+      name="description"
+      content="IPKivo 网络检测工具箱，提供 IP 查询、DNS 泄露与网络检测。"
+    />
+    <meta id="seo-robots" name="robots" content="index, follow" />
+    <link id="seo-canonical" rel="canonical" href="https://www.ipkivo.com/" />
+    <link
+      id="seo-hreflang-zh"
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://www.ipkivo.com/"
+    />
+    <link
+      id="seo-hreflang-zh-tw"
+      rel="alternate"
+      hreflang="zh-TW"
+      href="https://www.ipkivo.com/?lang=zh-TW"
+    />
+    <link
+      id="seo-hreflang-en"
+      rel="alternate"
+      hreflang="en"
+      href="https://www.ipkivo.com/?lang=en"
+    />
+    <link
+      id="seo-hreflang-ja"
+      rel="alternate"
+      hreflang="ja"
+      href="https://www.ipkivo.com/?lang=ja"
+    />
+    <link
+      id="seo-hreflang-ru"
+      rel="alternate"
+      hreflang="ru"
+      href="https://www.ipkivo.com/?lang=ru"
+    />
+    <link
+      id="seo-hreflang-default"
+      rel="alternate"
+      hreflang="x-default"
+      href="https://www.ipkivo.com/"
+    />
+    <meta id="seo-og-type" property="og:type" content="website" />
+    <meta
+      id="seo-og-title"
+      property="og:title"
+      content="IPKivo - IP 查询、DNS 泄露检测与网络诊断工具箱"
+    />
+    <meta
+      id="seo-og-description"
+      property="og:description"
+      content="查询 IP 地址与网络出口，检测 DNS/WebRTC 泄露，并诊断网络连通性。"
+    />
+    <meta id="seo-og-url" property="og:url" content="https://www.ipkivo.com/" />
+    <meta id="seo-og-site-name" property="og:site_name" content="IPKivo" />
+    <meta id="seo-og-locale" property="og:locale" content="zh_CN" />
+    <meta property="og:locale:alternate" content="zh_TW" />
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="ja_JP" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta
+      id="seo-og-image"
+      property="og:image"
+      content="https://www.ipkivo.com/og-image.jpg"
+    />
+    <meta
+      property="og:image:alt"
+      content="IPKivo 网络检测工具箱：IP 查询、DNS 泄露检测与网络诊断"
+    />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      id="seo-twitter-card"
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      id="seo-twitter-title"
+      name="twitter:title"
+      content="IPKivo - IP 查询、DNS 泄露检测与网络诊断工具箱"
+    />
+    <meta
+      id="seo-twitter-description"
+      name="twitter:description"
+      content="查询 IP 地址与网络出口，检测 DNS/WebRTC 泄露，并诊断网络连通性。"
+    />
+    <meta
+      id="seo-twitter-image"
+      name="twitter:image"
+      content="https://www.ipkivo.com/og-image.jpg"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="IPKivo Network Diagnostics Toolkit"
+    />
+    <script id="seo-jsonld" type="application/ld+json">
+      []
+    </script>
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="dns-prefetch" href="https://sdk.51.la" />
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+    <script>
+      // Classic ES5 script: IE cannot execute the application's module bundle.
+      (function () {
+        var root = document.documentElement;
+        // Fallback only: production must also send frame-ancestors / X-Frame-Options.
+        if (window.self !== window.top) {
+          root.className = "embedded-browser";
+          return;
+        }
+        if (document.documentMode || /MSIE|Trident/.test(navigator.userAgent)) {
+          root.className = "unsupported-browser";
+          return;
+        }
+        root.classList.add("js-enabled");
+        try {
+          var theme = localStorage.getItem("theme") || "system";
+          var dark =
+            theme === "dark" ||
+            (theme !== "light" &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches);
+          root.classList.toggle("dark", dark);
+          root.style.colorScheme = dark ? "dark" : "light";
+          ["color", "radius", "layout", "font-size"].forEach(function (key) {
+            var value = localStorage.getItem("ui-" + key);
+            if (value && value !== "default")
+              root.setAttribute("data-" + key, value);
+          });
+        } catch (error) {
+          // Keep the page usable when browser storage is unavailable.
+        }
+      })();
+    </script>
+    <style>
+      html {
+        touch-action: manipulation;
+        -webkit-text-size-adjust: 100%;
       }
-      if (document.documentMode || /MSIE|Trident/.test(navigator.userAgent)) {
-        root.className = "unsupported-browser";
-        return;
+
+      .embedded-browser body {
+        display: none !important;
       }
-      root.classList.add("js-enabled");
-      try {
-        var theme = localStorage.getItem("theme") || "system";
-        var dark = theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        root.classList.toggle("dark", dark);
-        root.style.colorScheme = dark ? "dark" : "light";
-        ["color", "radius", "layout", "font-size"].forEach(function (key) {
-          var value = localStorage.getItem("ui-" + key);
-          if (value && value !== "default") root.setAttribute("data-" + key, value);
-        });
-      } catch (error) {
-        // Keep the page usable when browser storage is unavailable.
+
+      .js-enabled #root > [data-seo-fallback] {
+        display: none;
       }
-    })();
-  </script>
-  <style>
-    html {
-      touch-action: manipulation;
-      -webkit-text-size-adjust: 100%;
-    }
 
-    .embedded-browser body {
-      display: none !important;
-    }
+      #unsupported-browser {
+        display: none;
+      }
 
-    .js-enabled #root > [data-seo-fallback] {
-      display: none;
-    }
+      .unsupported-browser #root {
+        display: none;
+      }
 
-    #unsupported-browser {
-      display: none;
-    }
+      .unsupported-browser #unsupported-browser {
+        display: block;
+        max-width: 640px;
+        margin: 80px auto;
+        padding: 24px;
+        font-family: sans-serif;
+        line-height: 1.8;
+        color: #171717;
+        background: #fff;
+      }
+    </style>
+    <meta name="google-adsense-account" content="ca-pub-9698370041410113" />
+  </head>
 
-    .unsupported-browser #root {
-      display: none;
-    }
-
-    .unsupported-browser #unsupported-browser {
-      display: block;
-      max-width: 640px;
-      margin: 80px auto;
-      padding: 24px;
-      font-family: sans-serif;
-      line-height: 1.8;
-      color: #171717;
-      background: #fff;
-    }
-  </style>
-  <script>
-    !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"3Rp6B9pBqXU8vzLU",ck:"3Rp6B9pBqXU8vzLU"});
-  </script>
-  <meta name="google-adsense-account" content="ca-pub-9698370041410113" />
-</head>
-
-<body>
-  <div id="unsupported-browser" role="alert">
-    <p><strong>不支持 Internet Explorer</strong></p>
-    <p>请使用最新版 Microsoft Edge、Google Chrome、Firefox 或 Safari 访问本站。</p>
-    <a href="https://www.microsoft.com/edge">下载 Microsoft Edge</a>
-  </div>
-  <noscript>请启用 JavaScript，并使用现代浏览器访问本站。</noscript>
-  <div id="root"></div>
-  <script type="module" src="/src/main.tsx"></script>
-</body>
-
+  <body>
+    <div id="unsupported-browser" role="alert">
+      <p><strong>不支持 Internet Explorer</strong></p>
+      <p>
+        请使用最新版 Microsoft Edge、Google Chrome、Firefox 或 Safari 访问本站。
+      </p>
+      <a href="https://www.microsoft.com/edge">下载 Microsoft Edge</a>
+    </div>
+    <noscript>请启用 JavaScript，并使用现代浏览器访问本站。</noscript>
+    <div id="root">
+      <div style="min-height: 100vh; display: flex; flex-direction: column">
+        <header
+          style="
+            height: 56px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+          "
+        >
+          <span
+            style="font-weight: 700; font-size: 18px; letter-spacing: -0.02em"
+            >IPKivo</span
+          >
+        </header>
+        <main
+          style="max-width: 1200px; width: 100%; margin: 0 auto; padding: 16px"
+        >
+          <div style="margin-bottom: 12px">
+            <div style="font-size: 16px; font-weight: 600; line-height: 1.25">
+              网络概览
+            </div>
+            <div
+              style="
+                margin-top: 4px;
+                font-size: 14px;
+                color: var(--muted-foreground);
+              "
+            >
+              IPKivo - IP 查询、DNS 泄露与网络检测工具箱
+            </div>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 12px;
+              margin-bottom: 12px;
+            "
+          >
+            <div
+              style="
+                min-height: 168px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: var(--card);
+              "
+            ></div>
+            <div
+              style="
+                min-height: 168px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: var(--card);
+              "
+            ></div>
+          </div>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 12px;
+            "
+          >
+            <div
+              style="
+                min-height: 212px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: var(--card);
+              "
+            ></div>
+            <div
+              style="
+                min-height: 212px;
+                border-radius: 10px;
+                border: 1px solid var(--border);
+                background: var(--card);
+              "
+            ></div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

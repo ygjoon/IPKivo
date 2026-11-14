@@ -143,10 +143,13 @@ export function HomePage() {
     <div className={homePageClass}>
       {/* <SponsorLinks /> */}
       <div className={homeToolbarClass}>
-        <div className="flex min-w-0 items-center gap-2">
-          <h1 className="text-[0.875rem] leading-[1.4] font-[650] whitespace-nowrap">
+        <div className="min-w-0">
+          <h1 className="text-base leading-tight font-semibold tracking-tight">
             {t("home.networkOverview")}
           </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {t("home.overviewIpTools")}
+          </p>
         </div>
         <div className={homeToolbarActionsClass}>
           <Button

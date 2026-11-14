@@ -19,10 +19,23 @@ export function IpCardMap({ geo }: { geo?: Geo }) {
   const { ref: container, inView: visible } = useInView<HTMLDivElement>();
   const attribution = useRef<HTMLDivElement>(null);
   const [loaded, setLoaded] = useState(false);
+  const [idleReady, setIdleReady] = useState(false);
+
+  useEffect(() => {
+    if (!visible || !valid || idleReady) return;
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(() => setIdleReady(true), {
+        timeout: 1200,
+      });
+      return () => window.cancelIdleCallback(id);
+    }
+    const timer = globalThis.setTimeout(() => setIdleReady(true), 600);
+    return () => globalThis.clearTimeout(timer);
+  }, [visible, valid, idleReady]);
 
   useEffect(() => {
     const element = container.current;
-    if (!visible || !valid || !element) return;
+    if (!visible || !valid || !idleReady || !element) return;
     let disposed = false;
     let instance: LeafletMap | undefined;
     let observer: ResizeObserver | undefined;
@@ -78,7 +91,7 @@ export function IpCardMap({ geo }: { geo?: Geo }) {
       observer?.disconnect();
       instance?.remove();
     };
-  }, [container, visible, valid, latitude, longitude]);
+  }, [container, visible, valid, idleReady, latitude, longitude]);
 
   if (!valid) return null;
   return (

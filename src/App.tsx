@@ -13,8 +13,8 @@ import { AppLayout } from "@/layout";
 import { browserChecks, legacyRoutes } from "@/layout/routes";
 import { ToolLayout } from "@/layout/tool-layout";
 import { localePath } from "@/lib/locale-path";
+import { HomePage } from "@/views/home";
 
-const HomePage = lazy(() => import("@/views/home"));
 const ClaudePage = lazy(() => import("@/views/claude"));
 const GptPage = lazy(() => import("@/views/gpt"));
 const IpPage = lazy(() => import("@/views/ip"));

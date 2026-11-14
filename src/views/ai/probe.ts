@@ -14,7 +14,9 @@ export async function probeAiDomain(
   const readable = domain === "claude.ai" || domain === "www.perplexity.ai";
   const path = readable
     ? "/cdn-cgi/trace"
-    : domain === "gemini.google.com"
+    : domain === "gemini.google.com" ||
+        domain === "chatgpt.com" ||
+        domain === "grok.com"
       ? "/robots.txt"
       : "/favicon.ico";
   const samples: number[] = [];

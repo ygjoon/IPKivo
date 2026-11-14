@@ -21,32 +21,23 @@ export type MessageKey =
   | keyof typeof zhPolicy
   | keyof typeof zhApi;
 
-const namespaces = [
-  "common",
-  "browser",
-  "ip",
-  "network",
-  "whois",
-  "ai",
-  "status",
-  "home",
-  "policy",
-  "api",
-] as const;
-
 export const supportedLocales = ["zh-CN", "zh-TW", "en", "ja", "ru"] as const;
 export type Locale = (typeof supportedLocales)[number];
+
+const loaders: Record<
+  Locale,
+  () => Promise<{ default: Record<MessageKey, string> }>
+> = {
+  "zh-CN": () => import("./zh-CN/index.ts"),
+  "zh-TW": () => import("./zh-TW/index.ts"),
+  en: () => import("./en/index.ts"),
+  ja: () => import("./ja/index.ts"),
+  ru: () => import("./ru/index.ts"),
+};
 
 export async function loadLocaleMessages(
   locale: Locale,
 ): Promise<Record<MessageKey, string>> {
-  const modules = await Promise.all(
-    namespaces.map(
-      (ns) => import(`./${locale}/${ns}.json`, { with: { type: "json" } }),
-    ),
-  );
-  return Object.assign({}, ...modules.map((mod) => mod.default)) as Record<
-    MessageKey,
-    string
-  >;
+  const mod = await loaders[locale]();
+  return mod.default;
 }

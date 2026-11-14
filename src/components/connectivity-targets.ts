@@ -25,7 +25,7 @@ export const homeTargets: Target[] = [
   {
     name: "GitHub",
     icon: "https://icons.duckduckgo.com/ip3/github.com.ico",
-    url: "https://github.com/generate_204",
+    url: "https://github.com/favicon.ico",
   },
   {
     name: "Cloudflare",

@@ -13,30 +13,53 @@ import ReactDOM from "react-dom/client";
 
 initializeLocale();
 
-function scheduleAdSense() {
+function scheduleDeferredScripts() {
   if (typeof window === "undefined") return;
-  const loadScript = () => {
-    if (document.getElementById("adsense-js")) return;
-    const script = document.createElement("script");
-    script.id = "adsense-js";
-    script.async = true;
-    script.crossOrigin = "anonymous";
-    script.src =
-      "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9698370041410113";
-    document.head.append(script);
+  const loadScripts = () => {
+    if (!document.getElementById("adsense-js")) {
+      const ads = document.createElement("script");
+      ads.id = "adsense-js";
+      ads.async = true;
+      ads.crossOrigin = "anonymous";
+      ads.src =
+        "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9698370041410113";
+      document.head.append(ads);
+    }
+    if (!document.getElementById("LA_COLLECT")) {
+      const cfg: { id: string; ck: string; d?: HTMLScriptElement } = {
+        id: "3Rp6B9pBqXU8vzLU",
+        ck: "3Rp6B9pBqXU8vzLU",
+      };
+      const win = window as Window & {
+        LA?: { ids?: Array<{ id: string; ck: string; d?: HTMLScriptElement }> };
+      };
+      const la = document.createElement("script");
+      la.id = "LA_COLLECT";
+      la.type = "text/javascript";
+      la.charset = "UTF-8";
+      la.async = true;
+      la.src = `${window.location.protocol === "https:" ? "https:" : "http:"}//sdk.51.la/js-sdk-pro.min.js`;
+      cfg.d = la;
+      if (win.LA?.ids) {
+        win.LA.ids.push(cfg);
+      } else {
+        win.LA = { ...cfg, ids: [cfg] };
+      }
+      document.head.append(la);
+    }
   };
   const scheduleIdle = () => {
     if ("requestIdleCallback" in window) {
-      window.requestIdleCallback(loadScript, { timeout: 3000 });
+      window.requestIdleCallback(loadScripts, { timeout: 3000 });
     } else {
-      globalThis.setTimeout(loadScript, 1500);
+      globalThis.setTimeout(loadScripts, 1500);
     }
   };
   if (document.readyState === "complete") scheduleIdle();
   else window.addEventListener("load", scheduleIdle, { once: true });
 }
 
-scheduleAdSense();
+scheduleDeferredScripts();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
