@@ -1,79 +1,17 @@
 import { t } from "./index.ts";
-import { messages, type MessageKey } from "./messages.ts";
+import type { MessageKey } from "./messages.ts";
+import zhApi from "./zh-CN/api.json" with { type: "json" };
 
 // The API currently returns Chinese display text. Keep that wire format separate
 // from translation keys; unknown third-party messages retain their original text.
-const apiMessageKeys = [
-  "api.publicServiceIncidentsReported",
-  "api.noUnresolvedIncidentsReportedInTheFeed",
-  "api.serviceIncidentsReported",
-  "common.operational",
-  "api.couldConnectOfficialDeepseekRssFeedRetryLater",
-  "api.couldParseOfficialDeepseekStatusDataVisitOfficial",
-  "api.unknownVerificationService",
-  "api.theCurrentEnvironmentIsMissingASiteKey",
-  "api.theCurrentEnvironmentIsMissingAServerSecret",
-  "api.currentDomainEnvironmentSVerificationAllowlist",
-  "api.selectAVerificationService",
-  "api.verificationServiceConfiguredSite",
-  "api.invalidVerificationTokenPleaseVerifyAgain",
-  "api.verificationServiceUnavailablePleaseRetryLater",
-  "api.invalidVerificationSecretCheckConfiguration",
-  "api.verificationFailedTokenExpiredPleaseVerifyAgain",
-  "api.verificationHostnameMismatchPleaseVerifyAgain",
-  "api.verificationActionMismatchPleaseVerifyAgain",
-  "api.invalidVerificationScorePleaseTryAgain",
-  "api.thisScoreIsBelowThePassingThreshold",
-  "api.thisVerificationAttemptOnThisSitePassed",
-  "api.serviceIssuesOrAdvisoriesReported",
-  "api.noWidespreadIncidentsReported",
-  "api.theIpLocationSourceReturnedNoValidResult",
-  "api.theSecondaryLocationSourceReturnedNoResult",
-  "api.enterAValidPublicIpv4OrIpv6Address",
-  "api.privateLoopbackAndReservedAddressesAreNotSupported",
-  "api.enterAValidDomainOrIp",
-  "api.enterPublicDomainWithoutProtocolPathPort",
-  "api.emptyJsonContent",
-  "api.jsonContentIsTooLarge",
-  "api.contentIsNotValidJson",
-  "api.upstreamConnectionFailedOrTimedOut",
-  "api.upstreamRateLimitReachedPleaseRetryLater",
-  "api.applicationJsonIsRequired",
-  "api.aJsonObjectIsRequired",
-  "api.onlySameOriginRequestsAreSupported",
-  "api.requestMethodNotSupported",
-  "api.tooManyRequestsPleaseRetryInOneMinute",
-  "api.apiEndpointNotFound",
-  "api.realVisitorIpAvailableLocallyDeployWorkerCheck",
-  "api.unknownService",
-  "api.publicStatusApiIntegratedServiceCheckOfficialStatus",
-  "api.invalidUrlEncoding",
-  "api.lookupTemporarilyFailedPleaseRetryLater",
-  "ip.ipReturnedSourceDoesMatchRequestedAddress",
-  "api.unsupportedMeasurementProtocol",
-  "api.selectValidRegions150ProbesPerBatch",
-  "api.select150RegionsPerBatch",
-  "api.invalidProbeRegion",
-  "api.invalidMeasurementId",
-  "common.underMaintenance",
-  "api.unexpectedCertificateLogDataFormat",
-  "api.thirdPartyStatusDataIsUnavailable",
-  "api.thirdPartyWebsiteMonitorOperational",
-  "api.thirdPartyWebsiteMonitorOutage",
-  "api.invalidAsNumber",
-  "api.enterAValidDomainIpOrAsNumber",
-  "api.enterDomainWithoutPathProtocol",
-  "api.httpsRdapServiceAvailableDomainSuffix",
-  "api.registrationSourceReturnedNoValidResult",
-  "api.rdapRegistryData",
-  "api.requestFailed",
-  "api.upstreamUnavailable",
-  "api.subdomainSourceInvalid",
-  "api.subdomainSourcesUnavailable",
-] as const satisfies readonly MessageKey[];
-const sourceMessages = messages["zh-CN"];
 const apiMessages = new Map<string, MessageKey>(
-  apiMessageKeys.map((key) => [sourceMessages[key], key] as const),
+  Object.entries(zhApi).map(([key, text]) => [text, key as MessageKey]),
+);
+apiMessages.set("正常运行", "common.operational");
+apiMessages.set("维护中", "common.underMaintenance");
+apiMessages.set(
+  "IP 数据源返回的地址不匹配",
+  "ip.ipReturnedSourceDoesMatchRequestedAddress",
 );
 apiMessages.set("RDAP · 注册局实时数据", "api.rdapRegistryData");
 const upstreamStatus = /^外部数据源暂不可用 \((\d{3})\)$/;

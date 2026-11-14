@@ -6,6 +6,7 @@ import { LanguageSelect } from "@/components/language-select";
 import { AppUpdateChecker } from "@/components/providers/app-update-checker";
 import { ThemeToggleButton } from "@/components/theme/theme-toggle-button";
 import { Pending, PrivacyToggle } from "@/components/toolkit";
+import { ToolsLauncher } from "@/components/tools-launcher";
 import { UnderlineHover } from "@/components/underline-hover";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useTheme } from "@/hooks/use-theme";
@@ -82,6 +83,7 @@ export function AppLayout() {
           </Link>
           <div className={headerActionsClass}>
             {mobile && <IpSearch />}
+            <ToolsLauncher />
             <PrivacyToggle iconOnly />
             <LanguageSelect />
             <ThemeToggleButton className="size-8 rounded-full text-muted-foreground" />
@@ -115,6 +117,7 @@ export function AppLayout() {
           </Link>
           <div className={cn(headerActionsClass, "md:gap-1.5")}>
             {!mobile && <IpSearch />}
+            <ToolsLauncher />
             <PrivacyToggle iconOnly />
             <LanguageSelect />
             <ThemeToggleButton className="size-9 shrink-0 rounded-lg text-muted-foreground" />

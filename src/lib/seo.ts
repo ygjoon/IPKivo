@@ -1,8 +1,13 @@
+import { isSupportedLocale, type Locale } from "@/i18n";
 import { normalizePublicIp } from "./public-ip";
 import seoConfig from "./seo-config.json" with { type: "json" };
 import { localizedFaq } from "./seo-faq";
 
 export type SeoLocale = "zh-CN" | "en";
+
+export function toSeoLocale(locale: Locale): SeoLocale {
+  return locale === "zh-CN" || locale === "zh-TW" ? "zh-CN" : "en";
+}
 
 type LocalizedMetadata = { title: string; description: string };
 type RouteMetadata = Record<SeoLocale, LocalizedMetadata>;
@@ -14,7 +19,14 @@ function normalizedPath(pathname: string) {
   return pathname.replace(/\/+$/, "") || "/";
 }
 
-export function resolvePageSeo(pathname: string, locale: SeoLocale) {
+function localizedHref(canonicalPath: string, locale: Locale) {
+  const url = new URL(canonicalPath, seoConfig.origin);
+  if (locale !== "zh-CN") url.searchParams.set("lang", locale);
+  return url.href;
+}
+
+export function resolvePageSeo(pathname: string, locale: Locale) {
+  const seoLocale = toSeoLocale(locale);
   const path = normalizedPath(pathname);
   const ipMatch = path.match(/^\/ip\/([^/]+)$/);
   let routePath = path;
@@ -36,19 +48,19 @@ export function resolvePageSeo(pathname: string, locale: SeoLocale) {
   }
 
   const route = routes[routePath];
-  const metadata = route?.[locale] ?? notFoundMetadata[locale];
+  const metadata = route?.[seoLocale] ?? notFoundMetadata[seoLocale];
   const replaceIp = (value: string) =>
     ip ? value.replaceAll("{ip}", ip) : value;
   const title = replaceIp(metadata.title);
   const description = replaceIp(metadata.description);
-  const faq = route ? localizedFaq(routePath, locale) : [];
-  const canonicalUrl = new URL(canonicalPath, seoConfig.origin);
-  if (route && locale === "en") canonicalUrl.searchParams.set("lang", "en");
+  const faq = route ? localizedFaq(routePath, seoLocale) : [];
 
-  const alternateZh = new URL(canonicalPath, seoConfig.origin).href;
-  const alternateEn = new URL(canonicalPath, seoConfig.origin);
-  alternateEn.searchParams.set("lang", "en");
-  const canonical = route ? canonicalUrl.href : "";
+  const alternateZh = localizedHref(canonicalPath, "zh-CN");
+  const alternateZhTw = localizedHref(canonicalPath, "zh-TW");
+  const alternateEn = localizedHref(canonicalPath, "en");
+  const alternateJa = localizedHref(canonicalPath, "ja");
+  const alternateRu = localizedHref(canonicalPath, "ru");
+  const canonical = route ? localizedHref(canonicalPath, locale) : "";
   const image = new URL(seoConfig.image, seoConfig.origin).href;
   const breadcrumbs = [
     {
@@ -76,7 +88,10 @@ export function resolvePageSeo(pathname: string, locale: SeoLocale) {
     description,
     canonical,
     alternateZh,
-    alternateEn: alternateEn.href,
+    alternateZhTw,
+    alternateEn,
+    alternateJa,
+    alternateRu,
     image,
     faq,
     structuredData: route
@@ -131,22 +146,23 @@ export function resolvePageSeo(pathname: string, locale: SeoLocale) {
 export function updateDocumentSeo(
   pathname: string,
   search: string,
-  preferredLocale: SeoLocale,
+  preferredLocale: Locale,
 ) {
   const params = new URLSearchParams(search);
   const langParam = params.get("lang");
-  const locale: SeoLocale =
-    langParam === "en" || langParam === "zh-CN" ? langParam : preferredLocale;
+  const activeLocale: Locale = isSupportedLocale(langParam)
+    ? langParam
+    : preferredLocale;
 
-  // Keep an English page's language in the shareable URL after in-app links.
-  if (locale === "en" && langParam !== "en") {
+  // Keep non-default page language in the shareable URL after in-app links.
+  if (activeLocale !== "zh-CN" && langParam !== activeLocale) {
     const url = new URL(window.location.href);
-    url.searchParams.set("lang", "en");
+    url.searchParams.set("lang", activeLocale);
     window.history.replaceState(window.history.state, "", url);
   }
 
-  const metadata = resolvePageSeo(pathname, locale);
-  document.documentElement.lang = locale;
+  const metadata = resolvePageSeo(pathname, activeLocale);
+  document.documentElement.lang = activeLocale;
   document.title = metadata.title;
 
   const setMeta = (id: string, key: "name" | "property", value: string) => {
@@ -208,10 +224,28 @@ export function updateDocumentSeo(
     "zh-CN",
   );
   setLink(
+    "seo-hreflang-zh-tw",
+    "alternate",
+    metadata.exists ? metadata.alternateZhTw : undefined,
+    "zh-TW",
+  );
+  setLink(
     "seo-hreflang-en",
     "alternate",
     metadata.exists ? metadata.alternateEn : undefined,
     "en",
+  );
+  setLink(
+    "seo-hreflang-ja",
+    "alternate",
+    metadata.exists ? metadata.alternateJa : undefined,
+    "ja",
+  );
+  setLink(
+    "seo-hreflang-ru",
+    "alternate",
+    metadata.exists ? metadata.alternateRu : undefined,
+    "ru",
   );
   setLink(
     "seo-hreflang-default",

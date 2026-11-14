@@ -28,6 +28,18 @@ function matchRoute(pattern, pathname) {
   return params;
 }
 
+const supportedLocales = new Set(["zh-CN", "zh-TW", "en", "ja", "ru"]);
+
+function toSeoLocale(locale) {
+  return locale === "zh-CN" || locale === "zh-TW" ? "zh-CN" : "en";
+}
+
+function localizedHref(canonicalPath, locale) {
+  const url = new URL(canonicalPath, seoConfig.origin);
+  if (locale !== "zh-CN") url.searchParams.set("lang", locale);
+  return url.href;
+}
+
 function resolvePage(pathname, locale) {
   const path = normalizePath(pathname);
   let routePath = path;
@@ -44,8 +56,9 @@ function resolvePage(pathname, locale) {
       }
     }
   }
+  const seoLocale = toSeoLocale(locale);
   const route = routes[routePath];
-  const content = route?.[locale] ?? notFound[locale];
+  const content = route?.[seoLocale] ?? notFound[seoLocale];
   const interpolate = (value) => {
     let result = value;
     for (const [key, param] of Object.entries(params))
@@ -54,12 +67,8 @@ function resolvePage(pathname, locale) {
   };
   const title = interpolate(content.title);
   const description = interpolate(content.description);
-  const faq = route ? localizedFaq(routePath, locale) : [];
-  const canonicalUrl = new URL(canonicalPath, seoConfig.origin);
-  if (route && locale === "en") canonicalUrl.searchParams.set("lang", "en");
-  const alternateEn = new URL(canonicalPath, seoConfig.origin);
-  alternateEn.searchParams.set("lang", "en");
-  const canonical = route ? canonicalUrl.href : "";
+  const faq = route ? localizedFaq(routePath, seoLocale) : [];
+  const canonical = route ? localizedHref(canonicalPath, locale) : "";
   const breadcrumbs = [
     {
       "@type": "ListItem",
@@ -81,11 +90,15 @@ function resolvePage(pathname, locale) {
   return {
     exists: Boolean(route),
     locale,
+    seoLocale,
     title,
     description,
     canonical,
-    alternateZh: new URL(canonicalPath, seoConfig.origin).href,
-    alternateEn: alternateEn.href,
+    alternateZh: localizedHref(canonicalPath, "zh-CN"),
+    alternateZhTw: localizedHref(canonicalPath, "zh-TW"),
+    alternateEn: localizedHref(canonicalPath, "en"),
+    alternateJa: localizedHref(canonicalPath, "ja"),
+    alternateRu: localizedHref(canonicalPath, "ru"),
     image: new URL(seoConfig.image, seoConfig.origin).href,
     faq,
     structuredData: route
@@ -206,50 +219,50 @@ function escapeHtml(value) {
 }
 
 function fallbackBody(metadata) {
-  const links =
-    metadata.locale === "en"
-      ? [
-          ["/", "IPKivo overview"],
-          ["/ip", "IP lookup"],
-          ["/leak/dns", "DNS leak test"],
-          ["/leak/webrtc", "WebRTC leak test"],
-          ["/unlock/sites", "Website connectivity"],
-          ["/unlock/gpt", "ChatGPT connectivity"],
-          ["/unlock/claude", "Claude connectivity"],
-          ["/speedtest", "Internet speed test"],
-          ["/whois", "WHOIS and RDAP lookup"],
-          ["/ping", "Global ping test"],
-          ["/browser/environment", "Browser environment"],
-          ["/browser/fingerprint", "Browser fingerprint"],
-          ["/browser/checks", "Browser consistency checks"],
-          ["/browser/privacy", "Browser privacy checks"],
-          ["/status", "Service status"],
-          ["/privacy", "Privacy policy"],
-          ["/terms", "Terms of service"],
-        ]
-      : [
-          ["/", "IPKivo 网络概览"],
-          ["/ip", "IP 地址查询"],
-          ["/leak/dns", "DNS 泄露检测"],
-          ["/leak/webrtc", "WebRTC 泄露检测"],
-          ["/unlock/sites", "网站连通性检测"],
-          ["/unlock/gpt", "ChatGPT 连通性诊断"],
-          ["/unlock/claude", "Claude 连通性诊断"],
-          ["/speedtest", "网络测速"],
-          ["/whois", "WHOIS 与 RDAP 查询"],
-          ["/ping", "全球 Ping 测试"],
-          ["/browser/environment", "浏览器环境信息"],
-          ["/browser/fingerprint", "浏览器指纹检测"],
-          ["/browser/checks", "浏览器一致性检测"],
-          ["/browser/privacy", "浏览器隐私检测"],
-          ["/status", "服务状态"],
-          ["/privacy", "隐私政策"],
-          ["/terms", "使用条款"],
-        ];
-  const language = metadata.locale === "en" ? "?lang=en" : "";
-  const label = metadata.locale === "en" ? "IPKivo tools" : "IPKivo 工具";
-  const faqTitle =
-    metadata.locale === "en" ? "Frequently asked questions" : "常见问题";
+  const isEnglishSeo = metadata.seoLocale === "en";
+  const links = isEnglishSeo
+    ? [
+        ["/", "IPKivo overview"],
+        ["/ip", "IP lookup"],
+        ["/leak/dns", "DNS leak test"],
+        ["/leak/webrtc", "WebRTC leak test"],
+        ["/unlock/sites", "Website connectivity"],
+        ["/unlock/gpt", "ChatGPT connectivity"],
+        ["/unlock/claude", "Claude connectivity"],
+        ["/speedtest", "Internet speed test"],
+        ["/whois", "WHOIS and RDAP lookup"],
+        ["/ping", "Global ping test"],
+        ["/browser/environment", "Browser environment"],
+        ["/browser/fingerprint", "Browser fingerprint"],
+        ["/browser/checks", "Browser consistency checks"],
+        ["/browser/privacy", "Browser privacy checks"],
+        ["/status", "Service status"],
+        ["/privacy", "Privacy policy"],
+        ["/terms", "Terms of service"],
+      ]
+    : [
+        ["/", "IPKivo 网络概览"],
+        ["/ip", "IP 地址查询"],
+        ["/leak/dns", "DNS 泄露检测"],
+        ["/leak/webrtc", "WebRTC 泄露检测"],
+        ["/unlock/sites", "网站连通性检测"],
+        ["/unlock/gpt", "ChatGPT 连通性诊断"],
+        ["/unlock/claude", "Claude 连通性诊断"],
+        ["/speedtest", "网络测速"],
+        ["/whois", "WHOIS 与 RDAP 查询"],
+        ["/ping", "全球 Ping 测试"],
+        ["/browser/environment", "浏览器环境信息"],
+        ["/browser/fingerprint", "浏览器指纹检测"],
+        ["/browser/checks", "浏览器一致性检测"],
+        ["/browser/privacy", "浏览器隐私检测"],
+        ["/status", "服务状态"],
+        ["/privacy", "隐私政策"],
+        ["/terms", "使用条款"],
+      ];
+  const language =
+    metadata.locale !== "zh-CN" ? `?lang=${metadata.locale}` : "";
+  const label = isEnglishSeo ? "IPKivo tools" : "IPKivo 工具";
+  const faqTitle = isEnglishSeo ? "Frequently asked questions" : "常见问题";
   const faq = (metadata.faq ?? [])
     .map(
       ({ question, answer }) =>
@@ -321,11 +334,35 @@ function htmlRewriterResponse(response, metadata, status, currentUrl, noindex) {
       ),
     )
     .on(
+      "#seo-hreflang-zh-tw",
+      setLink(
+        "alternate",
+        metadata.exists ? metadata.alternateZhTw : undefined,
+        "zh-TW",
+      ),
+    )
+    .on(
       "#seo-hreflang-en",
       setLink(
         "alternate",
         metadata.exists ? metadata.alternateEn : undefined,
         "en",
+      ),
+    )
+    .on(
+      "#seo-hreflang-ja",
+      setLink(
+        "alternate",
+        metadata.exists ? metadata.alternateJa : undefined,
+        "ja",
+      ),
+    )
+    .on(
+      "#seo-hreflang-ru",
+      setLink(
+        "alternate",
+        metadata.exists ? metadata.alternateRu : undefined,
+        "ru",
       ),
     )
     .on(
@@ -472,10 +509,28 @@ function fallbackHtmlResponse(response, metadata, status, currentUrl, noindex) {
       "zh-CN",
     )(html);
     html = replaceLink(
+      "seo-hreflang-zh-tw",
+      "alternate",
+      metadata.exists ? metadata.alternateZhTw : undefined,
+      "zh-TW",
+    )(html);
+    html = replaceLink(
       "seo-hreflang-en",
       "alternate",
       metadata.exists ? metadata.alternateEn : undefined,
       "en",
+    )(html);
+    html = replaceLink(
+      "seo-hreflang-ja",
+      "alternate",
+      metadata.exists ? metadata.alternateJa : undefined,
+      "ja",
+    )(html);
+    html = replaceLink(
+      "seo-hreflang-ru",
+      "alternate",
+      metadata.exists ? metadata.alternateRu : undefined,
+      "ru",
     )(html);
     html = replaceLink(
       "seo-hreflang-default",
@@ -518,7 +573,7 @@ export async function handlePageRequest(request, env) {
     return response;
 
   const lang = url.searchParams.get("lang");
-  const locale = lang === "en" ? "en" : "zh-CN";
+  const locale = lang && supportedLocales.has(lang) ? lang : "zh-CN";
   const metadata = resolvePage(url.pathname, locale);
   const status = metadata.exists ? response.status : 404;
   const nonCanonicalHost = url.hostname.toLowerCase() !== "www.ipkivo.com";

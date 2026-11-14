@@ -1,15 +1,24 @@
-import { messages, type MessageKey } from "./messages.ts";
+import {
+  loadLocaleMessages,
+  supportedLocales,
+  type Locale,
+  type MessageKey,
+} from "./messages.ts";
 
-export type { MessageKey } from "./messages.ts";
-
-export type Locale = "zh-CN" | "en";
+export { supportedLocales, type Locale, type MessageKey };
 const storageKey = "ip-tools:locale";
+
+export function isSupportedLocale(value: string | null): value is Locale {
+  return (
+    value !== null && (supportedLocales as readonly string[]).includes(value)
+  );
+}
 
 export function resolveLocale(
   saved: string | null,
   _languages: readonly string[] = [],
 ): Locale {
-  if (saved === "zh-CN" || saved === "en") return saved;
+  if (isSupportedLocale(saved)) return saved;
   return "zh-CN";
 }
 
@@ -23,17 +32,15 @@ function initialLocale(): Locale {
   } catch {
     /* Storage may be disabled. */
   }
-  return resolveLocale(
-    override === "en" || override === "zh-CN" ? override : saved,
-  );
+  return resolveLocale(isSupportedLocale(override) ? override : saved);
 }
 
 export const locale = initialLocale();
-const dictionary = messages[locale];
+const dictionary = await loadLocaleMessages(locale);
 const placeholder = /\{(\d+)\}/g;
 
 export function isMessageKey(key: string): key is MessageKey {
-  return Object.hasOwn(messages["zh-CN"], key);
+  return Object.hasOwn(dictionary, key);
 }
 
 export function t(key: MessageKey, values: readonly unknown[] = []): string {

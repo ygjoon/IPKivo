@@ -4,8 +4,7 @@ import type { Locale } from "@/i18n";
 export function localePath(path: string, locale: Locale) {
   const url = new URL(path, "https://www.ipkivo.com");
   if (url.origin !== "https://www.ipkivo.com") return path;
-  if (locale === "en") url.searchParams.set("lang", "en");
-  else if (url.searchParams.get("lang") === "en")
-    url.searchParams.delete("lang");
+  if (locale !== "zh-CN") url.searchParams.set("lang", locale);
+  else if (url.searchParams.has("lang")) url.searchParams.delete("lang");
   return `${url.pathname}${url.search}${url.hash}`;
 }

@@ -6,7 +6,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { locale, setLocale } from "@/i18n";
+import { isSupportedLocale, locale, setLocale } from "@/i18n";
 import { Languages } from "lucide-react";
 
 export function LanguageSelect() {
@@ -26,10 +26,15 @@ export function LanguageSelect() {
       <DropdownMenuContent align="end">
         <DropdownMenuRadioGroup
           value={locale}
-          onValueChange={(value) => setLocale(value === "en" ? "en" : "zh-CN")}
+          onValueChange={(value) => {
+            if (isSupportedLocale(value)) setLocale(value);
+          }}
         >
-          <DropdownMenuRadioItem value="zh-CN">中文</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="zh-CN">简体中文</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="zh-TW">繁體中文</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="en">English</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ja">日本語</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="ru">Русский</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>

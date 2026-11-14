@@ -3,14 +3,21 @@ import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { test } from "node:test";
 import { localizeApiMessage } from "../src/i18n/api-message.ts";
-import { resolveLocale, t } from "../src/i18n/index.ts";
-import { messages } from "../src/i18n/messages.ts";
+import { resolveLocale, supportedLocales, t } from "../src/i18n/index.ts";
+import { loadLocaleMessages } from "../src/i18n/messages.ts";
 
-const en = messages.en;
-const zh = messages["zh-CN"];
-test("saved language wins; browser language supplies a safe default", () => {
+const localeMessages = Object.fromEntries(
+  await Promise.all(
+    supportedLocales.map(async (loc) => [loc, await loadLocaleMessages(loc)]),
+  ),
+);
+const zh = localeMessages["zh-CN"];
+test("saved language wins; otherwise defaults to zh-CN", () => {
   assert.equal(resolveLocale("en", ["zh-CN"]), "en");
   assert.equal(resolveLocale("zh-CN", ["en-US"]), "zh-CN");
+  assert.equal(resolveLocale("zh-TW", ["en-US"]), "zh-TW");
+  assert.equal(resolveLocale("ja", ["en-US"]), "ja");
+  assert.equal(resolveLocale("ru", ["en-US"]), "ru");
   assert.equal(resolveLocale(null, ["zh-TW"]), "zh-CN");
   assert.equal(resolveLocale("invalid", ["fr-FR"]), "zh-CN");
   assert.equal(resolveLocale(null, []), "zh-CN");
@@ -22,7 +29,29 @@ test("interpolation leaves user values intact", () => {
     "请求失败 ({1} <script>)",
   );
 });
-test("all literal translation calls have English entries and matching placeholders", () => {
+test("all supported locales have complete entries and matching placeholders", () => {
+  const baseKeys = Object.keys(zh);
+  for (const loc of supportedLocales) {
+    const dict = localeMessages[loc];
+    assert.deepEqual(
+      Object.keys(dict),
+      baseKeys,
+      `${loc}: key parity mismatch`,
+    );
+    for (const key of baseKeys) {
+      assert.ok(
+        typeof dict[key] === "string" && dict[key].length > 0,
+        `${loc}: empty value for ${key}`,
+      );
+      assert.deepEqual(
+        dict[key].match(/\{\d+\}/g)?.sort() ?? [],
+        zh[key].match(/\{\d+\}/g)?.sort() ?? [],
+        `${loc}: placeholder mismatch for ${key}`,
+      );
+    }
+  }
+});
+test("all literal translation calls have entries in all locales and matching placeholders", () => {
   function scan(dir) {
     for (const entry of readdirSync(dir, { withFileTypes: true })) {
       const file = join(dir, entry.name);
@@ -35,12 +64,15 @@ test("all literal translation calls have English entries and matching placeholde
       const calls = /\bt\(\s*"((?:\\.|[^"\\])*)"/g;
       for (const match of source.matchAll(calls)) {
         const key = JSON.parse(`"${match[1]}"`);
-        assert.ok(en[key], `${file}: missing ${key}`);
-        assert.deepEqual(
-          en[key].match(/\{\d+\}/g)?.sort() ?? [],
-          zh[key].match(/\{\d+\}/g)?.sort() ?? [],
-          key,
-        );
+        for (const loc of supportedLocales) {
+          const dict = localeMessages[loc];
+          assert.ok(dict[key], `${file}: ${loc} missing ${key}`);
+          assert.deepEqual(
+            dict[key].match(/\{\d+\}/g)?.sort() ?? [],
+            zh[key].match(/\{\d+\}/g)?.sort() ?? [],
+            `${loc}: ${key}`,
+          );
+        }
       }
     }
   }

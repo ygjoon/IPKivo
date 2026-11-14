@@ -3,163 +3,244 @@
   <url>
     <loc>https://www.ipkivo.com/</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/leak/dns</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/leak/dns" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/leak/dns?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/leak/dns?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/leak/dns?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/leak/dns?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/leak/dns" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/leak/webrtc</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/leak/webrtc" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/leak/webrtc?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/leak/webrtc?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/leak/webrtc?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/leak/webrtc?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/leak/webrtc" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/unlock/sites</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/unlock/sites" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/unlock/sites?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/unlock/sites?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/unlock/sites?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/unlock/sites?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/unlock/sites" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/unlock/gpt</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/unlock/gpt" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/unlock/gpt?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/unlock/gpt?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/unlock/gpt?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/unlock/gpt?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/unlock/gpt" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/unlock/claude</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/unlock/claude" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/unlock/claude?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/unlock/claude?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/unlock/claude?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/unlock/claude?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/unlock/claude" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/speedtest</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/speedtest" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/speedtest?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/speedtest?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/speedtest?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/speedtest?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/speedtest" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/whois</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/whois" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/whois?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/whois?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/whois?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/whois?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/whois" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ping</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ping" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ping?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ping?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ping?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ping?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ping" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/browser/environment</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/browser/environment" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/browser/environment?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/browser/environment?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/browser/environment?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/browser/environment?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/browser/environment" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/browser/fingerprint</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/browser/fingerprint" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/browser/fingerprint?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/browser/fingerprint?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/browser/fingerprint?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/browser/fingerprint?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/browser/fingerprint" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/browser/checks</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/browser/checks" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/browser/checks?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/browser/checks?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/browser/checks?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/browser/checks?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/browser/checks" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/browser/privacy</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/browser/privacy" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/browser/privacy?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/browser/privacy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/browser/privacy?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/browser/privacy?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/browser/privacy" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/status</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/status" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/status?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/status?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/status?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/status?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/status" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/privacy</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/privacy" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/privacy?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/privacy?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/privacy?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/privacy?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/privacy" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/terms</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/terms" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/terms?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/terms?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/terms?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/terms?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/terms" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/1.1.1.1</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/1.1.1.1" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/1.1.1.1?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/1.1.1.1?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/1.1.1.1?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/1.1.1.1?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/1.1.1.1" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/1.0.0.1</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/1.0.0.1" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/1.0.0.1?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/1.0.0.1?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/1.0.0.1?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/1.0.0.1?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/1.0.0.1" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/8.8.8.8</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/8.8.8.8" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/8.8.8.8?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/8.8.8.8?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/8.8.8.8?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/8.8.8.8?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/8.8.8.8" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/8.8.4.4</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/8.8.4.4" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/8.8.4.4?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/8.8.4.4?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/8.8.4.4?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/8.8.4.4?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/8.8.4.4" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/223.5.5.5</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/223.5.5.5" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/223.5.5.5?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/223.5.5.5?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/223.5.5.5?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/223.5.5.5?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/223.5.5.5" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/223.6.6.6</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/223.6.6.6" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/223.6.6.6?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/223.6.6.6?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/223.6.6.6?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/223.6.6.6?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/223.6.6.6" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/119.29.29.29</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/119.29.29.29" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/119.29.29.29?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/119.29.29.29?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/119.29.29.29?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/119.29.29.29?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/119.29.29.29" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/114.114.114.114</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/114.114.114.114" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/114.114.114.114?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/114.114.114.114?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/114.114.114.114?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/114.114.114.114?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/114.114.114.114" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/9.9.9.9</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/9.9.9.9" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/9.9.9.9?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/9.9.9.9?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/9.9.9.9?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/9.9.9.9?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/9.9.9.9" />
   </url>
   <url>
     <loc>https://www.ipkivo.com/ip/208.67.222.222</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.ipkivo.com/ip/208.67.222.222" />
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.ipkivo.com/ip/208.67.222.222?lang=zh-TW" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.ipkivo.com/ip/208.67.222.222?lang=en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.ipkivo.com/ip/208.67.222.222?lang=ja" />
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.ipkivo.com/ip/208.67.222.222?lang=ru" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ipkivo.com/ip/208.67.222.222" />
   </url>
 </urlset>
