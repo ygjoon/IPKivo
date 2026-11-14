@@ -13,6 +13,8 @@ export function json(data, status = 200) {
     headers: {
       "Cache-Control": "no-store",
       "X-Content-Type-Options": "nosniff",
+      "X-Frame-Options": "DENY",
+      "Referrer-Policy": "no-referrer",
     },
   });
 }

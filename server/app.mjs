@@ -59,21 +59,32 @@ export function publicOrigin(value = "") {
   return url.origin;
 }
 
-/** Read only the global `/*` block; path-scoped rules are not emulated. */
-export function globalHeaders(text) {
-  const headers = {};
-  let global = false;
+/** Parse `_headers` into global `/*` headers and exact-path overrides. */
+export function parseHeadersFile(text) {
+  const global = {};
+  const paths = new Map();
+  let current = undefined;
   for (const line of text.split("\n")) {
     if (!line.trim() || line.trimStart().startsWith("#")) continue;
     if (!/^\s/.test(line)) {
-      global = line.trim() === "/*";
+      const pattern = line.trim();
+      if (pattern === "/*") current = global;
+      else if (pattern.startsWith("/") && !pattern.includes("*")) {
+        current = paths.get(pattern) ?? {};
+        paths.set(pattern, current);
+      } else current = undefined;
       continue;
     }
     const index = line.indexOf(":");
-    if (global && index > 0)
-      headers[line.slice(0, index).trim()] = line.slice(index + 1).trim();
+    if (current && index > 0)
+      current[line.slice(0, index).trim()] = line.slice(index + 1).trim();
   }
-  return headers;
+  return { global, paths };
+}
+
+/** Read only the global `/*` block. */
+export function globalHeaders(text) {
+  return parseHeadersFile(text).global;
 }
 
 function staticAssets(root) {
@@ -136,7 +147,7 @@ export async function createApp({
   const proxies = trustedProxyList(config.TRUSTED_PROXIES);
   const origin = publicOrigin(config.PUBLIC_ORIGIN);
   const trustCf = config.TRUST_CF_CONNECTING_IP === "true";
-  const securityHeaders = globalHeaders(
+  const { global: securityHeaders, paths: pathHeaders } = parseHeadersFile(
     await readFile(resolve(root, "_headers"), "utf8"),
   );
   const env = {
@@ -202,7 +213,12 @@ export async function createApp({
         : await worker.fetch(request, env);
     if (method === "HEAD") await response.body?.cancel();
     const merged = new Headers(securityHeaders);
+    const requestPathname = new URL(request.url).pathname;
+    const pathOverride = pathHeaders.get(requestPathname);
     for (const [name, value] of response.headers) merged.set(name, value);
+    if (pathOverride)
+      for (const [name, value] of Object.entries(pathOverride))
+        merged.set(name, value);
     return new Response(method === "HEAD" ? null : response.body, {
       status: response.status,
       statusText: response.statusText,

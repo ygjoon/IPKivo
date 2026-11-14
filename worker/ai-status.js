@@ -168,12 +168,12 @@ export async function getAiStatus(service) {
   if (service.id === "31") {
     const html = await pageText(service.page);
     // Public application identifiers shipped by AI Studio, not visitor credentials.
-    const keys = [...new Set(html.match(/AIza[\w-]+/g) ?? [])];
+    const keys = [...new Set(html.match(/AIza[\w-]+/g) ?? [])].slice(0, 3);
     for (const key of keys) {
       const response = await fetch(service.url, {
         method: "POST",
         body: "[]",
-        signal: AbortSignal.timeout(10_000),
+        signal: AbortSignal.timeout(5_000),
         headers: {
           "Content-Type": "application/json+protobuf",
           "X-Goog-Api-Key": key,

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useInView } from "@/hooks/use-in-view";
 import { attachMapLayers, loadMapConfig } from "@/lib/map";
 import type { Geo } from "@/lib/types";
 import type { Map as LeafletMap } from "leaflet";
@@ -15,23 +16,9 @@ export function IpCardMap({ geo }: { geo?: Geo }) {
     Number.isFinite(longitude) &&
     Math.abs(latitude) <= 90 &&
     Math.abs(longitude) <= 180;
-  const container = useRef<HTMLDivElement>(null);
+  const { ref: container, inView: visible } = useInView<HTMLDivElement>();
   const attribution = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const element = container.current;
-    if (!valid || !element) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    });
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [valid]);
 
   useEffect(() => {
     const element = container.current;
@@ -91,7 +78,7 @@ export function IpCardMap({ geo }: { geo?: Geo }) {
       observer?.disconnect();
       instance?.remove();
     };
-  }, [visible, valid, latitude, longitude]);
+  }, [container, visible, valid, latitude, longitude]);
 
   if (!valid) return null;
   return (

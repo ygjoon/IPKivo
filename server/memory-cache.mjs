@@ -28,6 +28,9 @@ export function memoryCache({
         remove(key);
         return undefined;
       }
+      // Refresh insertion order on hit so eviction behaves as LRU rather than FIFO.
+      entries.delete(key);
+      entries.set(key, entry);
       return new Response(entry.body.slice(), {
         status: entry.status,
         headers: entry.headers,
@@ -35,12 +38,12 @@ export function memoryCache({
     },
     async put(request, response) {
       const key = keyOf(request);
+      const cacheControl = response.headers.get("Cache-Control") ?? "";
       const ttl = Number(
-        /(?:^|,)\s*(?:s-)?max-age=(\d+)/i.exec(
-          response.headers.get("Cache-Control") ?? "",
-        )?.[1],
+        /(?:^|,)\s*(?:s-)?max-age=(\d+)/i.exec(cacheControl)?.[1],
       );
       if (
+        /(?:^|,)\s*(?:no-store|private)\b/i.test(cacheControl) ||
         !(ttl > 0) ||
         response.status !== 200 ||
         response.headers.has("Set-Cookie")

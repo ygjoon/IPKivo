@@ -428,7 +428,13 @@ export async function getCloudStatus(service) {
     return parseBandwagon(await sourceText(service.url));
   if (service.id === "google-cloud")
     return parseGoogleCloud(await upstream(service.url));
-  if (service.id === "aws")
-    return parseAws(JSON.parse(await sourceText(service.url)));
+  if (service.id === "aws") {
+    const raw = await sourceText(service.url);
+    try {
+      return parseAws(JSON.parse(raw));
+    } catch {
+      throw new HttpError(502, "AWS 官方状态数据解析失败，请查看官方页面。");
+    }
+  }
   return upstream(service.url);
 }

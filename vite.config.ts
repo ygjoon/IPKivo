@@ -37,6 +37,22 @@ export default defineConfig(() => {
     optimizeDeps: {
       include: ["vaul", "@fingerprintjs/fingerprintjs"],
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return;
+            if (id.includes("echarts") || id.includes("zrender"))
+              return "vendor-echarts";
+            if (id.includes("leaflet")) return "vendor-leaflet";
+            if (id.includes("gsap")) return "vendor-gsap";
+            if (id.includes("@tanstack")) return "vendor-tanstack";
+            if (id.includes("radix-ui") || id.includes("@radix-ui"))
+              return "vendor-radix";
+          },
+        },
+      },
+    },
     resolve: {
       alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
     },

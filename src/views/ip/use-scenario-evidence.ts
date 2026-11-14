@@ -27,8 +27,13 @@ export function useScenarioEvidence(ip: string) {
   const [busy, setBusy] = useState<string | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const controller = useRef<AbortController | null>(null);
+  const hasRecords = Object.keys(records).length > 0;
   useEffect(() => {
+    if (!hasRecords) return;
     const tick = setInterval(() => setNow(Date.now()), 5000);
+    return () => clearInterval(tick);
+  }, [hasRecords]);
+  useEffect(() => {
     const invalidate = () => {
       controller.current?.abort();
       cache.clear();
@@ -40,7 +45,6 @@ export function useScenarioEvidence(ip: string) {
     window.addEventListener("online", invalidate);
     connection?.addEventListener("change", invalidate);
     return () => {
-      clearInterval(tick);
       controller.current?.abort();
       controller.current = null;
       window.removeEventListener("online", invalidate);

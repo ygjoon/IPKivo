@@ -36,6 +36,7 @@ export async function rateLimit(binding, ip, bucket, limit) {
   // Evict the oldest client rather than rejecting every new visitor when full.
   if (!counters.has(id) && counters.size >= maxKeys)
     counters.delete(counters.keys().next().value);
+  else counters.delete(id);
   counters.set(id, count + 1);
   return true;
 }

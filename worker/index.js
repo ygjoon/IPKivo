@@ -37,6 +37,8 @@ export default {
           headers: {
             Location: redirect.href,
             "Cache-Control": "public, max-age=86400",
+            "X-Content-Type-Options": "nosniff",
+            "Referrer-Policy": "no-referrer",
           },
         });
     }
@@ -123,7 +125,7 @@ export default {
         return await cachedJson(
           new URL(`/api/geoip/${encodeURIComponent(ip)}`, url.origin),
           3600,
-          () => geoIp(ip),
+          () => geoIp(ip).catch(() => secondaryGeo(ip)),
         );
       }
       if (path.startsWith("/ip/network/")) {

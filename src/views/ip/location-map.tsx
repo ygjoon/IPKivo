@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ToolCard, Pending } from "@/components/toolkit";
 import { Button } from "@/components/ui/button";
+import { useInView } from "@/hooks/use-in-view";
 import { t } from "@/i18n";
 import { attachMapLayers, loadMapConfig, mapExternalUrl } from "@/lib/map";
 import { maskedIp } from "@/lib/network";
@@ -30,23 +31,11 @@ export function LocationMap({ geo }: { geo: Geo }) {
       .filter(Boolean)
       .filter((value, index, all) => all.indexOf(value) === index)
       .join(" · ") || t("ip.ipLocation");
-  const container = useRef<HTMLDivElement>(null);
+  const { ref: container, inView: visible } = useInView<HTMLDivElement>();
   const map = useRef<LeafletMap | null>(null);
-  const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [tileError, setTileError] = useState(false);
   const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    if (!container.current) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    });
-    observer.observe(container.current);
-    return () => observer.disconnect();
-  }, [valid]);
   useEffect(() => {
     const element = container.current;
     if (!visible || !valid || !element) return;
@@ -121,7 +110,7 @@ export function LocationMap({ geo }: { geo: Geo }) {
       instance?.remove();
       map.current = null;
     };
-  }, [visible, valid, latitude, longitude, location, attempt]);
+  }, [container, visible, valid, latitude, longitude, location, attempt]);
   return (
     <ToolCard
       title={

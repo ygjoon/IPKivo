@@ -108,7 +108,7 @@ test("standalone server serves assets, SPA fallback and hides deployment files",
     headers: { Accept: "text/html" },
   });
   assert.equal(index.status, 200);
-  assert.match(await index.text(), /<title>app/);
+  assert.match(await index.text(), /<title>1\.1\.1\.1 .*IPKivo<\/title>/);
   assert.equal(index.headers.get("X-Frame-Options"), "DENY");
   assert.equal(index.headers.get("X-Scoped"), null);
   const asset = await call(handle, "/assets/app.js");
@@ -232,11 +232,23 @@ test("memory cache honours max-age, skips uncacheable responses and evicts oldes
   );
   await cache.put(new Request("https://x/n"), ok("n", "no-store"));
   assert.equal(await cache.match(new Request("https://x/n")), undefined);
+  await cache.put(new Request("https://x/p"), ok("p", "private, max-age=60"));
+  assert.equal(await cache.match(new Request("https://x/p")), undefined);
   now = 10_000;
   assert.equal(await cache.match(new Request("https://x/a")), undefined);
-  for (const key of ["b", "c", "d"])
+  for (const key of ["b", "c"])
     await cache.put(new Request(`https://x/${key}`), ok(key));
-  assert.equal(await cache.match(new Request("https://x/b")), undefined);
+  // Accessing `b` refreshes its LRU position, so inserting `d` evicts `c` instead of `b`.
+  assert.equal(
+    await (await cache.match(new Request("https://x/b"))).text(),
+    "b",
+  );
+  await cache.put(new Request("https://x/d"), ok("d"));
+  assert.equal(await cache.match(new Request("https://x/c")), undefined);
+  assert.equal(
+    await (await cache.match(new Request("https://x/b"))).text(),
+    "b",
+  );
   assert.equal(
     await (await cache.match(new Request("https://x/d"))).text(),
     "d",

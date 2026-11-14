@@ -192,9 +192,19 @@ async function holderFor(asn) {
 }
 
 async function addHolders(topology) {
-  const holders = await Promise.all(
-    topology.lookupAsns.map(async (asn) => [asn, await holderFor(asn)]),
+  // Bound concurrent RIPEstat AS-overview lookups to stay within Worker connection limits.
+  const queue = topology.lookupAsns.slice(0, 12);
+  const holders = [];
+  const workers = Array.from(
+    { length: Math.min(4, queue.length) },
+    async () => {
+      while (queue.length > 0) {
+        const asn = queue.shift();
+        holders.push([asn, await holderFor(asn)]);
+      }
+    },
   );
+  await Promise.all(workers);
   const names = new Map(holders);
   const decorate = (item) =>
     names.get(item.asn) ? { ...item, name: names.get(item.asn) } : item;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CountryFlag } from "@/components/country-flag";
 import { SiteLogo } from "@/components/site-logo";
@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ResponsiveDialog } from "@/components/ui/responsive-dialog";
 import { UnderlineHover } from "@/components/underline-hover";
+import { useInView } from "@/hooks/use-in-view";
 import { locale, t } from "@/i18n";
 import { countryName } from "@/lib/country";
 import { sameIp } from "@/lib/ip-address";
@@ -33,21 +34,12 @@ export function SplitResults({ summary = false }: { summary?: boolean }) {
   const [detailIp, setDetailIp] = useState<string | null>(null);
   const [category, setCategory] = useState("all");
   const [filter, setFilter] = useState<SiteFilter | null>(null);
-  const [visibleSites, setVisibleSites] = useState<Set<string>>(
-    () => new Set(),
-  );
-  const container = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (!container.current) return;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries.some((entry) => entry.isIntersecting)) {
-        setVisibleSites(new Set(sites.map((site) => site.name)));
-        observer.disconnect();
-      }
-    });
-    observer.observe(container.current);
-    return () => observer.disconnect();
-  }, [summary]);
+  const { ref: container, inView } = useInView();
+  const [forceVisible, setForceVisible] = useState(false);
+  const visibleSites =
+    inView || forceVisible
+      ? new Set(sites.map((site) => site.name))
+      : new Set<string>();
   const [domestic] = useQueries({
     queries: [
       {
@@ -338,7 +330,7 @@ export function SplitResults({ summary = false }: { summary?: boolean }) {
                   setDetailName(null);
                   setDetailIp(null);
                   setFilter(null);
-                  setVisibleSites(new Set(sites.map((site) => site.name)));
+                  setForceVisible(true);
                   setRound((value) => value + 1);
                 }}
               >

@@ -89,7 +89,7 @@ test("WebMCP registers unique, complete tool definitions and restricts navigatio
   assert.deepEqual(calls, [["navigate", "/ip"]]);
   assert.throws(
     () => find("one_ip_open_page").execute({ path: "https://example.com" }),
-    /Unknown One IP page/,
+    /Unknown IPKivo page path/,
   );
   assert.equal(calls.length, 1);
   assert.ok(

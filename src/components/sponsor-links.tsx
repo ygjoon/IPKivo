@@ -43,7 +43,7 @@ export function SponsorLinks({
                     height="274"
                   />
                   <span className="pointer-events-none absolute right-0 top-0 z-10 -mr-0.5 -mt-0.5 p-1 text-[9px] leading-none text-white/80 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
-                    广告
+                    {t("common.ad")}
                   </span>
                 </>
               ) : (

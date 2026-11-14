@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { LazyMount } from "@/components/lazy-mount";
 import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -6,6 +6,7 @@ import {
   StreamingAnswer,
   type AnswerPart as Part,
 } from "@/components/ui/streaming-answer";
+import { useInView } from "@/hooks/use-in-view";
 import { locale, t, type MessageKey } from "@/i18n";
 import { countryName } from "@/lib/country";
 import { sameIp } from "@/lib/ip-address";
@@ -176,33 +177,11 @@ function cacheLetter(parts: Part[]) {
   }
 }
 
-/** True once the element has scrolled properly into view; stays true after. */
-function useSeen<T extends Element>() {
-  const ref = useRef<T>(null);
-  const [seen, setSeen] = useState(
-    () => typeof IntersectionObserver === "undefined",
-  );
-  useEffect(() => {
-    const element = ref.current;
-    if (seen || !element) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          setSeen(true);
-          observer.disconnect();
-        }
-      },
-      // Its top must clear the bottom fifth of the screen, not just peek in.
-      { rootMargin: "0px 0px -20% 0px" },
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [seen]);
-  return [ref, seen] as const;
-}
-
 function PortraitLetter() {
-  const [cardRef, seen] = useSeen<HTMLDivElement>();
+  const { ref: cardRef, inView: seen } = useInView<HTMLDivElement>({
+    // Its top must clear the bottom fifth of the screen, not just peek in.
+    rootMargin: "0px 0px -20% 0px",
+  });
   // Read the clock once, so a re-render can't switch the greeting mid-letter.
   const [hour] = useState(() => new Date().getHours());
   const [cached] = useState(readCachedLetter);

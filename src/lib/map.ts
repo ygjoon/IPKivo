@@ -1,3 +1,4 @@
+import { t } from "@/i18n";
 import { endpoint } from "@/lib/network";
 import type { Map as LeafletMap, TileLayer, TileLayerOptions } from "leaflet";
 
@@ -15,8 +16,8 @@ export interface MapTileLayerSpec {
 
 const OSM_ATTRIBUTION =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
-const TIANDITU_ATTRIBUTION =
-  '&copy; <a href="https://www.tianditu.gov.cn/">天地图</a>';
+const tiandituAttribution = () =>
+  `&copy; <a href="https://www.tianditu.gov.cn/">${t("common.tianditu")}</a>`;
 const TIANDITU_SUBDOMAINS = ["t0", "t1", "t2", "t3", "t4", "t5", "t6", "t7"];
 
 let mapConfigPromise: Promise<MapConfig> | undefined;
@@ -60,7 +61,7 @@ export function mapTileLayers(config: MapConfig): MapTileLayerSpec[] {
         options: {
           ...options,
           subdomains: TIANDITU_SUBDOMAINS,
-          attribution: TIANDITU_ATTRIBUTION,
+          attribution: tiandituAttribution(),
         },
       },
       {

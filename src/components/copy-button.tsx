@@ -10,18 +10,15 @@ type CopyButtonProps = {
 };
 
 export function CopyButton({ value, className }: CopyButtonProps) {
-  const [copyState, setCopyState] = useState({ value, copied: false });
-  if (copyState.value !== value) setCopyState({ value, copied: false });
-  const copied = copyState.value === value && copyState.copied;
+  const [copiedValue, setCopiedValue] = useState<string | null>(null);
+  const copied = copiedValue === value;
   useEffect(() => {
     if (!copied) return;
     const timer = setTimeout(() => {
-      setCopyState((previous) =>
-        previous === copyState ? { ...previous, copied: false } : previous,
-      );
+      setCopiedValue((previous) => (previous === value ? null : previous));
     }, 2000);
     return () => clearTimeout(timer);
-  }, [copied, copyState]);
+  }, [copied, value]);
   const label = copied ? t("common.copied") : t("common.copy");
   return (
     <Button
@@ -34,9 +31,7 @@ export function CopyButton({ value, className }: CopyButtonProps) {
       onClick={async () => {
         try {
           await navigator.clipboard.writeText(value);
-          setCopyState((previous) =>
-            previous === copyState ? { value, copied: true } : previous,
-          );
+          setCopiedValue(value);
         } catch {
           toast.error(
             t("common.couldCopyAutomaticallySelectPressHoldLinkCopy"),

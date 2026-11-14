@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import type { ReactNode } from "react";
+import { useInView } from "@/hooks/use-in-view";
 
 /**
  * Renders `children` only once the placeholder scrolls near the viewport, so
@@ -20,28 +21,10 @@ export function LazyMount({
   threshold?: number;
   className?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(
-    () => typeof IntersectionObserver === "undefined",
-  );
-  useEffect(() => {
-    const element = ref.current;
-    if (visible || !element) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin, threshold },
-    );
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, [visible, rootMargin, threshold]);
+  const { ref, inView } = useInView({ rootMargin, threshold });
   return (
     <div ref={ref} className={className}>
-      {visible ? children : fallback}
+      {inView ? children : fallback}
     </div>
   );
 }

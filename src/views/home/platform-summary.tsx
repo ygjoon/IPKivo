@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SiteLogo } from "@/components/site-logo";
 import { Pending } from "@/components/toolkit";
@@ -11,6 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { UnderlineHover } from "@/components/underline-hover";
+import { useInView } from "@/hooks/use-in-view";
 import { t, locale } from "@/i18n";
 import { localePath } from "@/lib/locale-path";
 import { localizeCatalogItem } from "@/lib/localize-catalog";
@@ -46,20 +46,8 @@ const statusLabels: Record<string, string> = {
   maintenance: t("common.underMaintenance"),
 };
 function useSummaryVisibility() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    if (!ref.current) return;
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setVisible(true);
-        observer.disconnect();
-      }
-    });
-    observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return { ref, visible };
+  const { ref, inView } = useInView();
+  return { ref, visible: inView };
 }
 
 export function AiAccessSummary() {

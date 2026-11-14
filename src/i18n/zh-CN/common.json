@@ -208,5 +208,7 @@
   "pageHelp.speedtest": "通过 Cloudflare 全球边缘网络测试下载、上传速度与延迟。点击开始后才会消耗流量。",
   "home.globalPing": "全球 Ping",
   "appUpdate.updateNow": "立即更新",
-  "appUpdate.remindLater": "稍后提醒"
+  "appUpdate.remindLater": "稍后提醒",
+  "common.ad": "广告",
+  "common.tianditu": "天地图"
 }

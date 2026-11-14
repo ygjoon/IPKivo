@@ -208,5 +208,7 @@
   "pageHelp.speedtest": "Measures download, upload and latency over Cloudflare's global edge. Traffic is used only after you click start.",
   "home.globalPing": "Global Ping",
   "appUpdate.updateNow": "Update now",
-  "appUpdate.remindLater": "Remind me later"
+  "appUpdate.remindLater": "Remind me later",
+  "common.ad": "Ad",
+  "common.tianditu": "Tianditu"
 }
