@@ -1,0 +1,206 @@
+{
+  "/": [
+    {
+      "question": "What network tools does IPKivo provide?",
+      "answer": "IPKivo provides public IP lookup, DNS and WebRTC leak checks, website connectivity and egress tests, speed tests, global ping, WHOIS/RDAP lookup, and browser environment checks."
+    },
+    {
+      "question": "Do I need an account to use IPKivo?",
+      "answer": "Basic network checks do not require an account. Some checks send requests to the relevant services, and results depend on your device, route, and probe locations."
+    },
+    {
+      "question": "Why can results change between checks?",
+      "answer": "Your public egress, ISP routes, probe locations, and upstream data sources can change. Repeat a check under the same network conditions and compare multiple results."
+    }
+  ],
+  "/ip": [
+    {
+      "question": "Which addresses can the IP lookup check?",
+      "answer": "The lookup supports public IPv4 and IPv6 addresses. Private, loopback, and reserved addresses do not have public geolocation results here."
+    },
+    {
+      "question": "How precise is IP geolocation?",
+      "answer": "IP location comes from third-party network databases. It usually indicates an approximate region or provider network, not GPS coordinates or the device's exact location."
+    },
+    {
+      "question": "Does an IP reputation score guarantee safety?",
+      "answer": "No. It is a reference signal based on available network data, which can have coverage and update limits. Do not use it as the only basis for a security decision."
+    }
+  ],
+  "/ping": [
+    {
+      "question": "What does the global ping test measure?",
+      "answer": "It runs ping or HTTPS measurements from selected probe locations and reports available latency, packet loss, or response details. The two protocols do not measure identical network paths."
+    },
+    {
+      "question": "Why do some probes return no result?",
+      "answer": "The target may block ICMP, or a probe may time out or lack a route to it. A missing result from one probe does not necessarily mean the service is down."
+    },
+    {
+      "question": "Why does latency vary by region?",
+      "answer": "Distance, ISP interconnection, and the route between a probe and the target all affect latency. Compare several regions and runs instead of relying on one probe."
+    }
+  ],
+  "/unlock/gpt": [
+    {
+      "question": "What does the ChatGPT network check inspect?",
+      "answer": "It checks connectivity, egress IP, and responses from related services to help troubleshoot routing or network errors. It does not verify account eligibility or replace a ChatGPT sign-in."
+    },
+    {
+      "question": "Why might ChatGPT still be unavailable when the network check passes?",
+      "answer": "Network reachability does not guarantee account or service access. Account status, service policies, regional restrictions, browser sessions, and service incidents can also affect access."
+    },
+    {
+      "question": "Can this result guarantee ChatGPT access?",
+      "answer": "No. It reflects the tested network path and responses at that time, and does not guarantee account eligibility, service availability, or future access."
+    }
+  ],
+  "/unlock/claude": [
+    {
+      "question": "What does the Claude diagnostic check?",
+      "answer": "It checks connectivity and egress for related services and displays browser signals such as language and timezone to help identify network or environment differences."
+    },
+    {
+      "question": "Why might Claude still restrict access?",
+      "answer": "Network egress is only one factor. Account status, service policies, region, browser sessions, or service incidents may also affect access; rely on Claude's own message for details."
+    },
+    {
+      "question": "Will changing browser language or timezone fix access?",
+      "answer": "Not necessarily. Language and timezone are only environment signals and cannot guarantee a different service decision. Keep device settings consistent with your actual environment."
+    }
+  ],
+  "/speedtest": [
+    {
+      "question": "What do download, upload, latency, and jitter mean?",
+      "answer": "Download and upload measure HTTP throughput between your browser and the test node. Latency is round-trip response time, while jitter is how that latency varies across measurements."
+    },
+    {
+      "question": "Why do speed test results vary between runs?",
+      "answer": "Wi-Fi signal, device load, proxies, ISP routing, and test-node load can all affect results. Repeat the test on the same device and network when possible."
+    },
+    {
+      "question": "Does a speed test use data?",
+      "answer": "Yes. The test transfers download and upload data. The amount depends on the test and connection speed; the page explains how upload data is counted."
+    }
+  ],
+  "/browser/fingerprint": [
+    {
+      "question": "What is a browser fingerprint?",
+      "answer": "A browser fingerprint combines environment signals exposed by a browser, such as rendering traits, language, and hardware capabilities, to distinguish browser configurations."
+    },
+    {
+      "question": "Can a browser fingerprint directly reveal my identity?",
+      "answer": "Fingerprint signals usually do not contain a name or identity by themselves, but they may help link browser activity when combined across sites or data sources."
+    },
+    {
+      "question": "How can I reduce browser fingerprinting?",
+      "answer": "Use a mainstream browser with fingerprinting protections, limit unnecessary permissions, and avoid inconsistent environment signals. A single check cannot prove complete anonymity."
+    }
+  ],
+  "/unlock/sites": [
+    {
+      "question": "What does the website connectivity check measure?",
+      "answer": "It tries to reach listed websites from your browser and reports available response timing and connectivity details. Cross-origin restrictions can hide some response information."
+    },
+    {
+      "question": "Does a successful check mean every website feature will work?",
+      "answer": "No. It reflects network requests at the time of the check and does not verify sign-in, page content, playback, or regional eligibility."
+    },
+    {
+      "question": "Why can results differ by region or network?",
+      "answer": "DNS answers, proxy routing, ISP paths, site policies, and network changes can all affect results. Compare repeated checks with actual access."
+    }
+  ],
+  "/status": [
+    {
+      "question": "Where does the service status data come from?",
+      "answer": "The page aggregates public status APIs or public feeds from listed providers. Their coverage, update frequency, and availability vary."
+    },
+    {
+      "question": "Why does a service show as unknown or unavailable?",
+      "answer": "A provider may not expose a supported public API, or its status source may be unavailable or change format. Check the provider's official status page for details."
+    },
+    {
+      "question": "Does this status represent service health in my region?",
+      "answer": "Not necessarily. Public status is usually an aggregate and may not cover a specific account, region, product component, or local network path."
+    }
+  ],
+  "/browser/environment": [
+    {
+      "question": "What information does the browser environment check show?",
+      "answer": "It displays environment signals exposed by the browser, such as User-Agent, language, timezone, screen, and some hardware capabilities. Available fields vary by browser."
+    },
+    {
+      "question": "Can browser environment data locate me precisely?",
+      "answer": "No. Language and timezone are only environment clues, not GPS location. The browser requests location permission only when you start the location check."
+    },
+    {
+      "question": "Why is some browser environment information missing?",
+      "answer": "Privacy settings, browser versions, permission policies, and device capabilities can limit available fields. A missing field does not mean the device is faulty."
+    }
+  ],
+  "/browser/checks": [
+    {
+      "question": "What does the browser consistency check compare?",
+      "answer": "It compares signals exposed across the page, Worker, or other browser contexts and checks some automation indicators. Coverage depends on browser support."
+    },
+    {
+      "question": "Does a detected difference mean something is wrong?",
+      "answer": "Not necessarily. Privacy protections, browser isolation, extensions, and compatibility can cause differences. Results are troubleshooting clues, not security or identity conclusions."
+    },
+    {
+      "question": "Does finding no automation signal prove I am a regular user?",
+      "answer": "No. The check covers only a limited set of exposed signals and cannot prove that a browser or visit is not automated."
+    }
+  ],
+  "/browser/privacy": [
+    {
+      "question": "Does the browser privacy check request camera or location access?",
+      "answer": "The page reads permission states exposed by the browser. Active camera, microphone, or location checks run only after you click the matching button."
+    },
+    {
+      "question": "Why are some permissions or browser capabilities unsupported?",
+      "answer": "Browser version, secure context, device support, and permission policies affect API availability. The page marks fields it cannot query as unsupported or unavailable."
+    },
+    {
+      "question": "Can this browser privacy check guarantee my privacy?",
+      "answer": "No. It shows a limited set of browser capabilities and permissions and cannot fully assess the privacy or security of sites, extensions, devices, or networks."
+    }
+  ],
+  "/privacy": [
+    {
+      "question": "What network request information does IPKivo process?",
+      "answer": "The hosting service processes request IPs and necessary request information. IP, domain, and network checks send their targets to the relevant data or diagnostic services. Third-party sites contacted directly by your browser can also see that connection's egress IP."
+    },
+    {
+      "question": "What data does IPKivo store in my browser?",
+      "answer": "The site stores theme, language, notice preferences, and lookup history in the current browser. Lookup history includes recent successful queries and their results."
+    },
+    {
+      "question": "How can I delete lookup history and other local data?",
+      "answer": "Clear this site's data in your browser settings to remove local data. This does not delete request records that hosting or third-party services may retain."
+    },
+    {
+      "question": "Can browser checks open my camera or access my location without consent?",
+      "answer": "Camera, microphone, and location checks start only after you click them and are controlled by browser permissions. Media tests close the stream immediately and do not record audio or video."
+    }
+  ],
+  "/terms": [
+    {
+      "question": "What services does IPKivo provide?",
+      "answer": "The site provides IP lookup, network diagnostics, browser checks, and service status queries. Features and data sources may change; follow the current page instructions."
+    },
+    {
+      "question": "May I test any IP address, domain, or website?",
+      "answer": "Use the tools only for targets you are authorized to test. Do not use the site for unlawful activity, disrupting third-party services, bypassing access restrictions, or abusing the API."
+    },
+    {
+      "question": "Do test results guarantee service availability or account access?",
+      "answer": "No. Results depend on the network, browser restrictions, and third-party data. They are for reference and do not guarantee security, account access, or continued availability. Verify important results through the relevant official service."
+    },
+    {
+      "question": "Does the API require a key, and are requests rate-limited?",
+      "answer": "The API requires no key but is rate-limited by request IP. If you receive a 429 response, reduce your request frequency and retry; do not rotate IPs to bypass limits."
+    }
+  ]
+}

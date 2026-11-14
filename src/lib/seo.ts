@@ -1,10 +1,7 @@
 import { isSupportedLocale, type Locale } from "@/i18n";
 import { normalizePublicIp } from "./public-ip";
 import seoConfig from "./seo-config.json" with { type: "json" };
-import { localizedFaq } from "./seo-faq";
-import jaSeo from "./seo-locales/ja.json" with { type: "json" };
-import ruSeo from "./seo-locales/ru.json" with { type: "json" };
-import zhTwSeo from "./seo-locales/zh-TW.json" with { type: "json" };
+import { loadLocalizedFaq } from "./seo-faq-client";
 
 export type SeoLocale = "zh-CN" | "en";
 
@@ -21,14 +18,10 @@ type ExtraSeoLocaleBundle = {
 
 const routes = seoConfig.routes as Record<string, RouteMetadata>;
 const notFoundMetadata = seoConfig.notFound as RouteMetadata;
-const extraSeoBundles: Record<
+const extraBundleCache = new Map<
   Exclude<Locale, SeoLocale>,
   ExtraSeoLocaleBundle
-> = {
-  "zh-TW": zhTwSeo,
-  ja: jaSeo,
-  ru: ruSeo,
-};
+>();
 
 const ogLocales: Record<Locale, string> = {
   "zh-CN": "zh_CN",
@@ -38,11 +31,25 @@ const ogLocales: Record<Locale, string> = {
   ru: "ru_RU",
 };
 
-function routeMetadataForLocale(routePath: string, locale: Locale) {
+async function routeMetadataForLocale(routePath: string, locale: Locale) {
   if (locale === "zh-CN" || locale === "en") {
     return routes[routePath]?.[locale] ?? notFoundMetadata[locale];
   }
-  const bundle = extraSeoBundles[locale];
+  let bundle = extraBundleCache.get(locale);
+  if (!bundle) {
+    switch (locale) {
+      case "zh-TW":
+        bundle = (await import("./seo-locales/zh-TW.json")).default;
+        break;
+      case "ja":
+        bundle = (await import("./seo-locales/ja.json")).default;
+        break;
+      case "ru":
+        bundle = (await import("./seo-locales/ru.json")).default;
+        break;
+    }
+    extraBundleCache.set(locale, bundle);
+  }
   return bundle.routes[routePath] ?? bundle.notFound;
 }
 
@@ -56,7 +63,7 @@ function localizedHref(canonicalPath: string, locale: Locale) {
   return url.href;
 }
 
-export function resolvePageSeo(pathname: string, locale: Locale) {
+export async function resolvePageSeo(pathname: string, locale: Locale) {
   const path = normalizedPath(pathname);
   const ipMatch = path.match(/^\/ip\/([^/]+)$/);
   let routePath = path;
@@ -78,12 +85,14 @@ export function resolvePageSeo(pathname: string, locale: Locale) {
   }
 
   const route = routes[routePath];
-  const metadata = routeMetadataForLocale(routePath, locale);
+  const [metadata, faq] = await Promise.all([
+    routeMetadataForLocale(routePath, locale),
+    route ? loadLocalizedFaq(routePath, locale) : Promise.resolve([]),
+  ]);
   const replaceIp = (value: string) =>
     ip ? value.replaceAll("{ip}", ip) : value;
   const title = replaceIp(metadata.title);
   const description = replaceIp(metadata.description);
-  const faq = route ? localizedFaq(routePath, locale) : [];
 
   const alternateZh = localizedHref(canonicalPath, "zh-CN");
   const alternateZhTw = localizedHref(canonicalPath, "zh-TW");
@@ -174,7 +183,7 @@ export function resolvePageSeo(pathname: string, locale: Locale) {
   };
 }
 
-export function updateDocumentSeo(
+export async function updateDocumentSeo(
   pathname: string,
   search: string,
   preferredLocale: Locale,
@@ -192,7 +201,7 @@ export function updateDocumentSeo(
     window.history.replaceState(window.history.state, "", url);
   }
 
-  const metadata = resolvePageSeo(pathname, activeLocale);
+  const metadata = await resolvePageSeo(pathname, activeLocale);
   document.documentElement.lang = activeLocale;
   document.title = metadata.title;
 

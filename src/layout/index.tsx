@@ -61,7 +61,7 @@ export function AppLayout() {
   }, [pathname]);
 
   useEffect(() => {
-    updateDocumentSeo(pathname, search, locale);
+    void updateDocumentSeo(pathname, search, locale);
   }, [pathname, search]);
 
   return (
