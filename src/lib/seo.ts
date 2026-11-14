@@ -2,6 +2,9 @@ import { isSupportedLocale, type Locale } from "@/i18n";
 import { normalizePublicIp } from "./public-ip";
 import seoConfig from "./seo-config.json" with { type: "json" };
 import { localizedFaq } from "./seo-faq";
+import jaSeo from "./seo-locales/ja.json" with { type: "json" };
+import ruSeo from "./seo-locales/ru.json" with { type: "json" };
+import zhTwSeo from "./seo-locales/zh-TW.json" with { type: "json" };
 
 export type SeoLocale = "zh-CN" | "en";
 
@@ -11,9 +14,37 @@ export function toSeoLocale(locale: Locale): SeoLocale {
 
 type LocalizedMetadata = { title: string; description: string };
 type RouteMetadata = Record<SeoLocale, LocalizedMetadata>;
+type ExtraSeoLocaleBundle = {
+  routes: Record<string, LocalizedMetadata>;
+  notFound: LocalizedMetadata;
+};
 
 const routes = seoConfig.routes as Record<string, RouteMetadata>;
 const notFoundMetadata = seoConfig.notFound as RouteMetadata;
+const extraSeoBundles: Record<
+  Exclude<Locale, SeoLocale>,
+  ExtraSeoLocaleBundle
+> = {
+  "zh-TW": zhTwSeo,
+  ja: jaSeo,
+  ru: ruSeo,
+};
+
+const ogLocales: Record<Locale, string> = {
+  "zh-CN": "zh_CN",
+  "zh-TW": "zh_TW",
+  en: "en_US",
+  ja: "ja_JP",
+  ru: "ru_RU",
+};
+
+function routeMetadataForLocale(routePath: string, locale: Locale) {
+  if (locale === "zh-CN" || locale === "en") {
+    return routes[routePath]?.[locale] ?? notFoundMetadata[locale];
+  }
+  const bundle = extraSeoBundles[locale];
+  return bundle.routes[routePath] ?? bundle.notFound;
+}
 
 function normalizedPath(pathname: string) {
   return pathname.replace(/\/+$/, "") || "/";
@@ -26,7 +57,6 @@ function localizedHref(canonicalPath: string, locale: Locale) {
 }
 
 export function resolvePageSeo(pathname: string, locale: Locale) {
-  const seoLocale = toSeoLocale(locale);
   const path = normalizedPath(pathname);
   const ipMatch = path.match(/^\/ip\/([^/]+)$/);
   let routePath = path;
@@ -48,12 +78,12 @@ export function resolvePageSeo(pathname: string, locale: Locale) {
   }
 
   const route = routes[routePath];
-  const metadata = route?.[seoLocale] ?? notFoundMetadata[seoLocale];
+  const metadata = routeMetadataForLocale(routePath, locale);
   const replaceIp = (value: string) =>
     ip ? value.replaceAll("{ip}", ip) : value;
   const title = replaceIp(metadata.title);
   const description = replaceIp(metadata.description);
-  const faq = route ? localizedFaq(routePath, seoLocale) : [];
+  const faq = route ? localizedFaq(routePath, locale) : [];
 
   const alternateZh = localizedHref(canonicalPath, "zh-CN");
   const alternateZhTw = localizedHref(canonicalPath, "zh-TW");
@@ -84,6 +114,7 @@ export function resolvePageSeo(pathname: string, locale: Locale) {
   return {
     exists: Boolean(route),
     locale,
+    ogLocale: ogLocales[locale],
     title,
     description,
     canonical,
@@ -211,6 +242,7 @@ export function updateDocumentSeo(
   setMeta("seo-og-description", "property", metadata.description);
   setMeta("seo-og-url", "property", metadata.canonical || window.location.href);
   setMeta("seo-og-site-name", "property", seoConfig.siteName);
+  setMeta("seo-og-locale", "property", metadata.ogLocale);
   setMeta("seo-og-image", "property", metadata.image);
   setMeta("seo-twitter-card", "name", "summary_large_image");
   setMeta("seo-twitter-title", "name", metadata.title);

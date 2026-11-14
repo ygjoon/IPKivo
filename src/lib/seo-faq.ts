@@ -1,15 +1,37 @@
+import jaSeo from "./seo-locales/ja.json" with { type: "json" };
+import ruSeo from "./seo-locales/ru.json" with { type: "json" };
+import zhTwSeo from "./seo-locales/zh-TW.json" with { type: "json" };
 import enNetwork from "../i18n/en/network.json" with { type: "json" };
 import enWhois from "../i18n/en/whois.json" with { type: "json" };
+import jaNetwork from "../i18n/ja/network.json" with { type: "json" };
+import jaWhois from "../i18n/ja/whois.json" with { type: "json" };
+import ruNetwork from "../i18n/ru/network.json" with { type: "json" };
+import ruWhois from "../i18n/ru/whois.json" with { type: "json" };
 import zhNetwork from "../i18n/zh-CN/network.json" with { type: "json" };
 import zhWhois from "../i18n/zh-CN/whois.json" with { type: "json" };
+import zhTwNetwork from "../i18n/zh-TW/network.json" with { type: "json" };
+import zhTwWhois from "../i18n/zh-TW/whois.json" with { type: "json" };
 
+export type FaqLocale = "zh-CN" | "zh-TW" | "en" | "ja" | "ru";
 type SeoLocale = "zh-CN" | "en";
 type FaqItem = { question: string; answer: string };
 
-const dictionaries = {
+const dictionaries: Record<FaqLocale, Record<string, string>> = {
   "zh-CN": { ...zhNetwork, ...zhWhois },
+  "zh-TW": { ...zhTwNetwork, ...zhTwWhois },
   en: { ...enNetwork, ...enWhois },
-} as const;
+  ja: { ...jaNetwork, ...jaWhois },
+  ru: { ...ruNetwork, ...ruWhois },
+};
+
+const extraSupplementalFaqs: Record<
+  Exclude<FaqLocale, SeoLocale>,
+  Record<string, readonly FaqItem[]>
+> = {
+  "zh-TW": zhTwSeo.supplementalFaqs,
+  ja: jaSeo.supplementalFaqs,
+  ru: ruSeo.supplementalFaqs,
+};
 
 const faqKeysByRoute: Record<string, readonly (readonly [string, string])[]> = {
   "/leak/dns": [
@@ -600,17 +622,18 @@ const supplementalFaqs: Record<
   },
 };
 
-export function localizedFaq(route: string, locale: SeoLocale) {
+export function localizedFaq(route: string, locale: FaqLocale) {
   const resolvedRoute = route === "/ip/:ip" ? "/ip" : route;
-  const dictionary = dictionaries[locale] as Record<string, string>;
+  const dictionary = dictionaries[locale];
   const translatedFaq = (faqKeysByRoute[resolvedRoute] ?? []).map(
     ([questionKey, answerKey]) => ({
       question: dictionary[questionKey],
       answer: dictionary[answerKey],
     }),
   );
-  return [
-    ...translatedFaq,
-    ...(supplementalFaqs[resolvedRoute]?.[locale] ?? []),
-  ];
+  const extra =
+    locale === "zh-CN" || locale === "en"
+      ? supplementalFaqs[resolvedRoute]?.[locale]
+      : extraSupplementalFaqs[locale][resolvedRoute];
+  return [...translatedFaq, ...(extra ?? [])];
 }

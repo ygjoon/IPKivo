@@ -1,6 +1,9 @@
 import { normalizePublicIp } from "../src/lib/public-ip.ts";
 import seoConfig from "../src/lib/seo-config.json" with { type: "json" };
 import { localizedFaq } from "../src/lib/seo-faq.ts";
+import jaSeo from "../src/lib/seo-locales/ja.json" with { type: "json" };
+import ruSeo from "../src/lib/seo-locales/ru.json" with { type: "json" };
+import zhTwSeo from "../src/lib/seo-locales/zh-TW.json" with { type: "json" };
 
 const routes = seoConfig.routes;
 const notFound = seoConfig.notFound;
@@ -29,9 +32,29 @@ function matchRoute(pattern, pathname) {
 }
 
 const supportedLocales = new Set(["zh-CN", "zh-TW", "en", "ja", "ru"]);
+const extraSeoBundles = {
+  "zh-TW": zhTwSeo,
+  ja: jaSeo,
+  ru: ruSeo,
+};
+const ogLocales = {
+  "zh-CN": "zh_CN",
+  "zh-TW": "zh_TW",
+  en: "en_US",
+  ja: "ja_JP",
+  ru: "ru_RU",
+};
 
 function toSeoLocale(locale) {
   return locale === "zh-CN" || locale === "zh-TW" ? "zh-CN" : "en";
+}
+
+function routeMetadataForLocale(routePath, locale) {
+  if (locale === "zh-CN" || locale === "en") {
+    return routes[routePath]?.[locale] ?? notFound[locale];
+  }
+  const bundle = extraSeoBundles[locale];
+  return bundle.routes[routePath] ?? bundle.notFound;
 }
 
 function localizedHref(canonicalPath, locale) {
@@ -58,7 +81,7 @@ function resolvePage(pathname, locale) {
   }
   const seoLocale = toSeoLocale(locale);
   const route = routes[routePath];
-  const content = route?.[seoLocale] ?? notFound[seoLocale];
+  const content = routeMetadataForLocale(routePath, locale);
   const interpolate = (value) => {
     let result = value;
     for (const [key, param] of Object.entries(params))
@@ -67,7 +90,7 @@ function resolvePage(pathname, locale) {
   };
   const title = interpolate(content.title);
   const description = interpolate(content.description);
-  const faq = route ? localizedFaq(routePath, seoLocale) : [];
+  const faq = route ? localizedFaq(routePath, locale) : [];
   const canonical = route ? localizedHref(canonicalPath, locale) : "";
   const breadcrumbs = [
     {
@@ -91,6 +114,7 @@ function resolvePage(pathname, locale) {
     exists: Boolean(route),
     locale,
     seoLocale,
+    ogLocale: ogLocales[locale],
     title,
     description,
     canonical,
@@ -219,50 +243,56 @@ function escapeHtml(value) {
 }
 
 function fallbackBody(metadata) {
+  const extraFallback = extraSeoBundles[metadata.locale]?.fallback;
   const isEnglishSeo = metadata.seoLocale === "en";
-  const links = isEnglishSeo
-    ? [
-        ["/", "IPKivo overview"],
-        ["/ip", "IP lookup"],
-        ["/leak/dns", "DNS leak test"],
-        ["/leak/webrtc", "WebRTC leak test"],
-        ["/unlock/sites", "Website connectivity"],
-        ["/unlock/gpt", "ChatGPT connectivity"],
-        ["/unlock/claude", "Claude connectivity"],
-        ["/speedtest", "Internet speed test"],
-        ["/whois", "WHOIS and RDAP lookup"],
-        ["/ping", "Global ping test"],
-        ["/browser/environment", "Browser environment"],
-        ["/browser/fingerprint", "Browser fingerprint"],
-        ["/browser/checks", "Browser consistency checks"],
-        ["/browser/privacy", "Browser privacy checks"],
-        ["/status", "Service status"],
-        ["/privacy", "Privacy policy"],
-        ["/terms", "Terms of service"],
-      ]
-    : [
-        ["/", "IPKivo 网络概览"],
-        ["/ip", "IP 地址查询"],
-        ["/leak/dns", "DNS 泄露检测"],
-        ["/leak/webrtc", "WebRTC 泄露检测"],
-        ["/unlock/sites", "网站连通性检测"],
-        ["/unlock/gpt", "ChatGPT 连通性诊断"],
-        ["/unlock/claude", "Claude 连通性诊断"],
-        ["/speedtest", "网络测速"],
-        ["/whois", "WHOIS 与 RDAP 查询"],
-        ["/ping", "全球 Ping 测试"],
-        ["/browser/environment", "浏览器环境信息"],
-        ["/browser/fingerprint", "浏览器指纹检测"],
-        ["/browser/checks", "浏览器一致性检测"],
-        ["/browser/privacy", "浏览器隐私检测"],
-        ["/status", "服务状态"],
-        ["/privacy", "隐私政策"],
-        ["/terms", "使用条款"],
-      ];
+  const links =
+    extraFallback?.links ??
+    (isEnglishSeo
+      ? [
+          ["/", "IPKivo overview"],
+          ["/ip", "IP lookup"],
+          ["/leak/dns", "DNS leak test"],
+          ["/leak/webrtc", "WebRTC leak test"],
+          ["/unlock/sites", "Website connectivity"],
+          ["/unlock/gpt", "ChatGPT connectivity"],
+          ["/unlock/claude", "Claude connectivity"],
+          ["/speedtest", "Internet speed test"],
+          ["/whois", "WHOIS and RDAP lookup"],
+          ["/ping", "Global ping test"],
+          ["/browser/environment", "Browser environment"],
+          ["/browser/fingerprint", "Browser fingerprint"],
+          ["/browser/checks", "Browser consistency checks"],
+          ["/browser/privacy", "Browser privacy checks"],
+          ["/status", "Service status"],
+          ["/privacy", "Privacy policy"],
+          ["/terms", "Terms of service"],
+        ]
+      : [
+          ["/", "IPKivo 网络概览"],
+          ["/ip", "IP 地址查询"],
+          ["/leak/dns", "DNS 泄露检测"],
+          ["/leak/webrtc", "WebRTC 泄露检测"],
+          ["/unlock/sites", "网站连通性检测"],
+          ["/unlock/gpt", "ChatGPT 连通性诊断"],
+          ["/unlock/claude", "Claude 连通性诊断"],
+          ["/speedtest", "网络测速"],
+          ["/whois", "WHOIS 与 RDAP 查询"],
+          ["/ping", "全球 Ping 测试"],
+          ["/browser/environment", "浏览器环境信息"],
+          ["/browser/fingerprint", "浏览器指纹检测"],
+          ["/browser/checks", "浏览器一致性检测"],
+          ["/browser/privacy", "浏览器隐私检测"],
+          ["/status", "服务状态"],
+          ["/privacy", "隐私政策"],
+          ["/terms", "使用条款"],
+        ]);
   const language =
     metadata.locale !== "zh-CN" ? `?lang=${metadata.locale}` : "";
-  const label = isEnglishSeo ? "IPKivo tools" : "IPKivo 工具";
-  const faqTitle = isEnglishSeo ? "Frequently asked questions" : "常见问题";
+  const label =
+    extraFallback?.label ?? (isEnglishSeo ? "IPKivo tools" : "IPKivo 工具");
+  const faqTitle =
+    extraFallback?.faqTitle ??
+    (isEnglishSeo ? "Frequently asked questions" : "常见问题");
   const faq = (metadata.faq ?? [])
     .map(
       ({ question, answer }) =>
@@ -319,6 +349,7 @@ function htmlRewriterResponse(response, metadata, status, currentUrl, noindex) {
     .on("#seo-og-description", setMeta(metadata.description))
     .on("#seo-og-url", setMeta(metadata.canonical || currentUrl))
     .on("#seo-og-site-name", setMeta(seoConfig.siteName))
+    .on("#seo-og-locale", setMeta(metadata.ogLocale))
     .on("#seo-og-image", setMeta(metadata.image))
     .on("#seo-twitter-card", setMeta("summary_large_image"))
     .on("#seo-twitter-title", setMeta(metadata.title))
@@ -470,6 +501,12 @@ function fallbackHtmlResponse(response, metadata, status, currentUrl, noindex) {
       "property",
       "og:site_name",
       seoConfig.siteName,
+    )(html);
+    html = replaceMeta(
+      "seo-og-locale",
+      "property",
+      "og:locale",
+      metadata.ogLocale,
     )(html);
     html = replaceMeta(
       "seo-og-image",

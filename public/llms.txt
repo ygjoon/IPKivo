@@ -2,7 +2,7 @@
 
 > IPKivo 提供公网 IP 查询、网络泄露检测、网站连通性诊断与浏览器环境检查。IPKivo provides public IP lookup, network leak checks, connectivity diagnostics, and browser environment checks.
 
-简体中文为默认语言。英文页面使用对应链接并添加 `?lang=en`，例如 `https://www.ipkivo.com/ip?lang=en`。Simplified Chinese is the default; add `?lang=en` to any route for English.
+简体中文为默认语言。支持繁体中文（`?lang=zh-TW`）、英文（`?lang=en`）、日语（`?lang=ja`）与俄语（`?lang=ru`），例如 `https://www.ipkivo.com/ip?lang=en`。Simplified Chinese is the default; add `?lang=zh-TW`, `?lang=en`, `?lang=ja`, or `?lang=ru` to any route for localized pages.
 
 ## 网络工具 / Network tools
 
